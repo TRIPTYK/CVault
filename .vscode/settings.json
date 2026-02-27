@@ -5,6 +5,9 @@
         "speckit.plan": true,
         "speckit.tasks": true,
         "speckit.implement": true
+    },
+    "files.exclude": {
+        "@apps/**": true,
+        "@libs/**": true,
     }
 }
-
