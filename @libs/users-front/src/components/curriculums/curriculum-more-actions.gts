@@ -5,6 +5,7 @@ import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
 import type RouterService from '@ember/routing/router-service';
 import { service } from '@ember/service';
+import { clickOutside } from 'ember-click-outside-modifier';
 
 import EditIcon from '#src/assets/icons/edit.gts';
 import RenameIcon from '#src/assets/icons/rename.gts';
@@ -24,39 +25,16 @@ class CurriculumMoreActions extends Component<CurriculumMoreActionsSignature> {
 
     @tracked isOpen = false;
 
-    private handleClickOutside = (event: MouseEvent) => {
-        const target = event.target as HTMLElement;
-        const popup = document.querySelector('.curriculum-popup');
-
-        if (popup && !popup.contains(target)) {
-        this.isOpen = false;
-        }
-    };
-
     @action
-    toggle(event: MouseEvent) {
-        event.stopPropagation();
+    toggle() {
         this.isOpen = !this.isOpen;
-
-        if (this.isOpen) {
-            document.addEventListener('click', this.handleClickOutside);
-        } else {
-            document.removeEventListener('click', this.handleClickOutside);
-        }
-    }
-
-    willDestroy() {
-        super.willDestroy();
-        document.removeEventListener('click', this.handleClickOutside);
     }
 
     @action
-        rename(event: MouseEvent) {
+    rename(event: MouseEvent) {
         event.stopPropagation();
 
         this.isOpen = false;
-        document.removeEventListener('click', this.handleClickOutside);
-
         this.args.onRename?.();
     }
 
@@ -75,7 +53,7 @@ class CurriculumMoreActions extends Component<CurriculumMoreActionsSignature> {
         <button
             type="button"
             class="cursor-pointer p-2 rounded-full w-8 h-8 flex items-center justify-center bg-white shadow-lg hover:border-blue-500 hover:bg-blue-50 hover:border transition-colors duration-200"
-            {{on "click" this.toggle}}
+            {{clickOutside this.close}} {{on "click" this.toggle}}
         >
             <span class="text-lg">⋮</span>
         </button>

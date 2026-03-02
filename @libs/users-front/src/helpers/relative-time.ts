@@ -35,7 +35,7 @@ export default class RelativeTimeHelper extends Helper {
     }
 
     const formatter = new Intl.RelativeTimeFormat(
-      this.intl.locales,
+      this.intl.primaryLocale,
       { numeric: 'auto' }
     );
 

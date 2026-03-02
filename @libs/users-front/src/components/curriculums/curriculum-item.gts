@@ -62,7 +62,7 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
             />
             <span class="text-sm text-gray-500">
                 {{t "curriculums.view.lastModified"}} 
-                {{relativeTime @curriculum.lastModified}}
+                {{relativeTime (String @curriculum.lastModified)}}
             </span>
         </div>
     </template>
