@@ -1,0 +1,10 @@
+view:
+  curriculumsVitae: 'Curriculum Vitae'
+  lastModified: 'modifié'
+  createNewCV: 'Créer un nouveau CV'
+moreActions:
+  edit: 'Modifier'
+  delete: 'Supprimer'
+  duplicate: 'Dupliquer'
+  download: 'Télécharger'
+  rename: 'Renommer'
