@@ -8,8 +8,17 @@ import { action } from '@ember/object';
 import CvIcon from '#src/assets/icons/cv.gts';
 import relativeTime from '#src/helpers/relative-time.ts';
 import CurriculumMoreActions from '#src/components/curriculums/curriculum-more-actions.gts';
+import {
+  clickable,
+  create,
+  fillable,
+  text,
+  value,
+} from 'ember-cli-page-object';
 
 interface CurriculumItemSignature {
+  Element: HTMLDivElement;
+
   Args: {
     curriculum: {
       id: number;
@@ -40,9 +49,10 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
   };
 
   <template>
-    <div class="flex flex-col p-5">
+    <div data-test-curriculum-item class="flex flex-col p-5">
       <div class="relative inline-block">
         <button
+          data-test-curriculum-enter
           type="button"
           class="cursor-pointer mb-3 hover:shadow-lg transition-shadow duration-200"
           {{on "click" this.goToCurriculum}}
@@ -59,11 +69,12 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
 
       <input
         aria-label="Curriculum title"
+        data-test-curriculum-title="{{@curriculum.id}}"
         name="curriculum-title-{{@curriculum.id}}"
         class="font-medium pb-1 hover:text-blue-600 hover:underline hover:underline-offset-6 focus:outline-none transition-colors duration-200"
         value={{@curriculum.title}}
       />
-      <span class="text-sm text-gray-500">
+      <span data-test-curriculum-last-modified class="text-sm text-gray-500">
         {{t "curriculums.view.lastModified"}}
         {{relativeTime @curriculum.lastModified}}
       </span>
@@ -72,3 +83,12 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
 }
 
 export default CurriculumItem;
+
+export const CurriculumItemPageObject = create({
+  scope: '[data-test-curriculum-item]',
+  enterButton: clickable('[data-test-curriculum-enter]'),
+  titleInput: fillable('[data-test-curriculum-title] input'),
+  titleValue: value('[data-test-curriculum-title]'),
+  lastModified: text('[data-test-curriculum-last-modified]'),
+  moreActionsButton: clickable('[data-test-curriculum-more-action-button]'),
+});

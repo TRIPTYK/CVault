@@ -1,4 +1,4 @@
-  import { entities as usersEntities } from "@libs/users-backend";
+import { entities as usersEntities } from "@libs/users-backend";
 import { MikroORM } from "@mikro-orm/postgresql";
 import { PostgreSqlContainer, StartedPostgreSqlContainer } from "@testcontainers/postgresql";
 

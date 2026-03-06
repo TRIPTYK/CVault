@@ -4,7 +4,13 @@ import { on } from '@ember/modifier';
 import type RouterService from '@ember/routing/router-service';
 import { service } from '@ember/service';
 
-class CurriculumAdd extends Component<object> {
+interface CurriculumAddSignature {
+  Element: HTMLDivElement;
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  Args: {};
+}
+
+class CurriculumAdd extends Component<CurriculumAddSignature> {
   @service declare router: RouterService;
 
   addCurriculum = () => {
@@ -13,6 +19,7 @@ class CurriculumAdd extends Component<object> {
 
   <template>
     <button
+      data-test-curriculum-add-button
       type="button"
       class="flex flex-col cursor-pointer items-center justify-center w-51 m-5 mb-20 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-gray-400 hover:text-gray-700 transition-colors duration-200"
       {{on "click" this.addCurriculum}}
@@ -26,3 +33,7 @@ class CurriculumAdd extends Component<object> {
 }
 
 export default CurriculumAdd;
+
+export const CurriculumAddPageObject = {
+  addButton: '[data-test-curriculum-add-button]',
+};

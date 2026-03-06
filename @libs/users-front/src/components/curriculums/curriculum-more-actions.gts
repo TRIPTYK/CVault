@@ -12,6 +12,7 @@ import RenameIcon from '#src/assets/icons/rename.gts';
 import DuplicateIcon from '#src/assets/icons/duplicate.gts';
 import DownloadIcon from '#src/assets/icons/download.gts';
 import DeleteIcon from '#src/assets/icons/delete.gts';
+import { clickable, create, isVisible } from 'ember-cli-page-object';
 
 interface CurriculumMoreActionsSignature {
   Args: {
@@ -51,6 +52,7 @@ class CurriculumMoreActions extends Component<CurriculumMoreActionsSignature> {
 
   <template>
     <button
+      data-test-curriculum-more-action-button
       type="button"
       class="cursor-pointer p-2 rounded-full w-8 h-8 flex items-center justify-center bg-white shadow-lg hover:border-blue-500 hover:bg-blue-50 hover:border transition-colors duration-200"
       {{clickOutside this.close}}
@@ -60,9 +62,11 @@ class CurriculumMoreActions extends Component<CurriculumMoreActionsSignature> {
     </button>
     {{#if this.isOpen}}
       <div
+        data-test-curriculum-more-action-popup
         class="curriculum-popup absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md z-20"
       >
         <button
+          data-test-curriculum-more-action-edit-button
           {{on "click" this.gotToEdit}}
           type="button"
           class="w-full text-left px-4 py-2 flex flex-row items-center cursor-pointer hover:bg-gray-100"
@@ -72,6 +76,7 @@ class CurriculumMoreActions extends Component<CurriculumMoreActionsSignature> {
         </button>
 
         <button
+          data-test-curriculum-more-action-rename-button
           {{on "click" this.rename}}
           type="button"
           class="w-full text-left px-4 py-2 flex flex-row items-center cursor-pointer hover:bg-gray-100"
@@ -81,6 +86,7 @@ class CurriculumMoreActions extends Component<CurriculumMoreActionsSignature> {
         </button>
 
         <button
+          data-test-curriculum-more-action-duplicate-button
           type="button"
           class="w-full text-left px-4 py-2 flex flex-row items-center cursor-pointer hover:bg-gray-100"
         >
@@ -89,6 +95,7 @@ class CurriculumMoreActions extends Component<CurriculumMoreActionsSignature> {
         </button>
 
         <button
+          data-test-curriculum-more-action-download-button
           type="button"
           class="w-full text-left px-4 py-2 flex flex-row items-center cursor-pointer hover:bg-gray-100"
         >
@@ -97,6 +104,7 @@ class CurriculumMoreActions extends Component<CurriculumMoreActionsSignature> {
         </button>
 
         <button
+          data-test-curriculum-more-action-delete-button
           type="button"
           class="w-full text-left px-4 py-2 flex flex-row items-center cursor-pointer hover:bg-gray-100"
         >
@@ -109,3 +117,17 @@ class CurriculumMoreActions extends Component<CurriculumMoreActionsSignature> {
 }
 
 export default CurriculumMoreActions;
+
+export const CurriculumMoreActionsPageObject = create({
+  scope: '[data-test-curriculum-more-action-button]',
+  popup: isVisible('[data-test-curriculum-more-action-popup]'),
+  editButton: clickable('[data-test-curriculum-more-action-edit-button]'),
+  renameButton: clickable('[data-test-curriculum-more-action-rename-button]'),
+  duplicateButton: clickable(
+    '[data-test-curriculum-more-action-duplicate-button]'
+  ),
+  downloadButton: clickable(
+    '[data-test-curriculum-more-action-download-button]'
+  ),
+  deleteButton: clickable('[data-test-curriculum-more-action-delete-button]'),
+});

@@ -1,22 +1,34 @@
 import Component from '@glimmer/component';
 import CurriculumItem from '#src/components/curriculums/curriculum-item.gts';
 import CurriculumAdd from '#src/components/curriculums/curriculum-add.gts';
+import { create, collection, clickable, text } from 'ember-cli-page-object';
 import t from 'ember-intl/helpers/t';
+import { CurriculumItemPageObject } from './curriculum-item.gts';
 
-class CurriculumList extends Component<object> {
+interface CurriculumListSignature {
+  Element: HTMLDivElement;
+
+  Args: {
+    curriculums?: Array<{
+      id: number;
+      title: string;
+      lastModified: string;
+    }>;
+  };
+}
+
+class CurriculumList extends Component<CurriculumListSignature> {
   get curriculums() {
-    return [
-      { id: 1, title: 'Curriculum 1', lastModified: '2026-03-01T08:32:12' },
-      { id: 2, title: 'Curriculum 2', lastModified: '2026-03-02T10:15:45' },
-      { id: 3, title: 'Curriculum 3', lastModified: '2026-03-03T14:22:30' },
-      { id: 4, title: 'Curriculum 4', lastModified: '2026-03-04T16:45:18' },
-      { id: 5, title: 'Curriculum 5', lastModified: '2026-03-05T09:58:57' },
-    ];
+    const sortedCurriculums = [...(this.args.curriculums || [])].sort(
+      (a, b) =>
+        new Date(b.lastModified).getTime() - new Date(a.lastModified).getTime()
+    );
+    return sortedCurriculums;
   }
 
   <template>
-    <div class="flex flex-col gap-4">
-      <h2 class="text-xl font-bold">
+    <div data-test-curriculums-list class="flex flex-col gap-4">
+      <h2 data-test-curriculums-title class="text-xl font-bold">
         {{t "curriculums.view.curriculumsVitae"}}
       </h2>
       <div class="flex flex-row flex-wrap">
@@ -30,3 +42,10 @@ class CurriculumList extends Component<object> {
 }
 
 export default CurriculumList;
+
+export const CurriculumListPageObject = create({
+  scope: '[data-test-curriculums-list]',
+  title: text('[data-test-curriculums-title]'),
+  addButton: clickable('[data-test-curriculum-add-button]'),
+  items: collection('[data-test-curriculum-item]', CurriculumItemPageObject),
+});
