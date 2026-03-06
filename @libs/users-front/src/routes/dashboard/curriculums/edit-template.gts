@@ -5,9 +5,9 @@ import CurriculumPreview from '#src/components/curriculums/edit/curriculum-previ
 import CurriculumEditView from '#src/components/curriculums/edit/curriculum-edit-view.gts';
 
 export default <template>
-    <CurriculumEditView />
-    <CurriculumPreview />
-    </template> as TOC<{
+  <CurriculumEditView />
+  <CurriculumPreview />
+</template> as TOC<{
   model: Awaited<ReturnType<CurriculumsEdit['model']>>;
   controller: undefined;
 }>

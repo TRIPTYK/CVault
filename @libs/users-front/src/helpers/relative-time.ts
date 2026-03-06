@@ -18,9 +18,7 @@ export default class RelativeTimeHelper extends Helper<RelativeTimeSignature> {
     const date = new Date(value);
     const now = new Date();
 
-    const diffInSeconds = Math.floor(
-      (date.getTime() - now.getTime()) / 1000
-    );
+    const diffInSeconds = Math.floor((date.getTime() - now.getTime()) / 1000);
 
     const abs = Math.abs(diffInSeconds);
 
@@ -41,10 +39,9 @@ export default class RelativeTimeHelper extends Helper<RelativeTimeSignature> {
       amount = Math.floor(diffInSeconds / 86400);
     }
 
-    const formatter = new Intl.RelativeTimeFormat(
-      this.intl.primaryLocale,
-      { numeric: 'auto' }
-    );
+    const formatter = new Intl.RelativeTimeFormat(this.intl.primaryLocale, {
+      numeric: 'auto',
+    });
 
     return formatter.format(amount, unit);
   }
