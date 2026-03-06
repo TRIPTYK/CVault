@@ -2,10 +2,17 @@ import Helper from '@ember/component/helper';
 import { service } from '@ember/service';
 import IntlService from 'ember-intl/services/intl';
 
-export default class RelativeTimeHelper extends Helper {
+interface RelativeTimeSignature {
+  Args: {
+    Positional: [string];
+  };
+  Return: string;
+}
+
+export default class RelativeTimeHelper extends Helper<RelativeTimeSignature> {
   @service declare intl: IntlService;
 
-  compute([value]: [string]) {
+  compute([value]: RelativeTimeSignature['Args']['Positional']): string {
     if (!value) return '';
 
     const date = new Date(value);
