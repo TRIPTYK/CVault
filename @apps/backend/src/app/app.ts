@@ -19,7 +19,7 @@ import packageJson from "../../package.json" with { type: "json" };
 import { appRouter } from "./app.router.js";
 import type { ApplicationContext } from "./application.context.js";
 import { logger } from "./logger.js";
-import { UserModule, AuthModule } from "@libs/users-backend";
+import { UserModule, AuthModule, CurriculumModule } from "@libs/users-backend";
 
 export type FastifyInstanceType = FastifyInstance<
   RawServerDefault,
@@ -157,6 +157,12 @@ export class App {
         em: this.context.orm.em.fork(),
       }),
       userModule: UserModule.init({
+        em: this.context.orm.em.fork(),
+        configuration: {
+          jwtSecret: this.context.configuration.JWT_SECRET,
+        },
+      }),
+      curriculumModule: CurriculumModule.init({
         em: this.context.orm.em.fork(),
         configuration: {
           jwtSecret: this.context.configuration.JWT_SECRET,

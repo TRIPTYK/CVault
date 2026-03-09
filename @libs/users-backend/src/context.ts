@@ -14,3 +14,10 @@ export interface AuthLibraryContext {
     jwtSecret: string;
   };
 }
+
+export interface CurriculumLibraryContext {
+  em: EntityManager;
+  configuration: {
+    jwtSecret: string;
+  };
+}

@@ -3,6 +3,8 @@ import {
   UserModule,
   UserEntity,
   RefreshTokenEntity,
+  CurriculumModule,
+  CurriculumEntity,
   type FastifyInstanceTypeForModule,
   AuthModule,
 } from "#src/index.js";
@@ -64,13 +66,19 @@ export class TestModule {
         jwtRefreshSecret: TestModule.JWT_REFRESH_SECRET,
       },
     });
+    const curriculumModule = CurriculumModule.init({
+      em: sharedEm,
+      configuration: {
+        jwtSecret: TestModule.JWT_SECRET,
+      },
+    });
 
     const testModule = new TestModule(module, orm);
     testModule.fastifyInstance = fastifyInstance;
 
     await module.setupRoutes(fastifyInstance);
     await authModule.setupRoutes(fastifyInstance);
-
+    await curriculumModule.setupRoutes(fastifyInstance);
     return testModule;
   }
 
@@ -116,6 +124,15 @@ export class TestModule {
     });
 
     await this.em.flush();
+  }
+
+  public async createCurriculum(data: { id?: string; userId: string; title: string }) {
+    await this.em.getRepository(CurriculumEntity).insert({
+      id: data.id ?? randomUUID(),
+      userId: data.userId,
+      title: data.title,
+      updatedAt: new Date(),
+    });
   }
 
   public async createUser(data: {
