@@ -8,3 +8,10 @@ moreActions:
   duplicate: 'Duplicate'
   download: 'Download'
   rename: 'Rename'
+validation:
+  titleRequired: 'Title is required'
+  minimumTitleLength: 'Title must be at least 1 character long'
+  maximumTitleLength: 'Title must be at most 255 characters long'
+create:
+  createSuccess: 'Curriculum vitae created successfully'
+  title: 'Title'

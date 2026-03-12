@@ -1,4 +1,4 @@
-import { expect, describe, assert } from 'vitest';
+import { expect, describe, assert, vi } from 'vitest';
 import { renderingTest } from 'ember-vitest';
 import { render } from '@ember/test-helpers';
 import CurriculumItem from '#src/components/curriculums/curriculum-item.gts';
@@ -7,6 +7,7 @@ import { CurriculumItemPageObject } from '#src/components/curriculums/curriculum
 import curriculumsList from '#src/models/curriculums/curriculums-list.mock.ts';
 
 const curriculum = curriculumsList.curriculums[0]!;
+const onRefresh = vi.fn();
 
 describe('curriculum-item', function () {
   renderingTest.scoped({
@@ -20,11 +21,12 @@ describe('curriculum-item', function () {
       await initializeTestApp(context.owner, 'en-us');
 
       await render(
-        <template><CurriculumItem @curriculum={{curriculum}} /></template>
+        <template>
+          <CurriculumItem @curriculum={{curriculum}} @onRefresh={{onRefresh}} />
+        </template>
       );
 
       expect(CurriculumItemPageObject.titleInput).toBeDefined();
-      expect(CurriculumItemPageObject.lastModified).toBeDefined();
       expect(CurriculumItemPageObject.enterButton).toBeDefined();
       expect(CurriculumItemPageObject.moreActionsButton).toBeDefined();
 
@@ -36,7 +38,9 @@ describe('curriculum-item', function () {
     await initializeTestApp(context.owner, 'en-us');
 
     await render(
-      <template><CurriculumItem @curriculum={{curriculum}} /></template>
+      <template>
+        <CurriculumItem @curriculum={{curriculum}} @onRefresh={{onRefresh}} />
+      </template>
     );
 
     await CurriculumItemPageObject.enterButton();

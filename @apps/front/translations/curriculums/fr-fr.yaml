@@ -8,3 +8,10 @@ moreActions:
   duplicate: 'Dupliquer'
   download: 'Télécharger'
   rename: 'Renommer'
+validation:
+  titleRequired: 'Le titre est requis'
+  minimumTitleLength: 'Le titre doit comporter au moins 1 caractère'
+  maximumTitleLength: 'Le titre doit comporter au maximum 255 caractères'
+create:
+  createSuccess: 'Le curriculum vitae a été créé avec succès'
+  title: 'Titre'

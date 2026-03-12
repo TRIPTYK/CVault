@@ -56,7 +56,6 @@ export function forRouter(this: DSL) {
     this.route('edit', { path: '/:user_id/edit' });
   });
   this.route('curriculums', function () {
-    this.route('create');
     this.route('edit', { path: '/:curriculum_id/edit' });
   });
 }

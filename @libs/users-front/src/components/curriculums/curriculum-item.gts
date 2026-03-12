@@ -15,21 +15,43 @@ import {
   text,
   value,
 } from 'ember-cli-page-object';
+import type CurriculumService from '#src/services/curriculum.ts';
 
 interface CurriculumItemSignature {
   Element: HTMLDivElement;
 
   Args: {
     curriculum: {
-      id: number;
+      id: string | null;
       title: string;
-      lastModified: string;
+      updatedAt: string;
     };
+    onRefresh: () => void;
   };
 }
 
 class CurriculumItem extends Component<CurriculumItemSignature> {
   @service declare router: RouterService;
+  @service declare curriculum: CurriculumService;
+
+  @action
+  async renameOnEnter(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      await this.rename((event.target as HTMLInputElement).value);
+    }
+  }
+
+  @action
+  async renameOnBlur(event: FocusEvent) {
+    await this.rename((event.target as HTMLInputElement).value);
+  }
+
+  async rename(title: string) {
+    if (!this.args.curriculum.id || title === this.args.curriculum.title)
+      return;
+    await this.curriculum.rename(this.args.curriculum.id, title);
+    this.args.onRefresh?.();
+  }
 
   @action
   focusTitle() {
@@ -41,6 +63,11 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
       (input as HTMLInputElement).focus();
       (input as HTMLInputElement).select();
     }
+  }
+
+  @action
+  refresh() {
+    this.args.onRefresh?.();
   }
 
   goToCurriculum = () => {
@@ -63,6 +90,7 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
           <CurriculumMoreActions
             @curriculumId={{@curriculum.id}}
             @onRename={{this.focusTitle}}
+            @onDelete={{this.refresh}}
           />
         </div>
       </div>
@@ -73,10 +101,12 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
         name="curriculum-title-{{@curriculum.id}}"
         class="font-medium pb-1 hover:text-blue-600 hover:underline hover:underline-offset-6 focus:outline-none transition-colors duration-200"
         value={{@curriculum.title}}
+        {{on "keydown" this.renameOnEnter}}
+        {{on "blur" this.renameOnBlur}}
       />
       <span data-test-curriculum-last-modified class="text-sm text-gray-500">
         {{t "curriculums.view.lastModified"}}
-        {{relativeTime @curriculum.lastModified}}
+        {{relativeTime @curriculum.updatedAt}}
       </span>
     </div>
   </template>

@@ -13,22 +13,35 @@ import DuplicateIcon from '#src/assets/icons/duplicate.gts';
 import DownloadIcon from '#src/assets/icons/download.gts';
 import DeleteIcon from '#src/assets/icons/delete.gts';
 import { clickable, create, isVisible } from 'ember-cli-page-object';
+import type CurriculumService from '#src/services/curriculum.ts';
 
 interface CurriculumMoreActionsSignature {
   Args: {
-    curriculumId: number;
+    curriculumId: string | null;
     onRename: () => void;
+    onDelete: () => void;
   };
 }
 
 class CurriculumMoreActions extends Component<CurriculumMoreActionsSignature> {
   @service declare router: RouterService;
+  @service declare curriculum: CurriculumService;
 
   @tracked isOpen = false;
 
   @action
   toggle() {
     this.isOpen = !this.isOpen;
+  }
+
+  @action
+  async delete(event: MouseEvent) {
+    event.stopPropagation();
+    this.isOpen = false;
+
+    if (!this.args.curriculumId) return;
+    await this.curriculum.delete(this.args.curriculumId);
+    this.args.onDelete?.();
   }
 
   @action
@@ -105,6 +118,7 @@ class CurriculumMoreActions extends Component<CurriculumMoreActionsSignature> {
 
         <button
           data-test-curriculum-more-action-delete-button
+          {{on "click" this.delete}}
           type="button"
           class="w-full text-left px-4 py-2 flex flex-row items-center cursor-pointer hover:bg-gray-100"
         >

@@ -4,27 +4,46 @@ import CurriculumAdd from '#src/components/curriculums/curriculum-add.gts';
 import { create, collection, clickable, text } from 'ember-cli-page-object';
 import t from 'ember-intl/helpers/t';
 import { CurriculumItemPageObject } from './curriculum-item.gts';
+import { service } from '@ember/service';
+import type CurriculumService from '#src/services/curriculum.ts';
+import type Owner from '@ember/owner';
+import { tracked } from '@glimmer/tracking';
+import type { Curriculum } from '#src/schemas/curriculums.ts';
 
 interface CurriculumListSignature {
   Element: HTMLDivElement;
-
-  Args: {
-    curriculums?: Array<{
-      id: number;
-      title: string;
-      lastModified: string;
-    }>;
-  };
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  Args: {};
 }
 
 class CurriculumList extends Component<CurriculumListSignature> {
-  get curriculums() {
-    const sortedCurriculums = [...(this.args.curriculums || [])].sort(
+  @service declare curriculum: CurriculumService;
+  @tracked curriculums: Curriculum[] = [];
+
+  constructor(owner: Owner, args: CurriculumListSignature['Args']) {
+    super(owner, args);
+    void this.loadCurriculums();
+  }
+
+  async loadCurriculums() {
+    this.curriculums = this.sortCurriculums(await this.curriculum.findAll());
+  }
+
+  onRefresh = async () => {
+    await this.loadCurriculums();
+  };
+
+  sortCurriculums(curriculums: Curriculum[] = this.curriculums): Curriculum[] {
+    const sortedCurriculums = [...(curriculums || [])].sort(
       (a, b) =>
-        new Date(b.lastModified).getTime() - new Date(a.lastModified).getTime()
+        new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
     );
     return sortedCurriculums;
   }
+
+  onAdd = async () => {
+    await this.loadCurriculums();
+  };
 
   <template>
     <div data-test-curriculums-list class="flex flex-col gap-4">
@@ -32,9 +51,12 @@ class CurriculumList extends Component<CurriculumListSignature> {
         {{t "curriculums.view.curriculumsVitae"}}
       </h2>
       <div class="flex flex-row flex-wrap">
-        <CurriculumAdd />
+        <CurriculumAdd @onAdd={{this.onAdd}} />
         {{#each this.curriculums as |curriculum|}}
-          <CurriculumItem @curriculum={{curriculum}} />
+          <CurriculumItem
+            @curriculum={{curriculum}}
+            @onRefresh={{this.onRefresh}}
+          />
         {{/each}}
       </div>
     </div>

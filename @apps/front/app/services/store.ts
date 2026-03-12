@@ -1,6 +1,7 @@
 import { useLegacyStore } from '@warp-drive/legacy';
 import { JSONAPICache } from '@warp-drive/json-api';
 import UserSchema from '@libs/users-front/schemas/users';
+import CurriculumSchema from '@libs/users-front/schemas/curriculums';
 import { setBuildURLConfig } from '@warp-drive/utilities';
 import { CacheHandler, Fetch, RequestManager } from '@warp-drive/core';
 import type Owner from '@ember/owner';
@@ -19,7 +20,7 @@ const legacyStore = useLegacyStore({
   legacyRequests: true,
   modelFragments: true,
   cache: JSONAPICache,
-  schemas: [UserSchema],
+  schemas: [UserSchema, CurriculumSchema],
   handlers: [],
 });
 

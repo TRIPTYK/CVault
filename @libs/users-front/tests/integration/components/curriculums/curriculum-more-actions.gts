@@ -8,6 +8,7 @@ import curriculumsList from '#src/models/curriculums/curriculums-list.mock.ts';
 
 const curriculumId = curriculumsList.curriculums[0]!.id;
 const onRename = vi.fn();
+const onDelete = vi.fn();
 
 describe('curriculum-more-actions', function () {
   renderingTest.scoped({
@@ -25,6 +26,7 @@ describe('curriculum-more-actions', function () {
           <CurriculumMoreActions
             @curriculumId={{curriculumId}}
             @onRename={{onRename}}
+            @onDelete={{onDelete}}
           />
         </template>
       );
@@ -43,6 +45,7 @@ describe('curriculum-more-actions', function () {
           <CurriculumMoreActions
             @curriculumId={{curriculumId}}
             @onRename={{onRename}}
+            @onDelete={{onDelete}}
           />
         </template>
       );
@@ -61,6 +64,7 @@ describe('curriculum-more-actions', function () {
           <CurriculumMoreActions
             @curriculumId={{curriculumId}}
             @onRename={{onRename}}
+            @onDelete={{onDelete}}
           />
         </template>
       );
@@ -104,6 +108,7 @@ describe('curriculum-more-actions', function () {
           <CurriculumMoreActions
             @curriculumId={{curriculumId}}
             @onRename={{onRename}}
+            @onDelete={{onDelete}}
           />
         </template>
       );
@@ -129,6 +134,7 @@ describe('curriculum-more-actions', function () {
           <CurriculumMoreActions
             @curriculumId={{curriculumId}}
             @onRename={{onRename}}
+            @onDelete={{onDelete}}
           />
         </template>
       );
@@ -148,13 +154,12 @@ describe('curriculum-more-actions', function () {
     async function ({ context }) {
       await initializeTestApp(context.owner, 'en-us');
 
-      const onRenameMock = vi.fn();
-
       await render(
         <template>
           <CurriculumMoreActions
             @curriculumId={{curriculumId}}
-            @onRename={{onRenameMock}}
+            @onRename={{onRename}}
+            @onDelete={{onDelete}}
           />
         </template>
       );
@@ -162,7 +167,7 @@ describe('curriculum-more-actions', function () {
       await click('[data-test-curriculum-more-action-button]');
       await CurriculumMoreActionsPageObject.renameButton();
 
-      expect(onRenameMock).toHaveBeenCalledOnce();
+      expect(onRename).toHaveBeenCalledOnce();
       expect(document.querySelector('.curriculum-popup')).toBeNull();
     }
   );
