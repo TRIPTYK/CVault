@@ -15,3 +15,6 @@ validation:
 create:
   createSuccess: 'Le curriculum vitae a été créé avec succès'
   title: 'Titre'
+edit:
+  returnToList: 'Retour à la liste'
+  download: 'Télécharger'
