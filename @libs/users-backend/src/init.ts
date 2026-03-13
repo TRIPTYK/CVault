@@ -31,6 +31,7 @@ import { ListCurriculumRoute } from "./routes/curriculums/list.route.ts";
 import { CreateCurriculumRoute } from "./routes/curriculums/create.route.ts";
 import { UpdateCurriculumRoute } from "./routes/curriculums/update.route.ts";
 import { DeleteCurriculumRoute } from "./routes/curriculums/delete.route.ts";
+import { DuplicateCurriculumRoute } from "./routes/curriculums/duplicate.route.ts";
 
 export type FastifyInstanceTypeForModule = FastifyInstance<
   RawServerDefault,
@@ -137,6 +138,7 @@ export class CurriculumModule implements ModuleInterface<FastifyInstanceTypeForM
           new CreateCurriculumRoute(repository),
           new UpdateCurriculumRoute(repository),
           new DeleteCurriculumRoute(repository),
+          new DuplicateCurriculumRoute(repository),
         ];
 
         f.setErrorHandler((error, request, reply) => {

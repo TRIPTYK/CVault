@@ -91,6 +91,7 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
             @curriculumId={{@curriculum.id}}
             @onRename={{this.focusTitle}}
             @onDelete={{this.refresh}}
+            @onDuplicate={{this.refresh}}
           />
         </div>
       </div>

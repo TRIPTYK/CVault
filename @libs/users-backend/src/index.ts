@@ -29,6 +29,7 @@ export * from "#src/routes/curriculums/list.route.js";
 export * from "#src/routes/curriculums/create.route.js";
 export * from "#src/routes/curriculums/update.route.js";
 export * from "#src/routes/curriculums/delete.route.js";
+export * from "#src/routes/curriculums/duplicate.route.js";
 export * from "#src/serializers/curriculum.serializer.js";
 
 export const entities = [UserEntity, RefreshTokenEntity, CurriculumEntity];

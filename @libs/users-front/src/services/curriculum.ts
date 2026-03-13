@@ -13,6 +13,14 @@ import type { Curriculum } from '#src/schemas/curriculums.ts';
 export default class CurriculumService extends Service {
   @service declare store: Store;
 
+  public async duplicate(curriculumId: string): Promise<void> {
+    await this.store.request({
+      method: 'POST',
+      url: `/api/v1/curriculums/${curriculumId}/duplicate`,
+      body: JSON.stringify({}),
+    });
+  }
+
   public async rename(curriculumId: string, title: string): Promise<void> {
     const curriculum = this.store.peekRecord<Curriculum>(
       'curriculums',

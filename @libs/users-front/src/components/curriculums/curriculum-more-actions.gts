@@ -20,6 +20,7 @@ interface CurriculumMoreActionsSignature {
     curriculumId: string | null;
     onRename: () => void;
     onDelete: () => void;
+    onDuplicate: () => void;
   };
 }
 
@@ -42,6 +43,16 @@ class CurriculumMoreActions extends Component<CurriculumMoreActionsSignature> {
     if (!this.args.curriculumId) return;
     await this.curriculum.delete(this.args.curriculumId);
     this.args.onDelete?.();
+  }
+
+  @action
+  async duplicate(event: MouseEvent) {
+    event.stopPropagation();
+    this.isOpen = false;
+
+    if (!this.args.curriculumId) return;
+    await this.curriculum.duplicate(this.args.curriculumId);
+    this.args.onDuplicate?.();
   }
 
   @action
@@ -100,6 +111,7 @@ class CurriculumMoreActions extends Component<CurriculumMoreActionsSignature> {
 
         <button
           data-test-curriculum-more-action-duplicate-button
+          {{on "click" this.duplicate}}
           type="button"
           class="w-full text-left px-4 py-2 flex flex-row items-center cursor-pointer hover:bg-gray-100"
         >
