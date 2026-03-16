@@ -1,4 +1,9 @@
-import { type AuthModule, type UserModule, type CurriculumModule } from "@libs/users-backend";
+import {
+  type AuthModule,
+  type UserModule,
+  type CurriculumModule,
+  ProposedSectionsModule,
+} from "@libs/users-backend";
 import type { FastifyInstanceType } from "./app.js";
 import { statusRoute } from "./status.route.js";
 
@@ -6,11 +11,12 @@ interface AppRouterOptions {
   authModule: AuthModule;
   userModule: UserModule;
   curriculumModule: CurriculumModule;
+  proposedSectionsModule: ProposedSectionsModule;
 }
 
 export async function appRouter(
   fastify: FastifyInstanceType,
-  { authModule, userModule, curriculumModule }: AppRouterOptions,
+  { authModule, userModule, curriculumModule, proposedSectionsModule }: AppRouterOptions,
 ) {
   await fastify.register(
     async function (fastify) {
@@ -27,6 +33,7 @@ export async function appRouter(
 
       await userModule.setupRoutes(fastify);
       await curriculumModule.setupRoutes(fastify);
+      await proposedSectionsModule.setupRoutes(fastify);
     },
     {
       prefix: "api/v1",

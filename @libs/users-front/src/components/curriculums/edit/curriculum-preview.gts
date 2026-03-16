@@ -1,5 +1,7 @@
+// TODO: implement curriculum preview (for later, when curriculum edition will be done)
+
 import Component from '@glimmer/component';
-import CvIcon from '#src/assets/icons/cvBig.gts';
+import CvIcon from '#src/assets/icons/cv.gts';
 
 class CurriculumPreview extends Component<object> {
   get curriculumPreview() {

@@ -4,7 +4,7 @@ import { render, click } from '@ember/test-helpers';
 import CurriculumMoreActions from '#src/components/curriculums/curriculum-more-actions.gts';
 import { initializeTestApp, TestApp } from '../../../app.ts';
 import { CurriculumMoreActionsPageObject } from '#src/components/curriculums/curriculum-more-actions.gts';
-import curriculumsList from '#src/models/curriculums/curriculums-list.mock.ts';
+import curriculumsList from '#src/http-mocks/curriculums.ts';
 
 const curriculumId = curriculumsList.curriculums[0]!.id;
 const onRename = vi.fn();

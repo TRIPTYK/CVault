@@ -9,6 +9,7 @@ export const SerializedCurriculumSchema = makeJsonApiDocumentSchema(
     userId: string(),
     title: string(),
     updatedAt: string(),
+    createdAt: string(),
   }),
 );
 
@@ -22,6 +23,7 @@ export function jsonApiSerializeCurriculum(
       userId: curriculum.userId,
       title: curriculum.title,
       updatedAt: curriculum.updatedAt.toISOString(),
+      createdAt: curriculum.createdAt.toISOString(),
     },
   };
 }

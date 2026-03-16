@@ -1,4 +1,4 @@
-import { hashPassword, UserEntity } from "@libs/users-backend";
+import { hashPassword, ProposedSectionEntity, UserEntity } from "@libs/users-backend";
 import type { EntityManager } from "@mikro-orm/core";
 import { Seeder } from "@mikro-orm/seeder";
 
@@ -13,6 +13,24 @@ export class DatabaseSeeder extends Seeder {
       firstName: "Amaury",
       lastName: "Deflorenne",
       password: hashedPassword,
+    });
+
+    em.create(ProposedSectionEntity, {
+      id: "e2e-proposed-section-1",
+      title: "Informations personnelles",
+      position: 1,
+    });
+
+    em.create(ProposedSectionEntity, {
+      id: "e2e-proposed-section-2",
+      title: "Expérience professionnelle",
+      position: 2,
+    });
+
+    em.create(ProposedSectionEntity, {
+      id: "e2e-proposed-section-3",
+      title: "Formation et diplômes",
+      position: 3,
     });
   }
 }

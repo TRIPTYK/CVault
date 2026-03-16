@@ -7,6 +7,7 @@ export const CurriculumEntity = defineEntity({
     userId: p.string().index(),
     title: p.string(),
     updatedAt: p.datetime(),
+    createdAt: p.datetime(),
   },
 });
 

@@ -1,4 +1,3 @@
-// #src/models/curriculums/curriculums-list.mock.ts
 import type { Curriculum } from '#src/schemas/curriculums.ts';
 
 const curriculumsList: { curriculums: Curriculum[] } = {

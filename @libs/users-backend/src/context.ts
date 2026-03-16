@@ -21,3 +21,10 @@ export interface CurriculumLibraryContext {
     jwtSecret: string;
   };
 }
+
+export interface ProposedSectionsLibraryContext {
+  em: EntityManager;
+  configuration: {
+    jwtSecret: string;
+  };
+}

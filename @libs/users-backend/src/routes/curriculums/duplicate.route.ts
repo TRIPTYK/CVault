@@ -28,7 +28,6 @@ export class DuplicateCurriculumRoute implements Route {
           response: {
             200: makeSingleJsonApiTopDocument(SerializedCurriculumSchema),
             404: jsonApiErrorDocumentSchema,
-            409: jsonApiErrorDocumentSchema,
           },
         },
       },
@@ -52,25 +51,12 @@ export class DuplicateCurriculumRoute implements Route {
 
         const duplicateTitle = `${original.title} (copy)`;
 
-        const existingCurriculum = await this.curriculumRepository.findOne({
-          userId: currentUser.id,
-          title: duplicateTitle,
-        });
-
-        if (existingCurriculum) {
-          return reply.code(409).send(
-            makeJsonApiError(409, "Conflict", {
-              code: "CURRICULUM_ALREADY_EXISTS",
-              detail: `A curriculum with title "${duplicateTitle}" already exists for this user`,
-            }),
-          );
-        }
-
         const duplicate = this.curriculumRepository.create({
           id: randomUUID(),
           userId: currentUser.id,
           title: duplicateTitle,
           updatedAt: new Date(),
+          createdAt: new Date(),
         });
 
         await this.curriculumRepository.getEntityManager().flush();

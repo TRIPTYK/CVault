@@ -6,12 +6,20 @@ import {
   query,
   deleteRecord,
   updateRecord,
+  findRecord,
 } from '@warp-drive/utilities/json-api';
-import type { ValidatedCurriculum } from '#src/components/curriculums/curriculum-validation.ts';
 import type { Curriculum } from '#src/schemas/curriculums.ts';
 
 export default class CurriculumService extends Service {
   @service declare store: Store;
+
+  public async findOne(curriculumId: string): Promise<Curriculum | null> {
+    const result = await this.store.request(
+      findRecord('curriculums', curriculumId, { reload: true })
+    );
+    const content = result.content as { data: Curriculum };
+    return content.data ?? null;
+  }
 
   public async duplicate(curriculumId: string): Promise<void> {
     await this.store.request({
@@ -61,14 +69,16 @@ export default class CurriculumService extends Service {
     return content.data ?? [];
   }
 
-  public async create(data: ValidatedCurriculum) {
-    const curriculum = this.store.createRecord<Curriculum>('curriculums', data);
+  public async create() {
+    const curriculum = this.store.createRecord<Curriculum>('curriculums', {});
     const request = createRecord(curriculum);
 
     request.body = JSON.stringify({
       data: this.store.cache.peek(cacheKeyFor(curriculum)),
     });
 
-    await this.store.request(request);
+    const response = await this.store.request(request);
+    const content = response.content as unknown as { data: Curriculum };
+    return content.data;
   }
 }

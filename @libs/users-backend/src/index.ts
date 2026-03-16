@@ -1,10 +1,12 @@
 import { RefreshTokenEntity } from "#src/entities/refresh-token.entity.js";
 import { UserEntity } from "#src/entities/user.entity.js";
 import { CurriculumEntity } from "#src/entities/curriculum.entity.js";
+import { ProposedSectionEntity } from "./entities/proposed-sections.entity.ts";
 
 export * from "#src/entities/user.entity.js";
 export * from "#src/entities/refresh-token.entity.js";
 export * from "#src/entities/curriculum.entity.js";
+export * from "#src/entities/proposed-sections.entity.js";
 
 export * from "#src/routes/create.route.js";
 export * from "#src/routes/delete.route.js";
@@ -32,4 +34,7 @@ export * from "#src/routes/curriculums/delete.route.js";
 export * from "#src/routes/curriculums/duplicate.route.js";
 export * from "#src/serializers/curriculum.serializer.js";
 
-export const entities = [UserEntity, RefreshTokenEntity, CurriculumEntity];
+export * from "#src/routes/proposedSections/list.route.js";
+export * from "#src/serializers/proposed-sections.serializer.js";
+
+export const entities = [UserEntity, RefreshTokenEntity, CurriculumEntity, ProposedSectionEntity];

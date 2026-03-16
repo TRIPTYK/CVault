@@ -132,6 +132,7 @@ export class TestModule {
       userId: data.userId,
       title: data.title,
       updatedAt: new Date(),
+      createdAt: new Date(),
     });
   }
 

@@ -17,41 +17,6 @@ aroundEach(async (runTest) => {
   await module.em.rollback();
 });
 
-test("Can't create curriculum with existing title", async () => {
-  await module.createCurriculum({
-    userId: TestModule.TEST_USER_ID,
-    title: "Existing Curriculum",
-  });
-
-  const response = await module.fastifyInstance.inject({
-    method: "POST",
-    url: "/curriculums",
-    headers: {
-      authorization: module.generateBearerToken(TestModule.TEST_USER_ID),
-    },
-    payload: {
-      data: {
-        type: "curriculums",
-        attributes: {
-          title: "Existing Curriculum",
-        },
-      },
-    },
-  });
-
-  expect(response.statusCode).toBe(409);
-  expect(response.json()).toEqual({
-    errors: [
-      {
-        status: "409",
-        title: "Conflict",
-        detail: 'A curriculum with title "Existing Curriculum" already exists for this user',
-        code: "CURRICULUM_ALREADY_EXISTS",
-      },
-    ],
-  });
-});
-
 test("CreateRoute works correctly", async () => {
   const response = await module.fastifyInstance.inject({
     method: "POST",
@@ -77,6 +42,7 @@ test("CreateRoute works correctly", async () => {
         userId: TestModule.TEST_USER_ID,
         title: "New Curriculum",
         updatedAt: expect.any(String),
+        createdAt: expect.any(String),
       },
     },
   });

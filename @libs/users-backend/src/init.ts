@@ -9,6 +9,7 @@ import type {
   AuthLibraryContext,
   UserLibraryContext,
   CurriculumLibraryContext,
+  ProposedSectionsLibraryContext,
 } from "./context.js";
 import { type ZodTypeProvider } from "fastify-type-provider-zod";
 import { LoginRoute } from "#src/routes/login.route.js";
@@ -25,6 +26,7 @@ import { type ModuleInterface, type Route } from "@libs/backend-shared";
 import { handleJsonApiErrors } from "@libs/backend-shared";
 import { createJwtAuthMiddleware } from "./index.ts";
 import { CurriculumEntity } from "./entities/curriculum.entity.ts";
+import { ProposedSectionEntity } from "./entities/proposed-sections.entity.ts";
 
 import { GetCurriculumRoute } from "./routes/curriculums/get.route.ts";
 import { ListCurriculumRoute } from "./routes/curriculums/list.route.ts";
@@ -32,6 +34,8 @@ import { CreateCurriculumRoute } from "./routes/curriculums/create.route.ts";
 import { UpdateCurriculumRoute } from "./routes/curriculums/update.route.ts";
 import { DeleteCurriculumRoute } from "./routes/curriculums/delete.route.ts";
 import { DuplicateCurriculumRoute } from "./routes/curriculums/duplicate.route.ts";
+
+import { ListProposedSectionRoute } from "./routes/proposedSections/list.route.ts";
 
 export type FastifyInstanceTypeForModule = FastifyInstance<
   RawServerDefault,
@@ -157,6 +161,42 @@ export class CurriculumModule implements ModuleInterface<FastifyInstanceTypeForM
         }
       },
       { prefix: "/curriculums" },
+    );
+  }
+}
+
+export class ProposedSectionsModule implements ModuleInterface<FastifyInstanceTypeForModule> {
+  private constructor(private context: ProposedSectionsLibraryContext) {}
+
+  public static init(context: ProposedSectionsLibraryContext): ProposedSectionsModule {
+    return new ProposedSectionsModule(context);
+  }
+
+  public async setupRoutes(fastify: FastifyInstanceTypeForModule): Promise<void> {
+    const repository = this.context.em.getRepository(ProposedSectionEntity);
+
+    await fastify.register(
+      async (f) => {
+        const proposedSectionRoutes: Route<FastifyInstanceTypeForModule>[] = [
+          new ListProposedSectionRoute(repository),
+        ];
+
+        f.setErrorHandler((error, request, reply) => {
+          handleJsonApiErrors(error, request, reply);
+        });
+
+        const jwtAuthMiddleware = createJwtAuthMiddleware(
+          this.context.em,
+          this.context.configuration.jwtSecret,
+        );
+
+        f.addHook("preValidation", jwtAuthMiddleware);
+
+        for (const route of proposedSectionRoutes) {
+          route.routeDefinition(f);
+        }
+      },
+      { prefix: "/proposed-sections" },
     );
   }
 }

@@ -34,7 +34,6 @@ export class UpdateCurriculumRoute implements Route {
           response: {
             200: makeSingleJsonApiTopDocument(SerializedCurriculumSchema),
             404: jsonApiErrorDocumentSchema,
-            409: jsonApiErrorDocumentSchema,
           },
         },
       },
@@ -50,21 +49,6 @@ export class UpdateCurriculumRoute implements Route {
             makeJsonApiError(404, "Not Found", {
               code: "CURRICULUM_NOT_FOUND",
               detail: `Curriculum with id ${id} not found`,
-            }),
-          );
-        }
-
-        const existingCurriculum = await this.curriculumRepository.findOne({
-          userId: currentUser.id,
-          title,
-          id: { $ne: id },
-        });
-
-        if (existingCurriculum) {
-          return reply.code(409).send(
-            makeJsonApiError(409, "Conflict", {
-              code: "CURRICULUM_ALREADY_EXISTS",
-              detail: `A curriculum with title "${title}" already exists for this user`,
             }),
           );
         }

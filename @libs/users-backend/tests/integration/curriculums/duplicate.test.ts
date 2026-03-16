@@ -41,6 +41,7 @@ test("CreateRoute works correctly", async () => {
         userId: TestModule.TEST_USER_ID,
         title: "Original Curriculum (copy)",
         updatedAt: expect.any(String),
+        createdAt: expect.any(String),
       },
     },
   });

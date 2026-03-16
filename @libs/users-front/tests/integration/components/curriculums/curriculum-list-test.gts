@@ -5,7 +5,7 @@ import CurriculumList from '#src/components/curriculums/curriculum-list.gts';
 import { initializeTestApp, TestApp } from '../../../app.ts';
 import { CurriculumListPageObject } from '#src/components/curriculums/curriculum-list.gts';
 import type CurriculumService from '#src/services/curriculum.ts';
-import curriculumsList from '#src/models/curriculums/curriculums-list.mock.ts';
+import curriculumsList from '#src/http-mocks/curriculums.ts';
 
 describe('curriculum-list', function () {
   renderingTest.scoped({

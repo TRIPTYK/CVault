@@ -4,7 +4,7 @@ import { render } from '@ember/test-helpers';
 import CurriculumItem from '#src/components/curriculums/curriculum-item.gts';
 import { initializeTestApp, TestApp } from '../../../app.ts';
 import { CurriculumItemPageObject } from '#src/components/curriculums/curriculum-item.gts';
-import curriculumsList from '#src/models/curriculums/curriculums-list.mock.ts';
+import curriculumsList from '#src/http-mocks/curriculums.ts';
 
 const curriculum = curriculumsList.curriculums[0]!;
 const onRefresh = vi.fn();

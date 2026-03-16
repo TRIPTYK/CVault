@@ -4,7 +4,6 @@ export const ProposedSectionEntity = defineEntity({
   name: "ProposedSection",
   properties: {
     id: p.string().primary(),
-    curriculumId: p.string().index(),
     title: p.string(),
     position: p.integer(),
   },

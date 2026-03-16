@@ -27,9 +27,10 @@ export class ListCurriculumRoute implements Route {
       async (request, reply) => {
         const currentUser = request.user!;
 
-        const curriculums = await this.curriculumRepository.find({
-          userId: currentUser.id,
-        });
+        const curriculums = await this.curriculumRepository.find(
+          { userId: currentUser.id },
+          { orderBy: { updatedAt: "DESC" } },
+        );
 
         if (!curriculums.length) {
           return reply.code(404).send(
