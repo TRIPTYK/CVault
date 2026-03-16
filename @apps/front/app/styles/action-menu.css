@@ -1,0 +1,11 @@
+.open_actions {
+  @apply btn btn-ghost;
+}
+
+.open_actions svg {
+  @apply size-6;
+}
+
+.actions_list {
+  @apply dropdown menu min-w-36 rounded-box bg-base-100 shadow-sm;
+}

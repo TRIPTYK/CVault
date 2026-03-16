@@ -10,6 +10,7 @@ const CurriculumSchema = withDefaults({
     { name: 'updatedAt', kind: 'attribute' },
     { name: 'title', kind: 'attribute' },
     { name: 'userId', kind: 'attribute' },
+    { name: 'createdAt', kind: 'attribute' },
   ],
 });
 
@@ -19,5 +20,6 @@ export type Curriculum = WithLegacy<{
   updatedAt: string;
   title: string;
   userId: string;
+  createdAt: string;
   [Type]: 'curriculums';
 }>;

@@ -14,7 +14,8 @@ validation:
   maximumTitleLength: 'Title must be at most 255 characters long'
 create:
   createSuccess: 'Curriculum vitae created successfully'
-  title: 'Title'
 edit:
   returnToList: 'Return to list'
   download: 'Download'
+  title: 'Title'
+  renameSuccess: 'Curriculum vitae renamed successfully'

@@ -59,6 +59,7 @@
     "@warp-drive/json-api": "catalog:",
     "@warp-drive/legacy": "catalog:",
     "@warp-drive/utilities": "catalog:",
+    "date-fns": "catalog:",
     "decorator-transforms": "catalog:",
     "ember-auto-import": "2.12.0",
     "ember-cli-page-object": "catalog:",
@@ -130,7 +131,8 @@
     "typescript-eslint": "^8.19.1",
     "vite": "~7.3.1",
     "vitest": "catalog:",
-    "webpack": "catalog:"
+    "webpack": "catalog:",
+    "date-fns": "catalog:"
   },
   "volta": {
     "extends": "../../package.json"

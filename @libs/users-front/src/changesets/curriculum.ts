@@ -7,4 +7,8 @@ export interface DraftCurriculum {
   updatedAt?: string;
 }
 
-export class CurriculumChangeset extends ImmerChangeset<DraftCurriculum> {}
+export class CompleteCurriculumChangeset extends ImmerChangeset<DraftCurriculum> {}
+
+type FormCurriculum = { title: string };
+
+export class CurriculumChangeset extends ImmerChangeset<FormCurriculum> {}
