@@ -1,0 +1,21 @@
+view:
+  curriculumsVitae: 'Curriculum Vitae'
+  lastModified: 'modifié'
+  createNewCV: 'Créer un nouveau CV'
+moreActions:
+  edit: 'Modifier'
+  delete: 'Supprimer'
+  duplicate: 'Dupliquer'
+  download: 'Télécharger'
+  rename: 'Renommer'
+validation:
+  titleRequired: 'Le titre est requis'
+  minimumTitleLength: 'Le titre doit comporter au moins 1 caractère'
+  maximumTitleLength: 'Le titre doit comporter au maximum 255 caractères'
+create:
+  createSuccess: 'Le curriculum vitae a été créé avec succès'
+edit:
+  returnToList: 'Retour à la liste'
+  download: 'Télécharger'
+  title: 'Titre'
+  renameSuccess: 'Le curriculum vitae a été renommé avec succès'
