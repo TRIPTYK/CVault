@@ -1,4 +1,5 @@
-import { defineEntity, p, type InferEntity } from "@mikro-orm/core";
+import { Cascade, defineEntity, p, type InferEntity } from "@mikro-orm/core";
+import { SectionsEntity } from "./sections.entity.ts";
 
 export const CurriculumEntity = defineEntity({
   name: "Curriculum",
@@ -8,6 +9,7 @@ export const CurriculumEntity = defineEntity({
     title: p.string(),
     updatedAt: p.datetime(),
     createdAt: p.datetime(),
+    sections: () => p.oneToMany(SectionsEntity).mappedBy("curriculum").cascade(Cascade.ALL),
   },
 });
 

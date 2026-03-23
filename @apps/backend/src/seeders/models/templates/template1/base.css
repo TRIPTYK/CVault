@@ -1,0 +1,265 @@
+/* base.css */
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-accent: #1a1a2e;
+  --color-accent-mid: #16213e;
+  --color-highlight: #e94560;
+  --color-bg: #fafaf8;
+  --color-text: #1a1a2e;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e5e0;
+
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-body: "DM Sans", Helvetica, sans-serif;
+
+  --sidebar-width: 260px;
+  --page-width: 794px; /* A4 */
+  --page-height: 1123px; /* A4 */
+  --gap: 32px;
+}
+
+/* ── Page ── */
+
+body {
+  background: #e8e8e3;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.cv-page {
+  width: var(--page-width);
+  min-height: var(--page-height);
+  margin: 40px auto;
+  background: var(--color-bg);
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+}
+
+/* ── Sidebar ── */
+
+.cv-sidebar {
+  background: var(--color-accent);
+  color: #f0ede8;
+  padding: 40px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* ── Main ── */
+
+.cv-main {
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* ── Section base ── */
+
+.cv-section {
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.cv-sidebar .section-title {
+  color: #f0ede8;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+.section-divider {
+  height: 2px;
+  background: var(--color-highlight);
+  width: 36px;
+  margin-bottom: 20px;
+}
+
+.cv-sidebar .section-divider {
+  background: rgba(255, 255, 255, 0.25);
+  width: 28px;
+}
+
+.item-separator {
+  height: 1px;
+  background: var(--color-border);
+  margin: 16px 0;
+}
+
+/* ── Personal info ── */
+
+.cv-section--personal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.personal-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-highlight);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.personal-name {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.personal-firstname {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(240, 237, 232, 0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.personal-lastname {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  color: #f0ede8;
+  line-height: 1.1;
+}
+
+.personal-contacts {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.personal-contact {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  color: rgba(240, 237, 232, 0.8);
+  line-height: 1.4;
+}
+
+.contact-icon {
+  font-size: 13px;
+  color: var(--color-highlight);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.contact-value {
+  word-break: break-word;
+}
+
+/* ── Education ── */
+
+.education-item {
+}
+
+.education-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.education-left {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.education-degree {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.education-field {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.education-dates {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.education-school {
+  font-size: 13px;
+  color: var(--color-highlight);
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.education-description {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ── Generic ── */
+
+.generic-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.generic-field {
+  font-size: 13px;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+/* ── Print ── */
+
+@media print {
+  body {
+    background: none;
+  }
+
+  .cv-page {
+    margin: 0;
+    box-shadow: none;
+    width: 100%;
+    min-height: 100vh;
+  }
+}

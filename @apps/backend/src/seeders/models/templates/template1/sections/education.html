@@ -1,0 +1,31 @@
+<!-- sections/education.html -->
+<section class="cv-section cv-section--education">
+  <h2 class="section-title">{{ section.title }}</h2>
+  <div class="section-divider"></div>
+
+  {% for item in section.items | sort(attribute="position") %}
+  <div class="education-item">
+    <div class="education-header">
+      <div class="education-left">
+        <span class="education-degree">{{ item.jsonData.degree }}</span>
+        {% if item.jsonData.field %}
+        <span class="education-field">— {{ item.jsonData.field }}</span>
+        {% endif %}
+      </div>
+      <div class="education-dates">
+        {{ item.jsonData.start_date | date("MM/YYYY") }} {% if item.jsonData.end_date %} → {{
+        item.jsonData.end_date | date("MM/YYYY") }} {% else %} → présent {% endif %}
+      </div>
+    </div>
+
+    <div class="education-school">{{ item.jsonData.school }}</div>
+
+    {% if item.jsonData.description %}
+    <p class="education-description">{{ item.jsonData.description }}</p>
+    {% endif %}
+  </div>
+
+  {% if not loop.last %}
+  <div class="item-separator"></div>
+  {% endif %} {% endfor %}
+</section>

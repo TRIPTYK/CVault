@@ -270,9 +270,6 @@ catalogs:
     ember-strict-application-resolver:
       specifier: ^0.1.1
       version: 0.1.1
-    ember-truth-helpers:
-      specifier: ^5.0.0
-      version: 5.0.0
     ember-vitest:
       specifier: ^0.3.3
       version: 0.3.3
@@ -632,6 +629,10 @@ importers:
         version: 25.2.0
 
   '@apps/front':
+    dependencies:
+      ember-truth-helpers:
+        specifier: ^5.0.0
+        version: 5.0.0
     devDependencies:
       '@babel/core':
         specifier: 'catalog:'
@@ -722,10 +723,10 @@ importers:
         version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/aed8372bbaa4b6bab003d28391fba7b20301dc89(@babel/core@7.28.6)(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
       '@triptyk/ember-input-validation':
         specifier: 'catalog:'
-        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(@popperjs/core@2.11.8)(@triptyk/ember-input@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/aed8372bbaa4b6bab003d28391fba7b20301dc89(@babel/core@7.28.6)(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)))(ember-immer-changeset@2.0.0(@babel/core@7.28.6))(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)
+        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(49051a663ddf038a896e84de772ffe6e)
       '@triptyk/ember-ui':
         specifier: 'catalog:'
-        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/eddaca62e7e77715bdaf51f4fc37cccfaf65e9ae(6af8bfd7c923b898b4010cd8104d07b3)
+        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/eddaca62e7e77715bdaf51f4fc37cccfaf65e9ae(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glint/template@1.7.4)(@triptyk/ember-input-validation@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(49051a663ddf038a896e84de772ffe6e))(@triptyk/ember-input@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/aed8372bbaa4b6bab003d28391fba7b20301dc89(@babel/core@7.28.6)(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)))(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.4))(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)
       '@triptyk/ember-yeti-table':
         specifier: ^3.0.0
         version: 3.0.0(@babel/core@7.28.6)(@ember/test-waiters@4.1.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glint/template@1.7.4)
@@ -1071,7 +1072,7 @@ importers:
         version: 9.2.1
       ember-basic-dropdown:
         specifier: git+https://github.com/cibernox/ember-basic-dropdown/tree/dist
-        version: https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/f3cb963ca0a2728c2580e71e9c822e9c6bee08c5(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)
+        version: https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/6979d290cbb25ddff53cbdcb1c7f1a7f15df8eee(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)
       ember-cli-flash:
         specifier: 'catalog:'
         version: 6.0.0(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(ember-modifier@4.3.0(@babel/core@7.28.6))
@@ -1096,9 +1097,6 @@ importers:
       ember-template-lint:
         specifier: ^7.9.0
         version: 7.9.3
-      ember-truth-helpers:
-        specifier: 'catalog:'
-        version: 5.0.0
       ember-vitest:
         specifier: 'catalog:'
         version: 0.3.3(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(vitest@4.1.0-beta.3)
@@ -1366,10 +1364,10 @@ importers:
         version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/aed8372bbaa4b6bab003d28391fba7b20301dc89(@babel/core@7.28.6)(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
       '@triptyk/ember-input-validation':
         specifier: 'catalog:'
-        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(@popperjs/core@2.11.8)(@triptyk/ember-input@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/aed8372bbaa4b6bab003d28391fba7b20301dc89(@babel/core@7.28.6)(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)))(ember-immer-changeset@2.0.0(@babel/core@7.28.6))(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)
+        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(38bc81f4cab562cf2e49494073f0199f)
       '@triptyk/ember-ui':
         specifier: 'catalog:'
-        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/eddaca62e7e77715bdaf51f4fc37cccfaf65e9ae(6af8bfd7c923b898b4010cd8104d07b3)
+        version: https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/eddaca62e7e77715bdaf51f4fc37cccfaf65e9ae(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glint/template@1.7.4)(@triptyk/ember-input-validation@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(38bc81f4cab562cf2e49494073f0199f))(@triptyk/ember-input@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/aed8372bbaa4b6bab003d28391fba7b20301dc89(@babel/core@7.28.6)(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)))(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.4))(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)
       '@warp-drive/core':
         specifier: 'catalog:'
         version: 5.8.1(@babel/core@7.28.6)(@glint/template@1.7.4)
@@ -1470,6 +1468,9 @@ importers:
       '@embroider/macros':
         specifier: 'catalog:'
         version: 1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4)
+      '@embroider/util':
+        specifier: ^1.13.5
+        version: 1.13.5(@babel/core@7.28.6)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
       '@embroider/vite':
         specifier: 'catalog:'
         version: 1.5.1(patch_hash=336c5986f12c593e707652ed3e9e283501f2880ffd57cc663f11de0175ab0a28)(@embroider/core@4.4.3(@glint/template@1.7.4))(@glint/template@1.7.4)(rollup@4.57.1)(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))
@@ -1501,11 +1502,11 @@ importers:
         specifier: ^6.0.4
         version: 6.1.0(@babel/core@7.28.6)(rollup@4.57.1)
       '@vitest/browser':
-        specifier: ^4.0.18
-        version: 4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.1.0-beta.3)
+        specifier: 4.0.18
+        version: 4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.0.18)
       '@vitest/browser-playwright':
         specifier: 'catalog:'
-        version: 4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(playwright@1.58.1)(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.1.0-beta.3)
+        version: 4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(playwright@1.58.1)(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.0.18)
       '@warp-drive/build-config':
         specifier: 'catalog:'
         version: 5.8.1(@babel/core@7.28.6)(@glint/template@1.7.4)
@@ -1520,7 +1521,7 @@ importers:
         version: 9.2.1
       ember-basic-dropdown:
         specifier: git+https://github.com/cibernox/ember-basic-dropdown/tree/dist
-        version: https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/f3cb963ca0a2728c2580e71e9c822e9c6bee08c5(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)
+        version: https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/6979d290cbb25ddff53cbdcb1c7f1a7f15df8eee(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)
       ember-cli-flash:
         specifier: 'catalog:'
         version: 6.0.0(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(ember-modifier@4.3.0(@babel/core@7.28.6))
@@ -1545,12 +1546,9 @@ importers:
       ember-template-lint:
         specifier: ^7.9.0
         version: 7.9.3
-      ember-truth-helpers:
-        specifier: 'catalog:'
-        version: 5.0.0
       ember-vitest:
         specifier: 'catalog:'
-        version: 0.3.3(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(vitest@4.1.0-beta.3)
+        version: 0.3.3(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(vitest@4.0.18)
       eslint:
         specifier: ^9.17.0
         version: 9.39.2(jiti@2.6.1)
@@ -1597,8 +1595,8 @@ importers:
         specifier: ~7.3.1
         version: 7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2)
       vitest:
-        specifier: 'catalog:'
-        version: 4.1.0-beta.3(@types/node@25.2.0)(@vitest/browser-playwright@4.0.18)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.31.1)(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(terser@5.46.0)(yaml@2.8.2)
+        specifier: 4.0.18
+        version: 4.0.18(@types/node@25.2.0)(@vitest/browser-playwright@4.0.18)(@vitest/ui@4.0.18)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.31.1)(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(terser@5.46.0)(yaml@2.8.2)
       webpack:
         specifier: 'catalog:'
         version: 5.105.0
@@ -4394,6 +4392,9 @@ packages:
       '@vitest/browser':
         optional: true
 
+  '@vitest/expect@4.0.18':
+    resolution: {integrity: sha512-8sCWUyckXXYvx4opfzVY03EOiYVxyNrHS5QxX3DAIi5dpJAAkyJezHCP77VMX4HKA2LDT/Jpfo8i2r5BE3GnQQ==}
+
   '@vitest/expect@4.1.0-beta.3':
     resolution: {integrity: sha512-rcWtKmpjGjtX+mDsP7N6cKg+YFdxO1CvGxaa3eZC1d0sdM9gXyZLWoJCdaxva85JC+WesY8ZPg4EBMMjTBf4tA==}
 
@@ -4425,8 +4426,14 @@ packages:
   '@vitest/pretty-format@4.1.0-beta.3':
     resolution: {integrity: sha512-1bdL7Ss91JUBAYDWol9Vq4oXndgpcIKSLGS2pHDqypX9tUCTOs7RTjY8rapr7SDKgNxM//QxQO954GshR3fvNA==}
 
+  '@vitest/runner@4.0.18':
+    resolution: {integrity: sha512-rpk9y12PGa22Jg6g5M3UVVnTS7+zycIGk9ZNGN+m6tZHKQb7jrP7/77WfZy13Y/EUDd52NDsLRQhYKtv7XfPQw==}
+
   '@vitest/runner@4.1.0-beta.3':
     resolution: {integrity: sha512-BDfhtQqYVNqn4D8dcepoCZpABhBLCqhL+u0J+h4K2il/EfmDB0hUZCfTS2qPdK4RxmgiikaTMbJHWarG5mGmmA==}
+
+  '@vitest/snapshot@4.0.18':
+    resolution: {integrity: sha512-PCiV0rcl7jKQjbgYqjtakly6T1uwv/5BQ9SwBLekVg/EaYeQFPiXcgrC2Y7vDMA8dM1SUEAEV82kgSQIlXNMvA==}
 
   '@vitest/snapshot@4.1.0-beta.3':
     resolution: {integrity: sha512-ucmbRDS7OZ4XwmrwZLOfFICQ3NNVHmABsJQ2R7ojCmF4CXCcoACB0tZZ6ElYlZso8qX8kbDzJidAKFYDgZ1ICw==}
@@ -6050,8 +6057,14 @@ packages:
     resolution: {integrity: sha512-J9wVTddnpx1ZPf6CgtMs8byp5t9ZZITUX9v+H+PgSDSgbYbDrVlKr2RGDfJLrnaTpuWwZqh1b54/9jLaERr6QA==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  ember-basic-dropdown@https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/f3cb963ca0a2728c2580e71e9c822e9c6bee08c5:
-    resolution: {tarball: https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/f3cb963ca0a2728c2580e71e9c822e9c6bee08c5}
+  ember-basic-dropdown@8.11.0:
+    resolution: {integrity: sha512-p7SIoyMUAKyUGe59sZC4o0U34DZxj5TqQmn/PO6TGiXkAsn81yZtuK1i2uYKMKtlXy8gHattOj3bl5ggqgsdAw==}
+    peerDependencies:
+      '@ember/test-helpers': ^2.9.4 || ^3.2.1 || ^4.0.2 || ^5.0.0
+      '@glimmer/component': ^1.1.2 || ^2.0.0
+
+  ember-basic-dropdown@https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/6979d290cbb25ddff53cbdcb1c7f1a7f15df8eee:
+    resolution: {tarball: https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/6979d290cbb25ddff53cbdcb1c7f1a7f15df8eee}
     version: 8.11.0
     peerDependencies:
       '@ember/test-helpers': ^5.0.0
@@ -6234,17 +6247,18 @@ packages:
 
   ember-power-select-with-create@3.1.0:
     resolution: {integrity: sha512-Ul34nNYBfitnXgv8IjnQ4WmoHN2h/nuuB5jLJnnuFa6aLEQM/dP2QWXQaCCybCzj9vytBDZIFO+/Egdk8uSY4w==}
-    version: 3.1.0
     peerDependencies:
       '@glimmer/component': ^1.1.2 || ^2.0.0
+      ember-basic-dropdown: ^8.8.0
       ember-power-select: ^8.12.0
 
-  ember-power-select@https://codeload.github.com/cibernox/ember-power-select/tar.gz/c0025446b19fd9641fdb48b1fef30abd2374115c:
-    resolution: {tarball: https://codeload.github.com/cibernox/ember-power-select/tar.gz/c0025446b19fd9641fdb48b1fef30abd2374115c}
+  ember-power-select@https://codeload.github.com/cibernox/ember-power-select/tar.gz/8284bf70ba8a9950e8879893c5ba3623b7f7037f:
+    resolution: {tarball: https://codeload.github.com/cibernox/ember-power-select/tar.gz/8284bf70ba8a9950e8879893c5ba3623b7f7037f}
     version: 8.12.1
     peerDependencies:
       '@ember/test-helpers': ^5.0.0
       '@glimmer/component': ^2.0.0
+      ember-basic-dropdown: ^8.11.0
       ember-concurrency: ^5.1.0
 
   ember-resolver@13.1.1:
@@ -6398,6 +6412,9 @@ packages:
   es-errors@1.3.0:
     resolution: {integrity: sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==}
     engines: {node: '>= 0.4'}
+
+  es-module-lexer@1.7.0:
+    resolution: {integrity: sha512-jEQoCwk8hyb2AZziIOLhDqpm5+2ww5uIE6lkO/6jcOCusfk6LhMHpXXfBLXTZ7Ydyt0j4VoUQv6uGNYbdW+kBA==}
 
   es-module-lexer@2.0.0:
     resolution: {integrity: sha512-5POEcUuZybH7IdmGsD8wlf0AI55wMecM9rVBTI/qEAy2c1kTOm3DjFYjrBdI2K3BaJjJYfYFeRtM0t9ssnRuxw==}
@@ -10653,6 +10670,40 @@ packages:
       yaml:
         optional: true
 
+  vitest@4.0.18:
+    resolution: {integrity: sha512-hOQuK7h0FGKgBAas7v0mSAsnvrIgAvWmRFjmzpJ7SwFHH3g1k2u37JtYwOwmEKhK6ZO3v9ggDBBm0La1LCK4uQ==}
+    engines: {node: ^20.0.0 || ^22.0.0 || >=24.0.0}
+    hasBin: true
+    peerDependencies:
+      '@edge-runtime/vm': '*'
+      '@opentelemetry/api': ^1.9.0
+      '@types/node': ^20.0.0 || ^22.0.0 || >=24.0.0
+      '@vitest/browser-playwright': 4.0.18
+      '@vitest/browser-preview': 4.0.18
+      '@vitest/browser-webdriverio': 4.0.18
+      '@vitest/ui': 4.0.18
+      happy-dom: '*'
+      jsdom: '*'
+    peerDependenciesMeta:
+      '@edge-runtime/vm':
+        optional: true
+      '@opentelemetry/api':
+        optional: true
+      '@types/node':
+        optional: true
+      '@vitest/browser-playwright':
+        optional: true
+      '@vitest/browser-preview':
+        optional: true
+      '@vitest/browser-webdriverio':
+        optional: true
+      '@vitest/ui':
+        optional: true
+      happy-dom:
+        optional: true
+      jsdom:
+        optional: true
+
   vitest@4.1.0-beta.3:
     resolution: {integrity: sha512-gADWD/N4mwrrEtNwB777C/9FdlaN1osb0bxl+sJiaZ3FzWbcENzuodxmK/OZrSUDU47U0Poy+wXjtvSPn51/Gw==}
     engines: {node: ^20.0.0 || ^22.0.0 || >=24.0.0}
@@ -13700,8 +13751,8 @@ snapshots:
       - react-native-b4a
       - supports-color
 
-  ? '@triptyk/ember-input-validation@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(@popperjs/core@2.11.8)(@triptyk/ember-input@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/aed8372bbaa4b6bab003d28391fba7b20301dc89(@babel/core@7.28.6)(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)))(ember-immer-changeset@2.0.0(@babel/core@7.28.6))(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)'
-  : dependencies:
+  '@triptyk/ember-input-validation@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(38bc81f4cab562cf2e49494073f0199f)':
+    dependencies:
       '@embroider/addon-shim': 1.10.2
       '@eonasdan/tempus-dominus': 6.10.4(@popperjs/core@2.11.8)
       '@glimmer/component': 2.0.0
@@ -13713,21 +13764,50 @@ snapshots:
       ember-intl: 8.0.5(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(typescript@5.9.3)
       ember-lifeline: 7.0.0(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))
       ember-modifier: 4.2.2(@babel/core@7.28.6)
-      ember-power-select: https://codeload.github.com/cibernox/ember-power-select/tar.gz/c0025446b19fd9641fdb48b1fef30abd2374115c(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4))
-      ember-power-select-with-create: 3.1.0(patch_hash=dbacba15e673d49c3e8ca32f0394e3964f68106c41a841dbfaf2ec1a467fc65a)(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-power-select@https://codeload.github.com/cibernox/ember-power-select/tar.gz/c0025446b19fd9641fdb48b1fef30abd2374115c(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4)))(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
+      ember-power-select: https://codeload.github.com/cibernox/ember-power-select/tar.gz/8284bf70ba8a9950e8879893c5ba3623b7f7037f(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-basic-dropdown@https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/6979d290cbb25ddff53cbdcb1c7f1a7f15df8eee(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0))(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4))
+      ember-power-select-with-create: 3.1.0(patch_hash=dbacba15e673d49c3e8ca32f0394e3964f68106c41a841dbfaf2ec1a467fc65a)(c888ab74d4ce9b47eb1c979cd9b2cf75)
       ember-source: 6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)
       ember-strict-application-resolver: 0.1.1(@babel/core@7.28.6)
       ember-test-selectors: 7.1.0
       zod: 4.3.6
     transitivePeerDependencies:
       - '@babel/core'
-      - '@ember/string'
       - '@ember/test-helpers'
-      - '@embroider/macros'
       - '@glint/environment-ember-loose'
       - '@glint/template'
       - '@popperjs/core'
       - '@popperjs/core"'
+      - ember-basic-dropdown
+      - supports-color
+      - typescript
+
+  '@triptyk/ember-input-validation@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(49051a663ddf038a896e84de772ffe6e)':
+    dependencies:
+      '@embroider/addon-shim': 1.10.2
+      '@eonasdan/tempus-dominus': 6.10.4(@popperjs/core@2.11.8)
+      '@glimmer/component': 2.0.0
+      '@glimmer/tracking': 1.1.2
+      '@triptyk/ember-input': https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/aed8372bbaa4b6bab003d28391fba7b20301dc89(@babel/core@7.28.6)(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
+      decorator-transforms: 2.3.1(@babel/core@7.28.6)
+      ember-concurrency: 5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4)
+      ember-immer-changeset: 2.0.0(@babel/core@7.28.6)
+      ember-intl: 8.0.5(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(typescript@5.9.3)
+      ember-lifeline: 7.0.0(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))
+      ember-modifier: 4.2.2(@babel/core@7.28.6)
+      ember-power-select: https://codeload.github.com/cibernox/ember-power-select/tar.gz/8284bf70ba8a9950e8879893c5ba3623b7f7037f(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-basic-dropdown@8.11.0(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)))(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4))
+      ember-power-select-with-create: 3.1.0(patch_hash=dbacba15e673d49c3e8ca32f0394e3964f68106c41a841dbfaf2ec1a467fc65a)(0a0363109365448e8e8127ba370fda09)
+      ember-source: 6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)
+      ember-strict-application-resolver: 0.1.1(@babel/core@7.28.6)
+      ember-test-selectors: 7.1.0
+      zod: 4.3.6
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@ember/test-helpers'
+      - '@glint/environment-ember-loose'
+      - '@glint/template'
+      - '@popperjs/core'
+      - '@popperjs/core"'
+      - ember-basic-dropdown
       - supports-color
       - typescript
 
@@ -13740,12 +13820,12 @@ snapshots:
       '@glimmer/tracking': 1.1.2
       '@popperjs/core': 2.11.8
       decorator-transforms: 2.3.1(@babel/core@7.28.6)
-      ember-basic-dropdown: https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/f3cb963ca0a2728c2580e71e9c822e9c6bee08c5(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)
+      ember-basic-dropdown: https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/6979d290cbb25ddff53cbdcb1c7f1a7f15df8eee(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)
       ember-click-outside: 6.1.1(@babel/core@7.28.6)
       ember-concurrency: 5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4)
       ember-modifier: 4.2.2(@babel/core@7.28.6)
-      ember-power-select: https://codeload.github.com/cibernox/ember-power-select/tar.gz/c0025446b19fd9641fdb48b1fef30abd2374115c(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4))
-      ember-power-select-with-create: 3.1.0(patch_hash=dbacba15e673d49c3e8ca32f0394e3964f68106c41a841dbfaf2ec1a467fc65a)(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-power-select@https://codeload.github.com/cibernox/ember-power-select/tar.gz/c0025446b19fd9641fdb48b1fef30abd2374115c(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4)))(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
+      ember-power-select: https://codeload.github.com/cibernox/ember-power-select/tar.gz/8284bf70ba8a9950e8879893c5ba3623b7f7037f(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-basic-dropdown@https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/6979d290cbb25ddff53cbdcb1c7f1a7f15df8eee(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0))(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4))
+      ember-power-select-with-create: 3.1.0(patch_hash=dbacba15e673d49c3e8ca32f0394e3964f68106c41a841dbfaf2ec1a467fc65a)(c888ab74d4ce9b47eb1c979cd9b2cf75)
       ember-source: 6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)
       ember-test-selectors: 7.1.0
       focus-trap: 7.8.0
@@ -13759,13 +13839,40 @@ snapshots:
       - '@glint/template'
       - supports-color
 
-  '@triptyk/ember-ui@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/eddaca62e7e77715bdaf51f4fc37cccfaf65e9ae(6af8bfd7c923b898b4010cd8104d07b3)':
-    dependencies:
+  ? '@triptyk/ember-ui@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/eddaca62e7e77715bdaf51f4fc37cccfaf65e9ae(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glint/template@1.7.4)(@triptyk/ember-input-validation@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(38bc81f4cab562cf2e49494073f0199f))(@triptyk/ember-input@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/aed8372bbaa4b6bab003d28391fba7b20301dc89(@babel/core@7.28.6)(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)))(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.4))(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)'
+  : dependencies:
       '@ember/string': 4.0.1
       '@ember/test-waiters': 4.1.1(@babel/core@7.28.6)(@glint/template@1.7.4)
       '@embroider/addon-shim': 1.10.2
       '@triptyk/ember-input': https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/aed8372bbaa4b6bab003d28391fba7b20301dc89(@babel/core@7.28.6)(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
-      '@triptyk/ember-input-validation': https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(@popperjs/core@2.11.8)(@triptyk/ember-input@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/aed8372bbaa4b6bab003d28391fba7b20301dc89(@babel/core@7.28.6)(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)))(ember-immer-changeset@2.0.0(@babel/core@7.28.6))(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)
+      '@triptyk/ember-input-validation': https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(38bc81f4cab562cf2e49494073f0199f)
+      '@triptyk/ember-yeti-table': 3.0.0(@babel/core@7.28.6)(@ember/test-waiters@4.1.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glint/template@1.7.4)
+      '@warp-drive/utilities': 5.8.1(@babel/core@7.28.6)(@glint/template@1.7.4)(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.4))
+      decorator-transforms: 2.3.1(@babel/core@7.28.6)
+      ember-click-outside: 6.1.1(@babel/core@7.28.6)
+      ember-immer-changeset: 2.0.0(@babel/core@7.28.6)
+      ember-intl: 8.0.5(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(typescript@5.9.3)
+      ember-modifier: 4.2.2(@babel/core@7.28.6)
+      ember-source: 6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)
+      ember-strict-application-resolver: 0.1.1(@babel/core@7.28.6)
+      ember-test-selectors: 7.1.0
+      focus-trap: 7.8.0
+      zod: 4.3.6
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@ember/test-helpers'
+      - '@glint/template'
+      - '@warp-drive/core'
+      - supports-color
+      - typescript
+
+  ? '@triptyk/ember-ui@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/eddaca62e7e77715bdaf51f4fc37cccfaf65e9ae(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glint/template@1.7.4)(@triptyk/ember-input-validation@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(49051a663ddf038a896e84de772ffe6e))(@triptyk/ember-input@https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/aed8372bbaa4b6bab003d28391fba7b20301dc89(@babel/core@7.28.6)(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)))(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.4))(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)'
+  : dependencies:
+      '@ember/string': 4.0.1
+      '@ember/test-waiters': 4.1.1(@babel/core@7.28.6)(@glint/template@1.7.4)
+      '@embroider/addon-shim': 1.10.2
+      '@triptyk/ember-input': https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/aed8372bbaa4b6bab003d28391fba7b20301dc89(@babel/core@7.28.6)(@ember/string@4.0.1)(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@eonasdan/tempus-dominus@6.10.4(@popperjs/core@2.11.8))(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
+      '@triptyk/ember-input-validation': https://codeload.github.com/TRIPTYK/ember-common-ui/tar.gz/d64cae22c2df5445ee43a17efb2e95589978e4a1(49051a663ddf038a896e84de772ffe6e)
       '@triptyk/ember-yeti-table': 3.0.0(@babel/core@7.28.6)(@ember/test-waiters@4.1.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glint/template@1.7.4)
       '@warp-drive/utilities': 5.8.1(@babel/core@7.28.6)(@glint/template@1.7.4)(@warp-drive/core@5.8.1(@babel/core@7.28.6)(@glint/template@1.7.4))
       decorator-transforms: 2.3.1(@babel/core@7.28.6)
@@ -14180,6 +14287,19 @@ snapshots:
       '@typescript/native-preview-win32-arm64': 7.0.0-dev.20260202.1
       '@typescript/native-preview-win32-x64': 7.0.0-dev.20260202.1
 
+  '@vitest/browser-playwright@4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(playwright@1.58.1)(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.0.18)':
+    dependencies:
+      '@vitest/browser': 4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.0.18)
+      '@vitest/mocker': 4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))
+      playwright: 1.58.1
+      tinyrainbow: 3.0.3
+      vitest: 4.0.18(@types/node@25.2.0)(@vitest/browser-playwright@4.0.18)(@vitest/ui@4.0.18)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.31.1)(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(terser@5.46.0)(yaml@2.8.2)
+    transitivePeerDependencies:
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
+
   '@vitest/browser-playwright@4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(playwright@1.58.1)(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.1.0-beta.3)':
     dependencies:
       '@vitest/browser': 4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.1.0-beta.3)
@@ -14200,6 +14320,23 @@ snapshots:
       playwright: 1.58.1
       tinyrainbow: 3.0.3
       vitest: 4.1.0-beta.3(@types/node@25.2.0)(@vitest/browser-playwright@4.0.18)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.31.1)(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(terser@5.46.0)(yaml@2.8.2)
+    transitivePeerDependencies:
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
+
+  '@vitest/browser@4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.0.18)':
+    dependencies:
+      '@vitest/mocker': 4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))
+      '@vitest/utils': 4.0.18
+      magic-string: 0.30.21
+      pixelmatch: 7.1.0
+      pngjs: 7.0.0
+      sirv: 3.0.2
+      tinyrainbow: 3.0.3
+      vitest: 4.0.18(@types/node@25.2.0)(@vitest/browser-playwright@4.0.18)(@vitest/ui@4.0.18)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.31.1)(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(terser@5.46.0)(yaml@2.8.2)
+      ws: 8.19.0
     transitivePeerDependencies:
       - bufferutil
       - msw
@@ -14274,6 +14411,15 @@ snapshots:
     optionalDependencies:
       '@vitest/browser': 4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(vite@8.0.0-beta.11(@types/node@25.2.0)(esbuild@0.27.2)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.1.0-beta.3)
 
+  '@vitest/expect@4.0.18':
+    dependencies:
+      '@standard-schema/spec': 1.1.0
+      '@types/chai': 5.2.3
+      '@vitest/spy': 4.0.18
+      '@vitest/utils': 4.0.18
+      chai: 6.2.2
+      tinyrainbow: 3.0.3
+
   '@vitest/expect@4.1.0-beta.3':
     dependencies:
       '@standard-schema/spec': 1.1.0
@@ -14328,9 +14474,20 @@ snapshots:
     dependencies:
       tinyrainbow: 3.0.3
 
+  '@vitest/runner@4.0.18':
+    dependencies:
+      '@vitest/utils': 4.0.18
+      pathe: 2.0.3
+
   '@vitest/runner@4.1.0-beta.3':
     dependencies:
       '@vitest/utils': 4.1.0-beta.3
+      pathe: 2.0.3
+
+  '@vitest/snapshot@4.0.18':
+    dependencies:
+      '@vitest/pretty-format': 4.0.18
+      magic-string: 0.30.21
       pathe: 2.0.3
 
   '@vitest/snapshot@4.1.0-beta.3':
@@ -14342,6 +14499,18 @@ snapshots:
   '@vitest/spy@4.0.18': {}
 
   '@vitest/spy@4.1.0-beta.3': {}
+
+  '@vitest/ui@4.0.18(vitest@4.0.18)':
+    dependencies:
+      '@vitest/utils': 4.0.18
+      fflate: 0.8.2
+      flatted: 3.3.3
+      pathe: 2.0.3
+      sirv: 3.0.2
+      tinyglobby: 0.2.15
+      tinyrainbow: 3.0.3
+      vitest: 4.0.18(@types/node@25.2.0)(@vitest/browser-playwright@4.0.18)(@vitest/ui@4.0.18)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.31.1)(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(terser@5.46.0)(yaml@2.8.2)
+    optional: true
 
   '@vitest/ui@4.0.18(vitest@4.1.0-beta.3)':
     dependencies:
@@ -16225,7 +16394,27 @@ snapshots:
       - supports-color
       - webpack
 
-  ember-basic-dropdown@https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/f3cb963ca0a2728c2580e71e9c822e9c6bee08c5(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0):
+  ember-basic-dropdown@8.11.0(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)):
+    dependencies:
+      '@ember/test-helpers': 5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4)
+      '@embroider/addon-shim': 1.10.2
+      '@embroider/macros': 1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4)
+      '@embroider/util': 1.13.5(@babel/core@7.28.6)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
+      '@glimmer/component': 2.0.0
+      decorator-transforms: 2.3.1(@babel/core@7.28.6)
+      ember-element-helper: 0.8.8
+      ember-modifier: 4.3.0(@babel/core@7.28.6)
+      ember-style-modifier: 4.5.1(@babel/core@7.28.6)(@ember/string@4.0.1)
+      ember-truth-helpers: 5.0.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@ember/string'
+      - '@glint/environment-ember-loose'
+      - '@glint/template'
+      - ember-source
+      - supports-color
+
+  ember-basic-dropdown@https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/6979d290cbb25ddff53cbdcb1c7f1a7f15df8eee(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0):
     dependencies:
       '@ember/test-helpers': 5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4)
       '@embroider/addon-shim': 1.10.2
@@ -16721,39 +16910,64 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-power-select-with-create@3.1.0(patch_hash=dbacba15e673d49c3e8ca32f0394e3964f68106c41a841dbfaf2ec1a467fc65a)(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-power-select@https://codeload.github.com/cibernox/ember-power-select/tar.gz/c0025446b19fd9641fdb48b1fef30abd2374115c(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4)))(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)):
+  ember-power-select-with-create@3.1.0(patch_hash=dbacba15e673d49c3e8ca32f0394e3964f68106c41a841dbfaf2ec1a467fc65a)(0a0363109365448e8e8127ba370fda09):
     dependencies:
       '@embroider/addon-shim': 1.10.2
       '@embroider/util': 1.13.5(@babel/core@7.28.6)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
       '@glimmer/component': 2.0.0
       decorator-transforms: 2.3.1(@babel/core@7.28.6)
-      ember-basic-dropdown: https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/f3cb963ca0a2728c2580e71e9c822e9c6bee08c5(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)
-      ember-power-select: https://codeload.github.com/cibernox/ember-power-select/tar.gz/c0025446b19fd9641fdb48b1fef30abd2374115c(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4))
+      ember-basic-dropdown: 8.11.0(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
+      ember-power-select: https://codeload.github.com/cibernox/ember-power-select/tar.gz/8284bf70ba8a9950e8879893c5ba3623b7f7037f(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-basic-dropdown@8.11.0(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)))(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4))
     transitivePeerDependencies:
       - '@babel/core'
-      - '@ember/string'
-      - '@ember/test-helpers'
-      - '@embroider/macros'
       - '@glint/environment-ember-loose'
       - '@glint/template'
       - ember-source
       - supports-color
 
-  ember-power-select@https://codeload.github.com/cibernox/ember-power-select/tar.gz/c0025446b19fd9641fdb48b1fef30abd2374115c(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4)):
+  ember-power-select-with-create@3.1.0(patch_hash=dbacba15e673d49c3e8ca32f0394e3964f68106c41a841dbfaf2ec1a467fc65a)(c888ab74d4ce9b47eb1c979cd9b2cf75):
+    dependencies:
+      '@embroider/addon-shim': 1.10.2
+      '@embroider/util': 1.13.5(@babel/core@7.28.6)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
+      '@glimmer/component': 2.0.0
+      decorator-transforms: 2.3.1(@babel/core@7.28.6)
+      ember-basic-dropdown: https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/6979d290cbb25ddff53cbdcb1c7f1a7f15df8eee(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)
+      ember-power-select: https://codeload.github.com/cibernox/ember-power-select/tar.gz/8284bf70ba8a9950e8879893c5ba3623b7f7037f(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-basic-dropdown@https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/6979d290cbb25ddff53cbdcb1c7f1a7f15df8eee(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0))(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4))
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@glint/environment-ember-loose'
+      - '@glint/template'
+      - ember-source
+      - supports-color
+
+  ember-power-select@https://codeload.github.com/cibernox/ember-power-select/tar.gz/8284bf70ba8a9950e8879893c5ba3623b7f7037f(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-basic-dropdown@8.11.0(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5)))(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4)):
     dependencies:
       '@ember/test-helpers': 5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4)
       '@embroider/addon-shim': 1.10.2
       '@glimmer/component': 2.0.0
       decorator-transforms: 2.3.1(@babel/core@7.28.6)
-      ember-basic-dropdown: https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/f3cb963ca0a2728c2580e71e9c822e9c6bee08c5(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)
+      ember-basic-dropdown: 8.11.0(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(@glint/environment-ember-loose@1.5.2(@glimmer/component@2.0.0)(@glint/template@1.7.4)(ember-modifier@4.3.0(@babel/core@7.28.6)))(@glint/template@1.7.4)(ember-source@6.10.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
       ember-concurrency: 5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4)
       ember-element-helper: 0.8.8
       ember-modifier: 4.3.0(@babel/core@7.28.6)
       ember-truth-helpers: 5.0.0
     transitivePeerDependencies:
       - '@babel/core'
-      - '@ember/string'
-      - '@embroider/macros'
+      - supports-color
+
+  ember-power-select@https://codeload.github.com/cibernox/ember-power-select/tar.gz/8284bf70ba8a9950e8879893c5ba3623b7f7037f(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)(ember-basic-dropdown@https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/6979d290cbb25ddff53cbdcb1c7f1a7f15df8eee(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0))(ember-concurrency@5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4)):
+    dependencies:
+      '@ember/test-helpers': 5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4)
+      '@embroider/addon-shim': 1.10.2
+      '@glimmer/component': 2.0.0
+      decorator-transforms: 2.3.1(@babel/core@7.28.6)
+      ember-basic-dropdown: https://codeload.github.com/cibernox/ember-basic-dropdown/tar.gz/6979d290cbb25ddff53cbdcb1c7f1a7f15df8eee(@babel/core@7.28.6)(@ember/string@4.0.1)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(@embroider/macros@1.19.7(@babel/core@7.28.6)(@glint/template@1.7.4))(@glimmer/component@2.0.0)
+      ember-concurrency: 5.1.0(@babel/core@7.28.6)(@glint/template@1.7.4)
+      ember-element-helper: 0.8.8
+      ember-modifier: 4.3.0(@babel/core@7.28.6)
+      ember-truth-helpers: 5.0.0
+    transitivePeerDependencies:
+      - '@babel/core'
       - supports-color
 
   ember-resolver@13.1.1:
@@ -16899,6 +17113,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  ember-vitest@0.3.3(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(vitest@4.0.18):
+    dependencies:
+      '@ember/test-helpers': 5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4)
+      ember-strict-application-resolver: 0.1.1(@babel/core@7.28.6)
+      vitest: 4.0.18(@types/node@25.2.0)(@vitest/browser-playwright@4.0.18)(@vitest/ui@4.0.18)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.31.1)(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(terser@5.46.0)(yaml@2.8.2)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - supports-color
+
   ember-vitest@0.3.3(@babel/core@7.28.6)(@ember/test-helpers@5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4))(vitest@4.1.0-beta.3):
     dependencies:
       '@ember/test-helpers': 5.4.1(@babel/core@7.28.6)(@glint/template@1.7.4)
@@ -17029,6 +17252,8 @@ snapshots:
   es-define-property@1.0.1: {}
 
   es-errors@1.3.0: {}
+
+  es-module-lexer@1.7.0: {}
 
   es-module-lexer@2.0.0: {}
 
@@ -21848,6 +22073,46 @@ snapshots:
       terser: 5.46.0
       yaml: 2.8.2
 
+  vitest@4.0.18(@types/node@25.2.0)(@vitest/browser-playwright@4.0.18)(@vitest/ui@4.0.18)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.31.1)(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(terser@5.46.0)(yaml@2.8.2):
+    dependencies:
+      '@vitest/expect': 4.0.18
+      '@vitest/mocker': 4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))
+      '@vitest/pretty-format': 4.0.18
+      '@vitest/runner': 4.0.18
+      '@vitest/snapshot': 4.0.18
+      '@vitest/spy': 4.0.18
+      '@vitest/utils': 4.0.18
+      es-module-lexer: 1.7.0
+      expect-type: 1.3.0
+      magic-string: 0.30.21
+      obug: 2.1.1
+      pathe: 2.0.3
+      picomatch: 4.0.3
+      std-env: 3.10.0
+      tinybench: 2.9.0
+      tinyexec: 1.0.2
+      tinyglobby: 0.2.15
+      tinyrainbow: 3.0.3
+      vite: 7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2)
+      why-is-node-running: 2.3.0
+    optionalDependencies:
+      '@types/node': 25.2.0
+      '@vitest/browser-playwright': 4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(playwright@1.58.1)(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.0.18)
+      '@vitest/ui': 4.0.18(vitest@4.0.18)
+      jsdom: 26.1.0
+    transitivePeerDependencies:
+      - jiti
+      - less
+      - lightningcss
+      - msw
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - terser
+      - tsx
+      - yaml
+
   vitest@4.1.0-beta.3(@types/node@25.2.0)(@vitest/browser-playwright@4.0.18)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.31.1)(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(terser@5.46.0)(yaml@2.8.2):
     dependencies:
       '@vitest/expect': 4.1.0-beta.3
@@ -21872,7 +22137,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 25.2.0
-      '@vitest/browser-playwright': 4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(playwright@1.58.1)(vite@8.0.0-beta.15(@types/node@25.2.0)(esbuild@0.27.2)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.1.0-beta.3)
+      '@vitest/browser-playwright': 4.0.18(msw@2.12.8(@types/node@25.2.0)(typescript@5.9.3))(playwright@1.58.1)(vite@7.3.1(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(vitest@4.1.0-beta.3)
       jsdom: 26.1.0
     transitivePeerDependencies:
       - jiti

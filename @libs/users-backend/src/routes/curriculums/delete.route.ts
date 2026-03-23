@@ -25,7 +25,10 @@ export class DeleteCurriculumRoute implements Route {
         const { id } = request.params as { id: string };
         const currentUser = request.user!;
 
-        const curriculum = await this.curriculumRepository.findOne({ id, userId: currentUser.id });
+        const curriculum = await this.curriculumRepository.findOne({
+          id: id,
+          userId: currentUser.id,
+        });
 
         if (!curriculum) {
           return reply.code(404).send(
@@ -36,7 +39,7 @@ export class DeleteCurriculumRoute implements Route {
           );
         }
 
-        await this.curriculumRepository.getEntityManager().removeAndFlush(curriculum);
+        await this.curriculumRepository.getEntityManager().remove(curriculum).flush();
 
         return reply.code(204).send({});
       },

@@ -19,3 +19,5 @@ edit:
   download: 'Download'
   title: 'Title'
   renameSuccess: 'Curriculum vitae renamed successfully'
+  field: 'Field'
+  addItem: 'Add'

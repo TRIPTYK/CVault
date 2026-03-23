@@ -9,6 +9,8 @@ import {
   findRecord,
 } from '@warp-drive/utilities/json-api';
 import type { Curriculum } from '#src/schemas/curriculums.ts';
+import type { SectionTemplates } from '#src/schemas/section-templates.ts';
+import type { Sections } from '#src/schemas/sections.ts';
 
 export default class CurriculumService extends Service {
   @service declare store: Store;
@@ -30,10 +32,10 @@ export default class CurriculumService extends Service {
   }
 
   public async rename(curriculumId: string, title: string): Promise<void> {
-    const curriculum = this.store.peekRecord<Curriculum>(
-      'curriculums',
-      curriculumId
+    const result = await this.store.request(
+      findRecord<Curriculum>('curriculums', curriculumId)
     );
+    const curriculum = (result.content as { data: Curriculum }).data;
     if (!curriculum) return;
 
     const request = updateRecord(curriculum);
@@ -48,10 +50,10 @@ export default class CurriculumService extends Service {
   }
 
   public async delete(curriculumId: string): Promise<void> {
-    const curriculum = this.store.peekRecord<Curriculum>(
-      'curriculums',
-      curriculumId
+    const result = await this.store.request(
+      findRecord<Curriculum>('curriculums', curriculumId)
     );
+    const curriculum = (result.content as { data: Curriculum }).data;
     if (!curriculum) return;
 
     const request = deleteRecord(curriculum);
@@ -77,8 +79,132 @@ export default class CurriculumService extends Service {
       data: this.store.cache.peek(cacheKeyFor(curriculum)),
     });
 
-    const response = await this.store.request(request);
-    const content = response.content as unknown as { data: Curriculum };
-    return content.data;
+    try {
+      const response = await this.store.request(request);
+      const content = response.content as unknown as { data: Curriculum };
+      return content.data;
+    } catch (e) {
+      this.store.unloadRecord(curriculum);
+      throw e;
+    }
+  }
+
+  public async findAllTemplates(): Promise<SectionTemplates[]> {
+    const result = await this.store.request<{ data: SectionTemplates[] }>({
+      method: 'GET',
+      url: `/api/v1/section-templates/`,
+    });
+    return result.content.data ?? [];
+  }
+
+  public async findAllSections(curriculumId: string): Promise<Sections[]> {
+    const result = await this.store.request<{ data: Sections[] }>({
+      method: 'GET',
+      url: `/api/v1/curriculums/${curriculumId}/sections`,
+      cacheOptions: { reload: true },
+    });
+    return result.content.data ?? [];
+  }
+
+  public async createSection(
+    curriculumId: string,
+    templateId: string,
+    title: string
+  ): Promise<Sections> {
+    const section = this.store.createRecord<Sections>('sections', {
+      templateId,
+      title,
+    });
+    const request = createRecord(section);
+
+    request.url = `/api/v1/curriculums/${curriculumId}/sections`;
+    request.method = 'POST';
+
+    request.body = JSON.stringify({
+      data: this.store.cache.peek(cacheKeyFor(section)),
+    });
+
+    try {
+      const response = await this.store.request(request);
+      const content = response.content as unknown as { data: Sections };
+      return content.data;
+    } catch (e) {
+      this.store.unloadRecord(section);
+      throw e;
+    }
+  }
+
+  public async createItem(
+    curriculumId: string | null,
+    sectionId: string | null
+  ): Promise<void> {
+    if (!sectionId) return;
+
+    await this.store.request({
+      url: `/api/v1/curriculums/${curriculumId}/sections/${sectionId}/items/`,
+      method: 'POST',
+      body: JSON.stringify({}),
+    });
+  }
+
+  public async deleteSection(
+    curriculumId: string,
+    sectionId: string | null
+  ): Promise<void> {
+    if (!sectionId) return;
+
+    try {
+      await this.store.request({
+        url: `/api/v1/curriculums/${curriculumId}/sections/${sectionId}`,
+        method: 'DELETE',
+        body: JSON.stringify({}),
+      });
+    } catch {
+      /* pas propre, temporaire */
+    }
+
+    const section = this.store.peekRecord<Sections>('sections', sectionId);
+    if (section) this.store.unloadRecord(section);
+  }
+
+  public async deleteItem(
+    curriculumId: string | null,
+    sectionId: string | null,
+    itemId: string | null
+  ): Promise<void> {
+    if (!sectionId || !itemId || !curriculumId) return;
+
+    try {
+      await this.store.request({
+        url: `/api/v1/curriculums/${curriculumId}/sections/${sectionId}/items/${itemId}`,
+        method: 'DELETE',
+        body: JSON.stringify({}),
+      });
+    } catch {
+      /* pas propre, temporaire */
+    }
+  }
+
+  public async updateItem(
+    key: string,
+    value: string,
+    curriculumId: string | null,
+    sectionId: string | null,
+    itemId: string | null
+  ): Promise<void> {
+    if (!sectionId || !itemId) return;
+
+    await this.store.request({
+      url: `/api/v1/curriculums/${curriculumId}/sections/${sectionId}/items/${itemId}`,
+      method: 'PATCH',
+      body: JSON.stringify({
+        data: {
+          attributes: {
+            [key]: value,
+          },
+        },
+      }),
+      op: 'updateRecord',
+    });
   }
 }

@@ -1,0 +1,8 @@
+[
+  { "key": "school", "label": "École / Université", "type": "text" },
+  { "key": "degree", "label": "Diplôme", "type": "text" },
+  { "key": "field", "label": "Domaine", "type": "text" },
+  { "key": "startDate", "label": "Début", "type": "date" },
+  { "key": "endDate", "label": "Fin", "type": "date" },
+  { "key": "description", "label": "Description", "type": "textarea" }
+]

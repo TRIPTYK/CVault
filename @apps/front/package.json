@@ -138,5 +138,8 @@
     "workerDirectory": [
       "public"
     ]
+  },
+  "dependencies": {
+    "ember-truth-helpers": "^5.0.0"
   }
 }

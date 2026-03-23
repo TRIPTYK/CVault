@@ -23,7 +23,9 @@ import {
   UserModule,
   AuthModule,
   CurriculumModule,
-  ProposedSectionsModule,
+  SectionTemplatesModule,
+  SectionsModule,
+  SectionItemsModule,
 } from "@libs/users-backend";
 
 export type FastifyInstanceType = FastifyInstance<
@@ -173,7 +175,19 @@ export class App {
           jwtSecret: this.context.configuration.JWT_SECRET,
         },
       }),
-      proposedSectionsModule: ProposedSectionsModule.init({
+      sectionTemplatesModule: SectionTemplatesModule.init({
+        em: this.context.orm.em.fork(),
+        configuration: {
+          jwtSecret: this.context.configuration.JWT_SECRET,
+        },
+      }),
+      sectionsModule: SectionsModule.init({
+        em: this.context.orm.em.fork(),
+        configuration: {
+          jwtSecret: this.context.configuration.JWT_SECRET,
+        },
+      }),
+      sectionItemsModule: SectionItemsModule.init({
         em: this.context.orm.em.fork(),
         configuration: {
           jwtSecret: this.context.configuration.JWT_SECRET,

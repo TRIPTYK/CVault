@@ -4,7 +4,9 @@ import {
   RefreshTokenEntity,
   UserEntity,
   CurriculumEntity,
-  ProposedSectionEntity,
+  SectionTemplatesEntity,
+  SectionsEntity,
+  SectionItemsEntity,
 } from "@libs/users-backend";
 
 export function databaseConfig(config: Pick<AppConfiguration, "DATABASE_URI">) {
@@ -13,7 +15,14 @@ export function databaseConfig(config: Pick<AppConfiguration, "DATABASE_URI">) {
       pathTs: "./src/seeders",
     },
     clientUrl: config.DATABASE_URI,
-    entities: [UserEntity, RefreshTokenEntity, CurriculumEntity, ProposedSectionEntity],
+    entities: [
+      UserEntity,
+      RefreshTokenEntity,
+      CurriculumEntity,
+      SectionTemplatesEntity,
+      SectionsEntity,
+      SectionItemsEntity,
+    ],
   });
 }
 

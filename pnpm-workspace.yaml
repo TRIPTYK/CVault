@@ -73,7 +73,7 @@ catalog:
   amqplib: ^0.10.5
   argon2: ^0.44.0
   daisyui: ~5.5.14
-  date-fns: '^4.1.0'
+  date-fns: ^4.1.0
   decorator-transforms: ~2.3.1
   ember-basic-dropdown: ^8.11.0
   ember-cli: ~6.10.0
@@ -94,7 +94,6 @@ catalog:
   ember-simple-auth-token: ~6.0.1
   ember-source: ~6.10.1
   ember-strict-application-resolver: ^0.1.1
-  ember-truth-helpers: ^5.0.0
   ember-vitest: ^0.3.3
   eslint-plugin-import: ^2.31.0
   fastify: ^5.7.2

@@ -9,5 +9,9 @@ const config = loadConfiguration();
  * Important for test reproduction
  */
 seed(config.SEED);
+defineConfig({
+  debug: true,
+  logger: (message) => console.log(message),
+});
 
 export default defineConfig(databaseConfig(config));
