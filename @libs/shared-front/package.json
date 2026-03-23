@@ -101,7 +101,6 @@
     "ember-resources": "catalog:",
     "ember-source": "catalog:",
     "ember-template-lint": "^7.9.0",
-    "ember-truth-helpers": "catalog:",
     "ember-vitest": "catalog:",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^10.1.5",

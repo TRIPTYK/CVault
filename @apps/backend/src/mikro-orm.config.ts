@@ -9,5 +9,4 @@ const config = loadConfiguration();
  * Important for test reproduction
  */
 seed(config.SEED);
-
 export default defineConfig(databaseConfig(config));

@@ -2,11 +2,15 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { on } from '@ember/modifier';
+import type Owner from '@ember/owner';
 
 interface CurriculumDropdownSectionSignature {
   Element: HTMLDivElement;
   Args: {
     title: string;
+    isActive: boolean;
+    onActivate?: () => void;
+    onDesactivate?: () => void;
   };
   Blocks: {
     default: [];
@@ -14,18 +18,21 @@ interface CurriculumDropdownSectionSignature {
 }
 
 class CurriculumDropdownSection extends Component<CurriculumDropdownSectionSignature> {
-  @tracked isActive = false;
   @tracked isOpen = false;
+
+  constructor(owner: Owner, args: CurriculumDropdownSectionSignature['Args']) {
+    super(owner, args);
+  }
 
   @action
   activate() {
-    this.isActive = true;
+    this.args.onActivate?.();
     this.isOpen = true;
   }
 
   @action
   desactivate() {
-    this.isActive = false;
+    this.args.onDesactivate?.();
     this.isOpen = false;
   }
 
@@ -53,13 +60,13 @@ class CurriculumDropdownSection extends Component<CurriculumDropdownSectionSigna
       >
         <span
           class="font-bold text-lg transition-colors duration-200
-            {{if this.isActive 'text-black' 'text-gray-400'}}"
+            {{if @isActive 'text-black' 'text-gray-400'}}"
         >
           {{@title}}
         </span>
 
         <div class="flex flex-row items-center gap-2">
-          {{#if this.isActive}}
+          {{#if @isActive}}
             <button
               type="button"
               title="Désactiver"
@@ -101,7 +108,9 @@ class CurriculumDropdownSection extends Component<CurriculumDropdownSectionSigna
       </div>
 
       {{#if this.isOpen}}
-        <div class="border-t border-gray-200 px-5 py-4 bg-gray-50">
+        <div
+          class="border-t border-gray-200 px-5 py-4 bg-gray-50 flex flex-col gap-4"
+        >
           {{yield}}
         </div>
       {{/if}}

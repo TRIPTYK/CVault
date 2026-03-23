@@ -1,0 +1,7 @@
+[
+  { "key": "name", "label": "Nom", "type": "text" },
+  { "key": "entreprise", "label": "Entreprise", "type": "text" },
+  { "key": "city", "label": "Ville", "type": "text" },
+  { "key": "phone", "label": "Téléphone", "type": "tel" },
+  { "key": "email", "label": "Email", "type": "email" }
+]

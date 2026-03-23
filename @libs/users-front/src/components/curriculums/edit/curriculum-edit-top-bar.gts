@@ -55,7 +55,7 @@ class CurriculumTopBar extends Component<CurriculumTopBarArgs> {
       class="flex flex-row bg-[#1D1D20] px-4 py-4 items-center justify-between"
     >
       <TpkPrefabButton
-        data-test-curriculum-download-button="{{@curriculum?.id}}"
+        data-test-curriculum-return-button="{{@curriculum?.id}}"
         @onClick={{this.handleReturnClick}}
         @label={{t "curriculums.edit.returnToList"}}
       />
@@ -63,7 +63,7 @@ class CurriculumTopBar extends Component<CurriculumTopBarArgs> {
         aria-label="Curriculum title"
         data-test-curriculum-title="{{@curriculum?.id}}"
         name="curriculum-title-{{@curriculum?.id}}"
-        class="font-medium pb-1 text-white hover:text-blue-600 hover:underline hover:underline-offset-6 focus:outline-none transition-colors duration-200"
+        class="font-medium pb-1 text-white hover:text-blue-600 hover:underline hover:underline-offset-6 focus:outline-none transition-colors duration-200 text-center"
         value={{@curriculum.title}}
         {{on "keydown" this.renameOnEnter}}
         {{on "blur" this.renameOnBlur}}

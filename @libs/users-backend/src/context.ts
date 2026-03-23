@@ -22,7 +22,21 @@ export interface CurriculumLibraryContext {
   };
 }
 
-export interface ProposedSectionsLibraryContext {
+export interface SectionTemplatesLibraryContext {
+  em: EntityManager;
+  configuration: {
+    jwtSecret: string;
+  };
+}
+
+export interface SectionsLibraryContext {
+  em: EntityManager;
+  configuration: {
+    jwtSecret: string;
+  };
+}
+
+export interface SectionItemsLibraryContext {
   em: EntityManager;
   configuration: {
     jwtSecret: string;

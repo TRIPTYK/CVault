@@ -9,7 +9,7 @@ import type {
   AuthLibraryContext,
   UserLibraryContext,
   CurriculumLibraryContext,
-  ProposedSectionsLibraryContext,
+  SectionTemplatesLibraryContext,
 } from "./context.js";
 import { type ZodTypeProvider } from "fastify-type-provider-zod";
 import { LoginRoute } from "#src/routes/login.route.js";
@@ -24,9 +24,13 @@ import { DeleteRoute } from "#src/routes/delete.route.js";
 import { UserEntity } from "./entities/user.entity.js";
 import { type ModuleInterface, type Route } from "@libs/backend-shared";
 import { handleJsonApiErrors } from "@libs/backend-shared";
-import { createJwtAuthMiddleware } from "./index.ts";
+import {
+  createJwtAuthMiddleware,
+  SectionItemsEntity,
+  SectionsEntity,
+  SectionTemplatesEntity,
+} from "./index.ts";
 import { CurriculumEntity } from "./entities/curriculum.entity.ts";
-import { ProposedSectionEntity } from "./entities/proposed-sections.entity.ts";
 
 import { GetCurriculumRoute } from "./routes/curriculums/get.route.ts";
 import { ListCurriculumRoute } from "./routes/curriculums/list.route.ts";
@@ -35,7 +39,18 @@ import { UpdateCurriculumRoute } from "./routes/curriculums/update.route.ts";
 import { DeleteCurriculumRoute } from "./routes/curriculums/delete.route.ts";
 import { DuplicateCurriculumRoute } from "./routes/curriculums/duplicate.route.ts";
 
-import { ListProposedSectionRoute } from "./routes/proposedSections/list.route.ts";
+import { GetSectionsRoute } from "./routes/sections/get.route.ts";
+import { CreateSectionsRoute } from "./routes/sections/create.route.ts";
+import { UpdateSectionsRoute } from "./routes/sections/update.route.ts";
+import { DeleteSectionsRoute } from "./routes/sections/delete.route.ts";
+import { UpdateReorderSectionsRoute } from "./routes/sections/update.reorder.route.ts";
+
+import { CreateSectionItemRoute } from "./routes/section-items/create.route.ts";
+import { UpdateSectionItemRoute } from "./routes/section-items/update.route.ts";
+import { DeleteSectionItemRoute } from "./routes/section-items/delete.route.ts";
+import { ReorderSectionItemsRoute } from "./routes/section-items/update.reorder.route.ts";
+
+import { ListSectionTemplatesRoute } from "./routes/section-templates/list.route.ts";
 
 export type FastifyInstanceTypeForModule = FastifyInstance<
   RawServerDefault,
@@ -165,20 +180,20 @@ export class CurriculumModule implements ModuleInterface<FastifyInstanceTypeForM
   }
 }
 
-export class ProposedSectionsModule implements ModuleInterface<FastifyInstanceTypeForModule> {
-  private constructor(private context: ProposedSectionsLibraryContext) {}
+export class SectionTemplatesModule implements ModuleInterface<FastifyInstanceTypeForModule> {
+  private constructor(private context: SectionTemplatesLibraryContext) {}
 
-  public static init(context: ProposedSectionsLibraryContext): ProposedSectionsModule {
-    return new ProposedSectionsModule(context);
+  public static init(context: SectionTemplatesLibraryContext): SectionTemplatesModule {
+    return new SectionTemplatesModule(context);
   }
 
   public async setupRoutes(fastify: FastifyInstanceTypeForModule): Promise<void> {
-    const repository = this.context.em.getRepository(ProposedSectionEntity);
+    const repository = this.context.em.getRepository(SectionTemplatesEntity);
 
     await fastify.register(
       async (f) => {
-        const proposedSectionRoutes: Route<FastifyInstanceTypeForModule>[] = [
-          new ListProposedSectionRoute(repository),
+        const sectionTemplateRoutes: Route<FastifyInstanceTypeForModule>[] = [
+          new ListSectionTemplatesRoute(repository),
         ];
 
         f.setErrorHandler((error, request, reply) => {
@@ -192,11 +207,97 @@ export class ProposedSectionsModule implements ModuleInterface<FastifyInstanceTy
 
         f.addHook("preValidation", jwtAuthMiddleware);
 
-        for (const route of proposedSectionRoutes) {
+        for (const route of sectionTemplateRoutes) {
           route.routeDefinition(f);
         }
       },
-      { prefix: "/proposed-sections" },
+      { prefix: "/section-templates" },
+    );
+  }
+}
+
+export class SectionsModule implements ModuleInterface<FastifyInstanceTypeForModule> {
+  private constructor(private context: SectionTemplatesLibraryContext) {}
+
+  public static init(context: SectionTemplatesLibraryContext): SectionsModule {
+    return new SectionsModule(context);
+  }
+
+  public async setupRoutes(fastify: FastifyInstanceTypeForModule): Promise<void> {
+    const repository = this.context.em.getRepository(SectionsEntity);
+
+    await fastify.register(
+      async (f) => {
+        const sectionsRoutes: Route<FastifyInstanceTypeForModule>[] = [
+          new GetSectionsRoute(repository, this.context.em.getRepository(CurriculumEntity)),
+          new CreateSectionsRoute(
+            repository,
+            this.context.em.getRepository(CurriculumEntity),
+            this.context.em.getRepository(SectionTemplatesEntity),
+          ),
+          new UpdateSectionsRoute(repository),
+          new DeleteSectionsRoute(repository),
+          new UpdateReorderSectionsRoute(
+            repository,
+            this.context.em.getRepository(CurriculumEntity),
+          ),
+        ];
+
+        f.setErrorHandler((error, request, reply) => {
+          handleJsonApiErrors(error, request, reply);
+        });
+
+        const jwtAuthMiddleware = createJwtAuthMiddleware(
+          this.context.em,
+          this.context.configuration.jwtSecret,
+        );
+
+        f.addHook("preValidation", jwtAuthMiddleware);
+
+        for (const route of sectionsRoutes) {
+          route.routeDefinition(f);
+        }
+      },
+      { prefix: "/curriculums/:curriculumId/sections" },
+    );
+  }
+}
+
+export class SectionItemsModule implements ModuleInterface<FastifyInstanceTypeForModule> {
+  private constructor(private context: SectionTemplatesLibraryContext) {}
+
+  public static init(context: SectionTemplatesLibraryContext): SectionItemsModule {
+    return new SectionItemsModule(context);
+  }
+
+  public async setupRoutes(fastify: FastifyInstanceTypeForModule): Promise<void> {
+    const repository = this.context.em.getRepository(SectionItemsEntity);
+
+    await fastify.register(
+      async (f) => {
+        const sectionsRoutes: Route<FastifyInstanceTypeForModule>[] = [
+          new CreateSectionItemRoute(repository, this.context.em.getRepository(SectionsEntity)),
+          new UpdateSectionItemRoute(repository),
+          new DeleteSectionItemRoute(repository),
+          new ReorderSectionItemsRoute(repository, this.context.em.getRepository(SectionsEntity)),
+        ];
+
+        f.setErrorHandler((error, request, reply) => {
+          handleJsonApiErrors(error, request, reply);
+        });
+
+        const jwtAuthMiddleware = createJwtAuthMiddleware(
+          this.context.em,
+          this.context.configuration.jwtSecret,
+        );
+
+        f.addHook("preValidation", jwtAuthMiddleware);
+
+        for (const route of sectionsRoutes) {
+          route.routeDefinition(f);
+        }
+      },
+      { prefix: "/curriculums/:curriculumId/sections/:sectionId/items" },
     );
   }
 }

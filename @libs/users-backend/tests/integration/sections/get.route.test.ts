@@ -1,0 +1,158 @@
+import { afterAll, aroundEach, beforeAll, expect, test } from "vitest";
+import { TestModule } from "#tests/utils/setup-module.js";
+
+let module: TestModule;
+
+beforeAll(async () => {
+  module = await TestModule.init();
+});
+
+afterAll(async () => {
+  await module.close();
+});
+
+aroundEach(async (runTest) => {
+  await module.em.begin();
+  await runTest();
+  await module.em.rollback();
+});
+
+test("GetRoute returns 200 and retrieves a section", async () => {
+  await module.createCurriculum({
+    id: TestModule.TEST_CURRICULUM_ID,
+    userId: TestModule.TEST_USER_ID,
+    title: "Test Curriculum",
+  });
+
+  await module.createSectionTemplate({
+    id: TestModule.TEST_SECTION_TEMPLATE_ID,
+    label: "Test Template",
+  });
+
+  await module.createSection({
+    id: TestModule.TEST_SECTION_ID,
+    curriculumId: TestModule.TEST_CURRICULUM_ID,
+    templateId: TestModule.TEST_SECTION_TEMPLATE_ID,
+    title: "Test Section",
+  });
+
+  const response = await module.fastifyInstance.inject({
+    method: "GET",
+    url: `/curriculums/${TestModule.TEST_CURRICULUM_ID}/sections/`,
+    headers: {
+      authorization: module.generateBearerToken(TestModule.TEST_USER_ID),
+    },
+  });
+
+  expect(response.statusCode).toBe(200);
+  const body = response.json();
+  expect(body).toHaveProperty("data");
+  expect(body.data).toMatchObject([
+    {
+      id: TestModule.TEST_SECTION_ID,
+      type: "sections",
+      attributes: {
+        curriculumId: TestModule.TEST_CURRICULUM_ID,
+        templateId: TestModule.TEST_SECTION_TEMPLATE_ID,
+        title: "Test Section",
+        position: 0,
+        items: [],
+      },
+    },
+  ]);
+});
+
+test("GetRoute returns empty array if curriculum has no sections", async () => {
+  await module.createCurriculum({
+    id: TestModule.TEST_CURRICULUM_ID,
+    userId: TestModule.TEST_USER_ID,
+    title: "Test Curriculum",
+  });
+
+  const response = await module.fastifyInstance.inject({
+    method: "GET",
+    url: `/curriculums/${TestModule.TEST_CURRICULUM_ID}/sections/`,
+    headers: {
+      authorization: module.generateBearerToken(TestModule.TEST_USER_ID),
+    },
+  });
+
+  expect(response.statusCode).toBe(200);
+  const body = response.json();
+  expect(body).toHaveProperty("data");
+  expect(body.data).toEqual([]);
+});
+
+test("GetRoute returns 404 if curriculum not found", async () => {
+  await module.createCurriculum({
+    id: TestModule.TEST_CURRICULUM_ID,
+    userId: TestModule.TEST_USER_ID,
+    title: "Test Curriculum",
+  });
+
+  await module.createSectionTemplate({
+    id: TestModule.TEST_SECTION_TEMPLATE_ID,
+    label: "Test Template",
+  });
+
+  const response = await module.fastifyInstance.inject({
+    method: "GET",
+    url: `/curriculums/nonexistent-curriculum-id/sections/`,
+    headers: {
+      authorization: module.generateBearerToken(TestModule.TEST_USER_ID),
+    },
+  });
+
+  expect(response.statusCode).toBe(404);
+  const body = response.json();
+  expect(body).toHaveProperty("errors");
+  expect(body.errors[0]).toMatchObject({
+    status: "404",
+    title: "Not Found",
+    code: "CURRICULUM_NOT_FOUND",
+    detail: `No curriculum found with id nonexistent-curriculum-id belonging to user with id ${TestModule.TEST_USER_ID}`,
+  });
+});
+
+test("GetRoute returns 404 if curriculum does not belong to user", async () => {
+  await module.createCurriculum({
+    id: TestModule.TEST_CURRICULUM_ID,
+    userId: "other-user-id",
+    title: "Test Curriculum",
+  });
+
+  const response = await module.fastifyInstance.inject({
+    method: "GET",
+    url: `/curriculums/${TestModule.TEST_CURRICULUM_ID}/sections/`,
+    headers: {
+      authorization: module.generateBearerToken(TestModule.TEST_USER_ID),
+    },
+  });
+
+  expect(response.statusCode).toBe(404);
+  const body = response.json();
+  expect(body).toHaveProperty("errors");
+  expect(body.errors[0]).toMatchObject({
+    status: "404",
+    title: "Not Found",
+    code: "CURRICULUM_NOT_FOUND",
+    detail: `No curriculum found with id ${TestModule.TEST_CURRICULUM_ID} belonging to user with id ${TestModule.TEST_USER_ID}`,
+  });
+});
+
+test("GetRoute returns 401 when not authenticated", async () => {
+  const response = await module.fastifyInstance.inject({
+    method: "GET",
+    url: `/curriculums/${TestModule.TEST_CURRICULUM_ID}/sections/`,
+  });
+
+  expect(response.statusCode).toBe(401);
+  const body = response.json();
+  expect(body).toHaveProperty("errors");
+  expect(body.errors[0]).toMatchObject({
+    status: "401",
+    title: "Unauthorized",
+    code: "UNAUTHORIZED",
+    detail: "Missing or invalid authorization header",
+  });
+});

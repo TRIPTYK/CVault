@@ -19,3 +19,5 @@ edit:
   download: 'Télécharger'
   title: 'Titre'
   renameSuccess: 'Le curriculum vitae a été renommé avec succès'
+  field: 'Champ'
+  addItem: 'Ajouter'

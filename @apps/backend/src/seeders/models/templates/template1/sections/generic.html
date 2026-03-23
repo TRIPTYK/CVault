@@ -1,0 +1,18 @@
+<!-- sections/generic.html — fallback pour les sections sans template dédié -->
+<section class="cv-section cv-section--generic">
+  <h2 class="section-title">{{ section.title }}</h2>
+  <div class="section-divider"></div>
+
+  {% for item in section.items | sort(attribute="position") %}
+  <div class="generic-item">
+    {% for key, value in item.jsonData %} {% if value %}
+    <div class="generic-field">
+      <span class="generic-value">{{ value }}</span>
+    </div>
+    {% endif %} {% endfor %}
+  </div>
+
+  {% if not loop.last %}
+  <div class="item-separator"></div>
+  {% endif %} {% endfor %}
+</section>

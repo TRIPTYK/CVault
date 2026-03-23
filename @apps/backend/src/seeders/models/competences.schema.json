@@ -1,0 +1,4 @@
+[
+  { "key": "competence", "label": "Compétence", "type": "text" },
+  { "key": "level", "label": "Niveau", "type": "text" }
+]
