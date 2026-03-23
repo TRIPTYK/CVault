@@ -205,7 +205,7 @@ test("UpdateReorderSectionsRoute returns 400 if a section id is invalid", async 
 
   const response = await module.fastifyInstance.inject({
     method: "PATCH",
-    url: `/curriculums/${TestModule.TEST_CURRICULUM_ID}/sections/${TestModule.TEST_SECTION_ID}`,
+    url: `/curriculums/${TestModule.TEST_CURRICULUM_ID}/sections/reorder`,
     headers: {
       authorization: module.generateBearerToken(TestModule.TEST_USER_ID),
     },
@@ -219,17 +219,17 @@ test("UpdateReorderSectionsRoute returns 400 if a section id is invalid", async 
   expect(body).toHaveProperty("errors");
   expect(body.errors[0]).toMatchObject({
     status: "400",
-    title: "Validation Error",
-    detail: "Invalid input: expected string, received undefined",
+    title: "Bad Request",
+    detail: `Section with id invalid-section-id does not belong to curriculum ${TestModule.TEST_CURRICULUM_ID}`,
   });
 });
 
 test("UpdateRoute returns 401 when not authenticated", async () => {
   const response = await module.fastifyInstance.inject({
     method: "PATCH",
-    url: `/curriculums/${TestModule.TEST_CURRICULUM_ID}/sections/${TestModule.TEST_SECTION_ID}`,
+    url: `/curriculums/${TestModule.TEST_CURRICULUM_ID}/sections/reorder`,
     payload: {
-      title: "Updated Test Section",
+      order: ["test-section-id", "test-section-id-2"],
     },
   });
 

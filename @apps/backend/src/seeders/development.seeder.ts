@@ -30,15 +30,6 @@ export class DatabaseSeeder extends Seeder {
       password: hashedPassword,
     });
 
-    // Curriculum for e2e tests
-    em.create(CurriculumEntity, {
-      id: "e2e-curriculum",
-      userId: "e2e-login-user",
-      title: "Mon CV",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
-
     const template1 = em.create(SectionTemplatesEntity, {
       id: "e2e-section-template-1",
       label: "Informations personnelles",
@@ -89,10 +80,10 @@ export class DatabaseSeeder extends Seeder {
     });
 
     em.create(SectionTemplatesEntity, {
-      id: "e2e-section-template-3",
+      id: "e2e-section-template-8",
       label: "Langues",
       jsonSchema: langueJsonSchema,
-      position: 3,
+      position: 8,
     });
 
     const curriculum = em.create(CurriculumEntity, {

@@ -192,7 +192,7 @@ export default class CurriculumService extends Service {
     sectionId: string | null,
     itemId: string | null
   ): Promise<void> {
-    if (!sectionId || !itemId) return;
+    if (!sectionId || !itemId || !curriculumId) return;
 
     await this.store.request({
       url: `/api/v1/curriculums/${curriculumId}/sections/${sectionId}/items/${itemId}`,

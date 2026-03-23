@@ -57,10 +57,13 @@ test("DeleteRoute returns 204 and deletes a item", async () => {
 
   expect(response.statusCode).toBe(204);
 
-  const deletedItem = await module.em.findOne(SectionsEntity, {
-    id: TestModule.TEST_SECTION_ITEM_ID,
-  });
-  expect(deletedItem).toBeNull();
+  const section = await module.em.findOne(
+    SectionsEntity,
+    { id: "test-section-id" },
+    { populate: ["items"] },
+  );
+  expect(section).not.toBeNull();
+  expect(section!.items).toHaveLength(0);
 });
 
 test("DeleteRoute returns 404 if curriculum not found", async () => {

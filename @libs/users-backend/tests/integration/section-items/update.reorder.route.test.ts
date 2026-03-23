@@ -67,7 +67,7 @@ test("UpdateReorderSectionsRoute returns 204 and updates items order", async () 
       },
     },
   });
-  console.log(response.body);
+
   expect(response.statusCode).toBe(204);
   const items = await module.em.find(
     SectionItemsEntity,

@@ -62,6 +62,27 @@ test("GetRoute returns 200 and retrieves a section", async () => {
   ]);
 });
 
+test("GetRoute returns empty array if curriculum has no sections", async () => {
+  await module.createCurriculum({
+    id: TestModule.TEST_CURRICULUM_ID,
+    userId: TestModule.TEST_USER_ID,
+    title: "Test Curriculum",
+  });
+
+  const response = await module.fastifyInstance.inject({
+    method: "GET",
+    url: `/curriculums/${TestModule.TEST_CURRICULUM_ID}/sections/`,
+    headers: {
+      authorization: module.generateBearerToken(TestModule.TEST_USER_ID),
+    },
+  });
+
+  expect(response.statusCode).toBe(200);
+  const body = response.json();
+  expect(body).toHaveProperty("data");
+  expect(body.data).toEqual([]);
+});
+
 test("GetRoute returns 404 if curriculum not found", async () => {
   await module.createCurriculum({
     id: TestModule.TEST_CURRICULUM_ID,

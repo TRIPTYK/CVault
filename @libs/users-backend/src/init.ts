@@ -229,7 +229,7 @@ export class SectionsModule implements ModuleInterface<FastifyInstanceTypeForMod
     await fastify.register(
       async (f) => {
         const sectionsRoutes: Route<FastifyInstanceTypeForModule>[] = [
-          new GetSectionsRoute(repository),
+          new GetSectionsRoute(repository, this.context.em.getRepository(CurriculumEntity)),
           new CreateSectionsRoute(
             repository,
             this.context.em.getRepository(CurriculumEntity),
