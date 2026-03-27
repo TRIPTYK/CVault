@@ -18,6 +18,7 @@ interface CurriculumEditSectionItemSignature {
     sectionId: string | null;
     itemId: string;
     onDelete: () => void;
+    onUpdate: () => void;
   };
 }
 
@@ -42,6 +43,7 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
       this.args.sectionId,
       this.args.itemId
     );
+    this.args.onUpdate();
   }
 
   <template>
@@ -94,6 +96,7 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
                   value={{get @fillInfos field.key}}
                   class="border border-gray-300 rounded px-3 py-2 text-sm resize-none focus:outline-none focus:border-blue-400"
                   rows="3"
+                  {{on "blur" (fn this.updateField field.key)}}
                 />
               {{else}}
                 <input

@@ -1,8 +1,11 @@
-[
-  { "key": "position", "label": "Poste", "type": "text" },
-  { "key": "employer", "label": "Employeur", "type": "text" },
-  { "key": "city", "label": "Ville", "type": "text" },
-  { "key": "startDate", "label": "Date de début", "type": "date" },
-  { "key": "endDate", "label": "Date de fin", "type": "date" },
-  { "key": "description", "label": "Description", "type": "textarea" }
-]
+{
+  "title": "Expériences",
+  "properties": [
+    { "key": "position", "label": "Poste", "type": "text" },
+    { "key": "employer", "label": "Employeur", "type": "text" },
+    { "key": "city", "label": "Ville", "type": "text" },
+    { "key": "startDate", "label": "Date de début", "type": "date" },
+    { "key": "endDate", "label": "Date de fin", "type": "date" },
+    { "key": "description", "label": "Description", "type": "textarea" }
+  ]
+}

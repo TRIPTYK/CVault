@@ -1,4 +1,7 @@
-[
-  { "key": "competence", "label": "Compétence", "type": "text" },
-  { "key": "level", "label": "Niveau", "type": "text" }
-]
+{
+  "title": "Compétences",
+  "properties": [
+    { "key": "competence", "label": "Compétence", "type": "text" },
+    { "key": "level", "label": "Niveau", "type": "text" }
+  ]
+}

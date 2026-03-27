@@ -23,6 +23,7 @@ class CurriculumEditSection extends Component<CurriculumEditSectionSignature> {
   @tracked curriculumItem: Curriculum | null = null;
   @tracked sectionTemplates: SectionTemplates[] = [];
   @tracked sections: Sections[] = [];
+  @tracked haveToUpdate = false;
 
   constructor(owner: Owner, args: CurriculumEditSectionSignature['Args']) {
     super(owner, args);
@@ -43,12 +44,26 @@ class CurriculumEditSection extends Component<CurriculumEditSectionSignature> {
     );
   };
 
+  onUpdate = () => {
+    this.haveToUpdate = !this.haveToUpdate;
+  };
+
   <template>
-    <div class="flex flex-col">
+    <div class="flex flex-col h-[calc(100vh-115px)]">
       <CurriculumEditTopBar @curriculum={{this.curriculumItem}} />
-      <div class="flex flex-row">
-        <CurriculumEditView @curriculumId={{@curriculumId}} />
-        <CurriculumPreview />
+      <div class="flex flex-row flex-1 overflow-hidden">
+        <div class="flex-1 overflow-y-auto">
+          <CurriculumEditView
+            @curriculumId={{@curriculumId}}
+            @onUpdate={{this.onUpdate}}
+          />
+        </div>
+        <div class="flex-1 overflow-y-auto border-l">
+          <CurriculumPreview
+            @curriculumId={{@curriculumId}}
+            @haveToUpdate={{this.haveToUpdate}}
+          />
+        </div>
       </div>
     </div>
   </template>

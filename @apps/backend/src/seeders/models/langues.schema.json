@@ -1,4 +1,7 @@
-[
-  { "key": "langue", "label": "Langue", "type": "text" },
-  { "key": "niveau", "label": "Niveau", "type": "text" }
-]
+{
+  "title": "Langues",
+  "properties": [
+    { "key": "language", "label": "Langue", "type": "text" },
+    { "key": "level", "label": "Niveau", "type": "text" }
+  ]
+}

@@ -44,7 +44,6 @@
     "fastify": "catalog:",
     "fastify-type-provider-zod": "catalog:",
     "fastify-zod": "catalog:",
-    "handlebars": "catalog:",
     "mailgen": "catalog:",
     "nodemailer": "catalog:",
     "passport-local": "catalog:",

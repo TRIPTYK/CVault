@@ -15,6 +15,7 @@ interface CurriculumEditViewSignature {
   Element: HTMLDivElement;
   Args: {
     curriculumId: string;
+    onUpdate: () => void;
   };
 }
 
@@ -110,6 +111,7 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
                 this.sections
               }}
               @itemId={{item.id}}
+              @onUpdate={{@onUpdate}}
             />
           {{/each}}
           <button

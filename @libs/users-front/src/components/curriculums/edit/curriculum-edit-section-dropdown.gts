@@ -3,6 +3,7 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { on } from '@ember/modifier';
 import type Owner from '@ember/owner';
+import DragIcon from '#src/assets/icons/drag.gts';
 
 interface CurriculumDropdownSectionSignature {
   Element: HTMLDivElement;
@@ -53,11 +54,13 @@ class CurriculumDropdownSection extends Component<CurriculumDropdownSectionSigna
 
   <template>
     <div
+      draggable="true"
       class="flex flex-col w-full border border-gray-200 rounded-lg mb-2 overflow-hidden shadow-sm"
     >
       <div
         class="flex flex-row items-center justify-between w-full px-5 py-4 bg-white"
       >
+        <DragIcon class="drag-handle" />
         <span
           class="font-bold text-lg transition-colors duration-200
             {{if @isActive 'text-black' 'text-gray-400'}}"
