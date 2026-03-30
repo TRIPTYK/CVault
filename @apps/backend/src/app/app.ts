@@ -27,6 +27,7 @@ import {
   SectionsModule,
   SectionItemsModule,
 } from "@libs/users-backend";
+import multipart from "@fastify/multipart";
 
 export type FastifyInstanceType = FastifyInstance<
   RawServerDefault,
@@ -46,6 +47,12 @@ export class App {
     const loggerInstance = logger(context.configuration);
     const fastifyInstance = Fastify({
       loggerInstance,
+    });
+
+    fastifyInstance.register(multipart, {
+      limits: {
+        fileSize: 10 * 1024 * 1024, // 10MB
+      },
     });
 
     fastifyInstance.addContentTypeParser(

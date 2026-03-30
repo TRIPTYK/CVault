@@ -45,7 +45,7 @@ async function renderSection(section: Sections): Promise<string> {
   return compiledTemplate(context);
 }
 
-export async function renderCv(sections: Sections[]): Promise<string> {
+export default async function renderCv(sections: Sections[]): Promise<string> {
   const sorted = [...sections].sort((a, b) => a.position - b.position);
 
   const leftSections: { html: string }[] = [];

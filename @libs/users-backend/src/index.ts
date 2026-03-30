@@ -54,6 +54,8 @@ export * from "#src/routes/section-items/create.route.js";
 export * from "#src/routes/section-items/update.route.js";
 export * from "#src/routes/section-items/delete.route.js";
 export * from "#src/routes/section-items/update.reorder.route.js";
+export * from "#src/routes/section-items/upload.pdp.route.js";
+export * from "#src/routes/section-items/get.pdp.route.js";
 
 export const entities = [
   UserEntity,

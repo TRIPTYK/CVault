@@ -49,6 +49,8 @@ import { CreateSectionItemRoute } from "./routes/section-items/create.route.ts";
 import { UpdateSectionItemRoute } from "./routes/section-items/update.route.ts";
 import { DeleteSectionItemRoute } from "./routes/section-items/delete.route.ts";
 import { ReorderSectionItemsRoute } from "./routes/section-items/update.reorder.route.ts";
+import { UploadPdpRoute } from "./routes/section-items/upload.pdp.route.ts";
+import { GetPdpRoute } from "./routes/section-items/get.pdp.route.ts";
 
 import { ListSectionTemplatesRoute } from "./routes/section-templates/list.route.ts";
 
@@ -280,6 +282,8 @@ export class SectionItemsModule implements ModuleInterface<FastifyInstanceTypeFo
           new UpdateSectionItemRoute(repository),
           new DeleteSectionItemRoute(repository),
           new ReorderSectionItemsRoute(repository, this.context.em.getRepository(SectionsEntity)),
+          new UploadPdpRoute(repository),
+          new GetPdpRoute(repository),
         ];
 
         f.setErrorHandler((error, request, reply) => {

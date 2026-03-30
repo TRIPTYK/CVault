@@ -68,7 +68,6 @@
     "ember-immer-changeset": "catalog:",
     "ember-intl": "catalog:",
     "ember-simple-auth": "catalog:",
-    "ember-sortable": "^5.3.3",
     "ember-strict-application-resolver": "catalog:",
     "handlebars": "catalog:",
     "msw": "catalog:",

@@ -31,6 +31,7 @@
   "dependencies": {
     "@fastify/cookie": "catalog:",
     "@fastify/cors": "catalog:",
+    "@fastify/multipart": "^9.4.0",
     "@fastify/passport": "catalog:",
     "@fastify/session": "catalog:",
     "@fastify/swagger": "catalog:",

@@ -1,6 +1,7 @@
 {
   "title": "Informations personnelles",
   "properties": [
+    { "key": "profilePicture", "label": "Photo de profil", "type": "file" },
     { "key": "firstName", "label": "Prénom", "type": "text" },
     { "key": "lastName", "label": "Nom", "type": "text" },
     { "key": "email", "label": "Email", "type": "email" },

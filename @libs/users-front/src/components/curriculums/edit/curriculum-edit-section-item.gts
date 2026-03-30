@@ -37,11 +37,10 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
   async updateField(key: string, event: FocusEvent) {
     const input = event.target as HTMLInputElement;
     await this.curriculum.updateItem(
-      key,
-      input.value,
       this.args.curriculumId,
-      this.args.sectionId,
-      this.args.itemId
+      this.args.sectionId!,
+      this.args.itemId,
+      {[key]: input.value},
     );
     this.args.onUpdate();
   }

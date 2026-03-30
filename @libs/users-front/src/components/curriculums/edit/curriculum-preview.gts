@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import type Owner from '@ember/owner';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import { renderCv } from '#src/helpers/cv-renderer.ts';
+import renderCv from '#src/helpers/cv-renderer.ts';
 import type CurriculumService from '#src/services/curriculum.ts';
 import type { Sections } from '#src/schemas/sections.ts';
 
@@ -35,7 +35,7 @@ class CurriculumPreview extends Component<CurriculumPreviewSignature> {
     const sections: Sections[] = await this.curriculum.findAllSections(
       this.args.curriculumId
     );
-    this.renderedHtml = await renderCv(sections); // <-- await ajouté
+    this.renderedHtml = await renderCv(sections);
   };
 
   <template>
