@@ -2,7 +2,6 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { on } from '@ember/modifier';
-import { t } from 'ember-intl';
 import { get } from '@ember/helper';
 import type { SchemaField } from '#src/schemas/section-templates.ts';
 import { fn } from '@ember/helper';
@@ -27,6 +26,7 @@ const isTextarea = (field: SchemaField) => field.type === 'textarea';
 class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSignature> {
   @service declare curriculum: CurriculumService;
   @tracked isOpen = false;
+  @tracked firstFieldKey = this.args.fields[0]?.key || '';
 
   @action
   toggleOpen() {
@@ -45,6 +45,14 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
     this.args.onUpdate();
   }
 
+  get firstFieldValue() {
+    const firstFieldKey = this.args.fields[0]?.key;
+    if (!firstFieldKey || !this.args.fillInfos) {
+      return 'Nouvel élément';
+    }
+    return this.args.fillInfos[firstFieldKey]?.substring(0, 25) || 'Sans titre';
+  }
+
   <template>
     <div
       class="flex flex-col w-full border border-gray-300 rounded-lg bg-white shadow-sm overflow-hidden"
@@ -52,9 +60,9 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
       <div
         class="flex flex-row items-center justify-between px-4 py-2 bg-white-50 border-b border-gray-200"
       >
-        <span class="text-sm font-medium text-gray-700">{{t
-            "curriculums.edit.field"
-          }}</span>
+        <span class="text-sm font-medium text-gray-700">
+          {{this.firstFieldValue}}
+        </span>
 
         <div class="flex flex-row items-center gap-2">
 
