@@ -40,7 +40,7 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
       this.args.curriculumId,
       this.args.sectionId!,
       this.args.itemId,
-      {[key]: input.value},
+      { [key]: input.value }
     );
     this.args.onUpdate();
   }
