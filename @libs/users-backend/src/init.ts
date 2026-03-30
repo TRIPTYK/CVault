@@ -159,7 +159,11 @@ export class CurriculumModule implements ModuleInterface<FastifyInstanceTypeForM
           new CreateCurriculumRoute(repository),
           new UpdateCurriculumRoute(repository),
           new DeleteCurriculumRoute(repository),
-          new DuplicateCurriculumRoute(repository),
+          new DuplicateCurriculumRoute(
+            repository,
+            this.context.em.getRepository(SectionsEntity),
+            this.context.em.getRepository(SectionItemsEntity),
+          ),
         ];
 
         f.setErrorHandler((error, request, reply) => {

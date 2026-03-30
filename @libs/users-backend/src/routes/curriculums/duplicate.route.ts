@@ -1,5 +1,7 @@
 import type { FastifyInstanceTypeForModule } from "#src/init.js";
 import type { CurriculumEntityType } from "#src/entities/curriculum.entity.js";
+import type { SectionEntityType } from "#src/entities/sections.entity.js";
+import type { SectionItemEntityType } from "#src/entities/section-items.entity.js";
 import type { EntityRepository } from "@mikro-orm/core";
 import { randomUUID } from "crypto";
 import {
@@ -15,7 +17,11 @@ import {
 import { object, string } from "zod";
 
 export class DuplicateCurriculumRoute implements Route {
-  public constructor(private curriculumRepository: EntityRepository<CurriculumEntityType>) {}
+  public constructor(
+    private curriculumRepository: EntityRepository<CurriculumEntityType>,
+    private sectionsRepository: EntityRepository<SectionEntityType>,
+    private SectionItemsRepository: EntityRepository<SectionItemEntityType>,
+  ) {}
 
   public routeDefinition(f: FastifyInstanceTypeForModule) {
     return f.post(
@@ -35,10 +41,15 @@ export class DuplicateCurriculumRoute implements Route {
         const { id } = request.params;
         const currentUser = request.user!;
 
-        const original = await this.curriculumRepository.findOne({
-          id,
-          userId: currentUser.id,
-        });
+        const original = await this.curriculumRepository.findOne(
+          {
+            id,
+            userId: currentUser.id,
+          },
+          {
+            populate: ["sections", "sections.items"],
+          },
+        );
 
         if (!original) {
           return reply.code(404).send(
@@ -59,7 +70,30 @@ export class DuplicateCurriculumRoute implements Route {
           createdAt: new Date(),
         });
 
-        await this.curriculumRepository.getEntityManager().flush();
+        for (const section of original.sections) {
+          const newSection = this.sectionsRepository.create({
+            id: randomUUID(),
+            curriculum: duplicate,
+            template: section.template,
+            title: section.title,
+            position: section.position,
+          });
+
+          for (const item of section.items) {
+            const newItem = this.SectionItemsRepository.create({
+              id: randomUUID(),
+              section: newSection,
+              position: item.position,
+              jsonData: item.jsonData,
+            });
+
+            newSection.items.add(newItem);
+          }
+
+          duplicate.sections.add(newSection);
+        }
+
+        await this.curriculumRepository.getEntityManager().persist(duplicate).flush();
 
         return reply.send(jsonApiSerializeSingleCurriculumDocument(duplicate));
       },
