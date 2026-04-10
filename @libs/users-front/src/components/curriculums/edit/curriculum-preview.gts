@@ -35,6 +35,23 @@ class CurriculumPreview extends Component<CurriculumPreviewSignature> {
     const sections: Sections[] = await this.curriculum.findAllSections(
       this.args.curriculumId
     );
+
+    for (const section of sections) {
+      for (const item of section.items) {
+        for (const [key, value] of Object.entries(item.jsonData)) {
+          if (key === 'profilePicture' && value !== '' && value !== null) {
+            const res = await this.curriculum.getFile(
+              this.args.curriculumId,
+              section.id!,
+              item.id,
+              key
+            );
+            item.jsonData[key] = res;
+          }
+        }
+      }
+    }
+
     this.renderedHtml = await renderCv(sections);
   };
 

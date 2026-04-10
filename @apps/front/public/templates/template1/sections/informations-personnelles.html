@@ -1,5 +1,18 @@
 <section class="cv-section cv-section--personal">
-  <div class="cv-section__personal-name">{{item.firstName}} {{item.lastName}}</div>
+  <div class="cv-section__personal-header">
+    {{#if item.profilePicture}}
+      <img
+        class="cv-section__profile-picture"
+        src={{item.profilePicture}}
+        alt="Photo de profil"
+      />
+    {{/if}}
+
+    <div class="cv-section__personal-name">
+      {{item.firstName}} {{item.lastName}}
+    </div>
+  </div>
+
   <ul class="cv-section__personal-details">
     {{#if item.email}}
       <li class="cv-section__personal-detail">
@@ -7,12 +20,14 @@
         <span>{{item.email}}</span>
       </li>
     {{/if}}
+
     {{#if item.phone}}
       <li class="cv-section__personal-detail">
         <span class="cv-section__personal-detail-label">Téléphone</span>
         <span>{{item.phone}}</span>
       </li>
     {{/if}}
+
     {{#if item.address}}
       <li class="cv-section__personal-detail">
         <span class="cv-section__personal-detail-label">Adresse</span>

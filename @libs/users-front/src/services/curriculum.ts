@@ -4,6 +4,7 @@ import { type Store } from '@warp-drive/core';
 import type { Curriculum } from '#src/schemas/curriculums.ts';
 import type { SectionTemplates } from '#src/schemas/section-templates.ts';
 import type { Sections } from '#src/schemas/sections.ts';
+import SessionService from 'ember-simple-auth/services/session';
 
 const API_BASE = '/api/v1';
 
@@ -73,6 +74,7 @@ function isEmptyResponseError(err: unknown): boolean {
 
 export default class CurriculumService extends Service {
   @service declare store: Store;
+  @service declare session: SessionService;
 
   // ── Curriculums ───────────────────────────────────────────────────────────
   public async findOne(curriculumId: string): Promise<Curriculum> {
@@ -298,6 +300,70 @@ export default class CurriculumService extends Service {
         `deleteItem(${curriculumId}, ${sectionId}, ${itemId})`,
         err
       );
+    }
+  }
+
+  public async uploadFile(
+    curriculumId: string,
+    sectionId: string,
+    itemId: string,
+    file: File
+  ): Promise<void> {
+    try {
+      const formData = new FormData();
+      formData.append('profilePicture', file);
+
+      await this.store.request({
+        method: 'POST',
+        url: `${Endpoints.item(curriculumId, sectionId, itemId)}/pdp`,
+        body: formData,
+      });
+    } catch (err) {
+      toServiceError(
+        `uploadFile(${curriculumId}, ${sectionId}, ${itemId})`,
+        err
+      );
+    }
+  }
+
+  public async getFile(
+    curriculumId: string,
+    sectionId: string,
+    itemId: string,
+    fieldname: string
+  ): Promise<string> {
+    try {
+      const url = `${Endpoints.item(curriculumId, sectionId, itemId)}/pdp/${fieldname}`;
+
+      if (
+        !this.session.isAuthenticated ||
+        !this.session.data.authenticated.data
+      ) {
+        throw new Error('User is not authenticated');
+      }
+
+      const token = this.session.data.authenticated.data as unknown as {
+        accessToken: string;
+      };
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token.accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const blob: Blob = await response.blob();
+      return URL.createObjectURL(blob);
+    } catch (err) {
+      toServiceError(
+        `getFile(${curriculumId}, ${sectionId}, ${itemId}, ${fieldname})`,
+        err
+      );
+      throw err;
     }
   }
 }

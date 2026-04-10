@@ -23,6 +23,7 @@ export class GetPdpRoute implements Route {
         },
       },
       async (request, reply) => {
+        console.log("Received request for PDP with params:", request.params);
         const currentUser = request.user!;
         const { curriculumId, sectionId, itemId, fieldname } = request.params as {
           curriculumId: string;

@@ -87,6 +87,23 @@
 }
 
 /* ── Informations personnelles ────────────────────────── */
+.cv-section__personal-header {
+  display: flex;
+  align-items: center;
+  gap: 5mm;
+  margin-bottom: 5mm;
+}
+
+/* Photo de profil */
+.cv-section__profile-picture {
+  width: 28mm;
+  height: 28mm;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 0.6mm solid rgba(255, 255, 255, 0.4);
+  background: #fff;
+}
+
 .cv-section__personal-name {
   font-size: 18pt;
   font-weight: 700;

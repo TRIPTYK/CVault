@@ -15,6 +15,7 @@ import {
   type Route,
 } from "@libs/backend-shared";
 import { object, string } from "zod";
+import fs from "fs";
 
 export class DuplicateCurriculumRoute implements Route {
   public constructor(
@@ -86,6 +87,18 @@ export class DuplicateCurriculumRoute implements Route {
               position: item.position,
               jsonData: item.jsonData,
             });
+
+            const fields = item.jsonData as Record<string, string>;
+            if (fields["profilePicture"] !== "" && fields["profilePicture"] !== undefined) {
+              const oldFilePath = fields["profilePicture"] as string;
+              const fileExtension = oldFilePath.split(".").pop();
+              const newFileName = `${newItem.id}.${fileExtension}`;
+              const newFilePath = `uploads/${newFileName}`;
+
+              await fs.promises.copyFile(oldFilePath, newFilePath);
+
+              fields["profilePicture"] = newFilePath;
+            }
 
             newSection.items.add(newItem);
           }

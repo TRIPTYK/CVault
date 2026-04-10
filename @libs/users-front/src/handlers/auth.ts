@@ -9,7 +9,15 @@ export default class AuthHandler {
   request<T>(context: RequestContext, next: NextFn<T>) {
     const headers = new Headers(context.request.headers);
 
-    headers.append('Content-Type', 'application/json');
+    const isBinaryRequest = headers.get('X-Response-Type') === 'blob';
+
+    if (context.request.body instanceof FormData || isBinaryRequest) {
+      headers.delete('Content-Type');
+    } else {
+      headers.append('Content-Type', 'application/json');
+    }
+
+    headers.delete('X-Response-Type');
 
     const authData = this.session.data.authenticated as Record<string, unknown>;
     const accessToken = (authData?.['data'] as Record<string, unknown>)?.[

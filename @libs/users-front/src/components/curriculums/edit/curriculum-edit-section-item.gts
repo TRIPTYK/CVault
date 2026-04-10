@@ -23,10 +23,13 @@ interface CurriculumEditSectionItemSignature {
 
 const isTextarea = (field: SchemaField) => field.type === 'textarea';
 
+const isFileInput = (field: SchemaField) => field.type === 'file';
+
 class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSignature> {
   @service declare curriculum: CurriculumService;
   @tracked isOpen = false;
   @tracked firstFieldKey = this.args.fields[0]?.key || '';
+  @tracked fileName: string | null = null;
 
   @action
   toggleOpen() {
@@ -36,6 +39,19 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
   @action
   async updateField(key: string, event: FocusEvent) {
     const input = event.target as HTMLInputElement;
+
+    if (input.type === 'file' && input.files && input.files.length > 0) {
+      const file = input.files[0];
+      await this.curriculum.uploadFile(
+        this.args.curriculumId,
+        this.args.sectionId!,
+        this.args.itemId,
+        file!
+      );
+      this.args.onUpdate();
+      return;
+    }
+
     await this.curriculum.updateItem(
       this.args.curriculumId,
       this.args.sectionId!,
@@ -43,6 +59,25 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
       { [key]: input.value }
     );
     this.args.onUpdate();
+  }
+
+  @action
+  async uploadFile(key: string, event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      await this.curriculum.uploadFile(
+        this.args.curriculumId,
+        this.args.sectionId!,
+        this.args.itemId,
+        file!
+      );
+      this.args.onUpdate();
+    }
+  }
+
+  getFileName(key: string | undefined) {
+    return key?.split('/').pop() || 'Aucun fichier choisi';
   }
 
   get firstFieldValue() {
@@ -105,6 +140,27 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
                   rows="3"
                   {{on "blur" (fn this.updateField field.key)}}
                 />
+              {{else if (isFileInput field)}}
+                <div class="flex items-center gap-2">
+                  <input
+                    id={{field.key}}
+                    name={{field.key}}
+                    type="file"
+                    class="hidden"
+                    {{on "change" (fn this.uploadFile field.key)}}
+                  />
+
+                  <label
+                    for={{field.key}}
+                    class="border border-gray-300 rounded px-3 py-2 text-sm cursor-pointer hover:border-blue-400"
+                  >
+                    Choisir un fichier
+                  </label>
+
+                  <span class="text-sm text-gray-500">
+                    {{this.getFileName (get @fillInfos field.key)}}
+                  </span>
+                </div>
               {{else}}
                 <input
                   id={{field.key}}
