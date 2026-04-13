@@ -19,11 +19,6 @@ class CurriculumPreview extends Component<CurriculumPreviewSignature> {
     void this.render();
   }
 
-  updateHaveToUpdate(value: boolean) {
-    console.log('Updating haveToUpdate to:', value);
-    void this.render();
-  }
-
   get triggerUpdate() {
     if (this.args.haveToUpdate) {
       void this.render();

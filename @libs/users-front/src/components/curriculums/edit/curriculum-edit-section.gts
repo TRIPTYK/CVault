@@ -45,7 +45,7 @@ class CurriculumEditSection extends Component<CurriculumEditSectionSignature> {
   };
 
   onUpdate = () => {
-    this.haveToUpdate = !this.haveToUpdate;
+    this.haveToUpdate = true;
   };
 
   <template>

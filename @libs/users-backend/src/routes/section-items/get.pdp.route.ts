@@ -23,7 +23,6 @@ export class GetPdpRoute implements Route {
         },
       },
       async (request, reply) => {
-        console.log("Received request for PDP with params:", request.params);
         const currentUser = request.user!;
         const { curriculumId, sectionId, itemId, fieldname } = request.params as {
           curriculumId: string;
@@ -48,7 +47,6 @@ export class GetPdpRoute implements Route {
 
         const jsonData = item.jsonData as Record<string, string> | null;
         const filePath = jsonData?.[fieldname];
-        console.log("filePath", filePath);
         if (!filePath) {
           return reply.code(404).send(
             makeJsonApiError(404, "Not Found", {

@@ -30,9 +30,6 @@ async function renderSection(section: Sections): Promise<string> {
   const templateSource = await fetchTemplate(templatePath);
 
   if (!templateSource) {
-    console.log(
-      `Template not found for templateId: ${templateId} (${templatePath})`
-    );
     return '';
   }
 
@@ -68,7 +65,6 @@ export default async function renderCv(sections: Sections[]): Promise<string> {
   ]);
 
   if (!baseSource || !styles) {
-    console.log('Base template or styles not found');
     return '';
   }
 

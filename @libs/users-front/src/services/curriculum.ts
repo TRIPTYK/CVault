@@ -363,7 +363,6 @@ export default class CurriculumService extends Service {
         `getFile(${curriculumId}, ${sectionId}, ${itemId}, ${fieldname})`,
         err
       );
-      throw err;
     }
   }
 }

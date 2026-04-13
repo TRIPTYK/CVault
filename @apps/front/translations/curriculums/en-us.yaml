@@ -21,3 +21,6 @@ edit:
   renameSuccess: 'Curriculum vitae renamed successfully'
   field: 'Field'
   addItem: 'Add'
+  noFileChosen: 'No file chosen'
+  newItem: 'New item'
+  noTitle: 'Untitled'

@@ -7,6 +7,7 @@ import type { SchemaField } from '#src/schemas/section-templates.ts';
 import { fn } from '@ember/helper';
 import { service } from '@ember/service';
 import type CurriculumService from '#src/services/curriculum.ts';
+import { type IntlService } from 'ember-intl';
 
 interface CurriculumEditSectionItemSignature {
   Element: HTMLDivElement;
@@ -27,9 +28,9 @@ const isFileInput = (field: SchemaField) => field.type === 'file';
 
 class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSignature> {
   @service declare curriculum: CurriculumService;
+  @service declare intl: IntlService;
   @tracked isOpen = false;
   @tracked firstFieldKey = this.args.fields[0]?.key || '';
-  @tracked fileName: string | null = null;
 
   @action
   toggleOpen() {
@@ -63,6 +64,7 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
 
   @action
   async uploadFile(key: string, event: Event) {
+    if (key !== 'profilePicture') return;
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
@@ -76,16 +78,22 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
     }
   }
 
+  @action
   getFileName(key: string | undefined) {
-    return key?.split('/').pop() || 'Aucun fichier choisi';
+    return (
+      key?.split('/').pop() || this.intl.t('curriculums.edit.noFileChosen')
+    );
   }
 
   get firstFieldValue() {
     const firstFieldKey = this.args.fields[0]?.key;
     if (!firstFieldKey || !this.args.fillInfos) {
-      return 'Nouvel élément';
+      return this.intl.t('curriculums.edit.newItem');
     }
-    return this.args.fillInfos[firstFieldKey]?.substring(0, 25) || 'Sans titre';
+    return (
+      this.args.fillInfos[firstFieldKey]?.substring(0, 25) ||
+      this.intl.t('curriculums.edit.noTitle')
+    );
   }
 
   <template>

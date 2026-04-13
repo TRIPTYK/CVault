@@ -85,19 +85,20 @@ export class DuplicateCurriculumRoute implements Route {
               id: randomUUID(),
               section: newSection,
               position: item.position,
-              jsonData: item.jsonData,
+              jsonData: JSON.parse(JSON.stringify(item.jsonData)),
             });
 
             const fields = item.jsonData as Record<string, string>;
-            if (fields["profilePicture"] !== "" && fields["profilePicture"] !== undefined) {
-              const oldFilePath = fields["profilePicture"] as string;
+            const fieldType = "profilePicture";
+            if (fields[fieldType] !== "" && fields[fieldType] !== undefined) {
+              const oldFilePath = fields[fieldType] as string;
               const fileExtension = oldFilePath.split(".").pop();
               const newFileName = `${newItem.id}.${fileExtension}`;
-              const newFilePath = `uploads/${newFileName}`;
+              const newFilePath = `uploads/${newFileName}/${fieldType}`;
 
               await fs.promises.copyFile(oldFilePath, newFilePath);
 
-              fields["profilePicture"] = newFilePath;
+              fields[fieldType] = newFilePath;
             }
 
             newSection.items.add(newItem);

@@ -75,18 +75,17 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
 
   onDeleteItem = async (templateId: string | null, itemId: string | null) => {
     if (!templateId || !itemId) return;
-    await this.curriculum.deleteItem(
-      this.args.curriculumId,
-      this.getSectionIdByTemplate(templateId, this.sections)!,
-      itemId
-    );
+    const sectionId = this.getSectionIdByTemplate(templateId, this.sections);
+    if (!sectionId) return;
+    await this.curriculum.deleteItem(this.args.curriculumId, sectionId, itemId);
     await this.loadSections();
   };
 
   onDeleteSection = async (templateId: string | null) => {
     if (!templateId) return;
     const sectionId = this.getSectionIdByTemplate(templateId, this.sections);
-    await this.curriculum.deleteSection(this.args.curriculumId, sectionId!);
+    if (!sectionId) return;
+    await this.curriculum.deleteSection(this.args.curriculumId, sectionId);
     await this.loadSections();
   };
 
@@ -105,7 +104,7 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
     if (!moved) return;
     reordered.splice(targetIndex, 0, moved);
 
-    // await this.curriculum.updateOrderSections(this.args.curriculumId, reordered);
+    // TODO : await this.curriculum.updateOrderSections(this.args.curriculumId, reordered);
 
     this.sectionTemplates = reordered;
     this.dragSourceIndex = null;

@@ -21,3 +21,6 @@ edit:
   renameSuccess: 'Le curriculum vitae a été renommé avec succès'
   field: 'Champ'
   addItem: 'Ajouter'
+  noFileChosen: 'Aucun fichier choisi'
+  newItem: 'Nouvel élément'
+  noTitle: 'Sans titre'
