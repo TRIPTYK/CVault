@@ -24,6 +24,6 @@ export type SectionTemplates = WithLegacy<{
 
 export interface SchemaField {
   key: string;
-  type: 'text' | 'email' | 'tel' | 'date' | 'textarea';
+  type: 'text' | 'email' | 'tel' | 'date' | 'textarea' | 'file';
   label: string;
 }

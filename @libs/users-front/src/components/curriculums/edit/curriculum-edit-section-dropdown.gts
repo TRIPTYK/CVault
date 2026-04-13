@@ -3,6 +3,7 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { on } from '@ember/modifier';
 import type Owner from '@ember/owner';
+import DragIcon from '#src/assets/icons/drag.gts';
 
 interface CurriculumDropdownSectionSignature {
   Element: HTMLDivElement;
@@ -11,6 +12,10 @@ interface CurriculumDropdownSectionSignature {
     isActive: boolean;
     onActivate?: () => void;
     onDesactivate?: () => void;
+    onDragStart?: (event: DragEvent) => void;
+    onDragOver?: (event: DragEvent) => void;
+    onDrop?: (event: DragEvent) => void;
+    onDragEnd?: (event: DragEvent) => void;
   };
   Blocks: {
     default: [];
@@ -19,6 +24,7 @@ interface CurriculumDropdownSectionSignature {
 
 class CurriculumDropdownSection extends Component<CurriculumDropdownSectionSignature> {
   @tracked isOpen = false;
+  @tracked isDragOver = false;
 
   constructor(owner: Owner, args: CurriculumDropdownSectionSignature['Args']) {
     super(owner, args);
@@ -51,13 +57,53 @@ class CurriculumDropdownSection extends Component<CurriculumDropdownSectionSigna
     this.isOpen = !this.isOpen;
   }
 
+  @action
+  handleDragStart(event: DragEvent) {
+    this.args.onDragStart?.(event);
+  }
+
+  @action
+  handleDragOver(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = true;
+    this.args.onDragOver?.(event);
+  }
+
+  @action
+  handleDrop(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = false;
+    this.args.onDrop?.(event);
+  }
+
+  @action
+  handleDragEnd(event: DragEvent) {
+    this.isDragOver = false;
+    this.args.onDragEnd?.(event);
+  }
+
+  @action
+  handleDragLeave() {
+    this.isDragOver = false;
+  }
+
   <template>
     <div
-      class="flex flex-col w-full border border-gray-200 rounded-lg mb-2 overflow-hidden shadow-sm"
+      draggable="true"
+      class="flex flex-col w-full border rounded-lg mb-2 overflow-hidden shadow-sm transition-colors duration-150
+        {{if this.isDragOver 'border-blue-400 bg-blue-50' 'border-gray-200'}}"
+      {{on "dragstart" this.handleDragStart}}
+      {{on "dragover" this.handleDragOver}}
+      {{on "drop" this.handleDrop}}
+      {{on "dragend" this.handleDragEnd}}
+      {{on "dragleave" this.handleDragLeave}}
     >
       <div
         class="flex flex-row items-center justify-between w-full px-5 py-4 bg-white"
       >
+        <DragIcon
+          class="drag-handle cursor-grab active:cursor-grabbing text-gray-400"
+        />
         <span
           class="font-bold text-lg transition-colors duration-200
             {{if @isActive 'text-black' 'text-gray-400'}}"

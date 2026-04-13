@@ -10,11 +10,13 @@ import { service } from '@ember/service';
 import { fn } from '@ember/helper';
 import type Owner from '@ember/owner';
 import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 
 interface CurriculumEditViewSignature {
   Element: HTMLDivElement;
   Args: {
     curriculumId: string;
+    onUpdate: () => void;
   };
 }
 
@@ -25,6 +27,7 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
   @service declare curriculum: CurriculumService;
   @tracked sectionTemplates: SectionTemplates[] = [];
   @tracked sections: Sections[] = [];
+  dragSourceIndex: number | null = null;
 
   constructor(owner: Owner, args: CurriculumEditViewSignature['Args']) {
     super(owner, args);
@@ -72,29 +75,57 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
 
   onDeleteItem = async (templateId: string | null, itemId: string | null) => {
     if (!templateId || !itemId) return;
-    await this.curriculum.deleteItem(
-      this.args.curriculumId,
-      this.getSectionIdByTemplate(templateId, this.sections),
-      itemId
-    );
+    const sectionId = this.getSectionIdByTemplate(templateId, this.sections);
+    if (!sectionId) return;
+    await this.curriculum.deleteItem(this.args.curriculumId, sectionId, itemId);
     await this.loadSections();
   };
 
   onDeleteSection = async (templateId: string | null) => {
     if (!templateId) return;
     const sectionId = this.getSectionIdByTemplate(templateId, this.sections);
+    if (!sectionId) return;
     await this.curriculum.deleteSection(this.args.curriculumId, sectionId);
     await this.loadSections();
   };
 
+  @action
+  onDragStart(index: number) {
+    this.dragSourceIndex = index;
+  }
+
+  @action
+  onDrop(targetIndex: number) {
+    const sourceIndex = this.dragSourceIndex;
+    if (sourceIndex === null || sourceIndex === targetIndex) return;
+
+    const reordered = [...this.sectionTemplates];
+    const [moved] = reordered.splice(sourceIndex, 1);
+    if (!moved) return;
+    reordered.splice(targetIndex, 0, moved);
+
+    // TODO : await this.curriculum.updateOrderSections(this.args.curriculumId, reordered);
+
+    this.sectionTemplates = reordered;
+    this.dragSourceIndex = null;
+  }
+
+  @action
+  onDragEnd() {
+    this.dragSourceIndex = null;
+  }
+
   <template>
     <div class="flex flex-col border-2 border-gray-300 w-full p-4 gap-4">
-      {{#each this.sectionTemplates as |template|}}
+      {{#each this.sectionTemplates as |template index|}}
         <CurriculumDropdownSection
           @title={{template.label}}
           @isActive={{isSectionInTemplate this.sections template.id}}
           @onActivate={{fn this.onAddSection template.id template.label}}
           @onDesactivate={{fn this.onDeleteSection template.id}}
+          @onDragStart={{fn this.onDragStart index}}
+          @onDrop={{fn this.onDrop index}}
+          @onDragEnd={{this.onDragEnd}}
         >
           {{#each
             (this.getItemsByTemplate template.id this.sections)
@@ -110,6 +141,7 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
                 this.sections
               }}
               @itemId={{item.id}}
+              @onUpdate={{@onUpdate}}
             />
           {{/each}}
           <button

@@ -1,0 +1,15 @@
+<style>
+  .cv-preview-container {{{styles}}}
+</style>
+<div class="cv">
+  <div class="cv__sidebar">
+    {{#each leftSections}}
+      {{{this.html}}}
+    {{/each}}
+  </div>
+  <div class="cv__main">
+    {{#each rightSections}}
+      {{{this.html}}}
+    {{/each}}
+  </div>
+</div>

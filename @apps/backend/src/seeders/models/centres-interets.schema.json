@@ -1,1 +1,4 @@
-[{ "key": "interest", "label": "Centre d'intérêt", "type": "text" }]
+{
+  "title": "Centres d'intérêt",
+  "properties": [{ "key": "name", "label": "Centre d'intérêt", "type": "text" }]
+}

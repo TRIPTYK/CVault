@@ -1,7 +1,11 @@
-[
-  { "key": "firstName", "label": "Prénom", "type": "text" },
-  { "key": "lastName", "label": "Nom", "type": "text" },
-  { "key": "email", "label": "Email", "type": "email" },
-  { "key": "phone", "label": "Téléphone", "type": "tel" },
-  { "key": "address", "label": "Adresse", "type": "textarea" }
-]
+{
+  "title": "Informations personnelles",
+  "properties": [
+    { "key": "firstName", "label": "Prénom", "type": "text" },
+    { "key": "lastName", "label": "Nom", "type": "text" },
+    { "key": "profilePicture", "label": "Photo de profil", "type": "file" },
+    { "key": "email", "label": "Email", "type": "email" },
+    { "key": "phone", "label": "Téléphone", "type": "tel" },
+    { "key": "address", "label": "Adresse", "type": "textarea" }
+  ]
+}
