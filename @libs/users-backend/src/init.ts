@@ -156,7 +156,11 @@ export class CurriculumModule implements ModuleInterface<FastifyInstanceTypeForM
         const curriculumRoutes: Route<FastifyInstanceTypeForModule>[] = [
           new GetCurriculumRoute(repository),
           new ListCurriculumRoute(repository),
-          new CreateCurriculumRoute(repository),
+          new CreateCurriculumRoute(
+            repository,
+            this.context.em.getRepository(SectionsEntity),
+            this.context.em.getRepository(SectionTemplatesEntity),
+          ),
           new UpdateCurriculumRoute(repository),
           new DeleteCurriculumRoute(repository),
           new DuplicateCurriculumRoute(

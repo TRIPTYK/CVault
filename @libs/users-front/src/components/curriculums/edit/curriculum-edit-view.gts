@@ -95,7 +95,7 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
   }
 
   @action
-  onDrop(targetIndex: number) {
+  async onDrop(targetIndex: number) {
     const sourceIndex = this.dragSourceIndex;
     if (sourceIndex === null || sourceIndex === targetIndex) return;
 
@@ -104,10 +104,35 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
     if (!moved) return;
     reordered.splice(targetIndex, 0, moved);
 
-    // TODO : await this.curriculum.updateOrderSections(this.args.curriculumId, reordered);
+    const newOrder = [];
+    for (let i = 0; i < reordered.length; i++) {
+      newOrder.push(
+        this.getSectionIdByTemplate(reordered[i]!.id, this.sections)
+      );
+    }
+    if (newOrder.some((id) => typeof id !== 'string')) return;
+    await this.curriculum.updateOrderSections(
+      this.args.curriculumId,
+      newOrder as string[]
+    );
 
     this.sectionTemplates = reordered;
     this.dragSourceIndex = null;
+
+    await this.loadSections();
+    this.args.onUpdate();
+  }
+
+  get sortedSectionTemplates() {
+    return this.sectionTemplates.slice().sort((a, b) => {
+      const sectionA = this.sections.find((s) => s.templateId === a.id);
+      const sectionB = this.sections.find((s) => s.templateId === b.id);
+
+      const positionA = sectionA?.position ?? Infinity;
+      const positionB = sectionB?.position ?? Infinity;
+
+      return positionA - positionB;
+    });
   }
 
   @action
@@ -115,9 +140,13 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
     this.dragSourceIndex = null;
   }
 
+  getTemplateLabel(templateId: string | null) {
+    return this.sectionTemplates.find((t) => t.id === templateId)?.label || '';
+  }
+
   <template>
     <div class="flex flex-col border-2 border-gray-300 w-full p-4 gap-4">
-      {{#each this.sectionTemplates as |template index|}}
+      {{#each this.sortedSectionTemplates as |template index|}}
         <CurriculumDropdownSection
           @title={{template.label}}
           @isActive={{isSectionInTemplate this.sections template.id}}

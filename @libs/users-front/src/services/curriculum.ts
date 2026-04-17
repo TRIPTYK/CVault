@@ -222,6 +222,9 @@ export default class CurriculumService extends Service {
         body: JSON.stringify({ order }),
       });
     } catch (err) {
+      if (isEmptyResponseError(err)) {
+        return;
+      }
       toServiceError(`updateOrderSections(${curriculumId})`, err);
     }
   }
