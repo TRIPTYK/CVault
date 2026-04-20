@@ -28,6 +28,8 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
   @tracked sectionTemplates: SectionTemplates[] = [];
   @tracked sections: Sections[] = [];
   dragSourceIndex: number | null = null;
+  dragSourceItemIndex: number | null = null;
+  dragSourceTemplateId: string | null = null;
 
   constructor(owner: Owner, args: CurriculumEditViewSignature['Args']) {
     super(owner, args);
@@ -119,8 +121,55 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
     this.sectionTemplates = reordered;
     this.dragSourceIndex = null;
 
+    this.args.onUpdate();
+  }
+
+  @action
+  async onItemDrop(templateId: string | null, targetIndex: number) {
+    if (!templateId) return;
+    const sourceIndex = this.dragSourceItemIndex;
+    if (
+      sourceIndex === null ||
+      sourceIndex === targetIndex ||
+      this.dragSourceTemplateId !== templateId
+    )
+      return;
+
+    const sectionId = this.getSectionIdByTemplate(templateId, this.sections);
+    if (!sectionId) return;
+
+    const items = this.getItemsByTemplate(templateId, this.sections);
+    const reordered = [...items];
+    const [moved] = reordered.splice(sourceIndex, 1);
+    if (!moved) return;
+    reordered.splice(targetIndex, 0, moved);
+
+    const newOrder = reordered.map((i) => i.id);
+
+    await this.curriculum.updateOrderItems(
+      this.args.curriculumId,
+      sectionId,
+      newOrder
+    );
+
+    this.dragSourceItemIndex = null;
+    this.dragSourceTemplateId = null;
+
     await this.loadSections();
     this.args.onUpdate();
+  }
+
+  @action
+  onItemDragEnd() {
+    this.dragSourceItemIndex = null;
+    this.dragSourceTemplateId = null;
+  }
+
+  @action
+  onItemDragStart(templateId: string | null, itemIndex: number) {
+    if (!templateId) return;
+    this.dragSourceItemIndex = itemIndex;
+    this.dragSourceTemplateId = templateId;
   }
 
   get sortedSectionTemplates() {
@@ -158,7 +207,7 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
         >
           {{#each
             (this.getItemsByTemplate template.id this.sections)
-            as |item|
+            as |item indexItem|
           }}
             <CurriculumEditSectionItem
               @fields={{template.jsonSchema}}
@@ -171,6 +220,9 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
               }}
               @itemId={{item.id}}
               @onUpdate={{@onUpdate}}
+              @onDragStart={{fn this.onItemDragStart template.id indexItem}}
+              @onDrop={{fn this.onItemDrop template.id indexItem}}
+              @onDragEnd={{this.onItemDragEnd}}
             />
           {{/each}}
           <button

@@ -19,11 +19,13 @@ interface CurriculumEditSectionItemSignature {
     itemId: string;
     onDelete: () => void;
     onUpdate: () => void;
+    onDragStart?: (event: DragEvent) => void;
+    onDrop?: (event: DragEvent) => void;
+    onDragEnd?: (event: DragEvent) => void;
   };
 }
 
 const isTextarea = (field: SchemaField) => field.type === 'textarea';
-
 const isFileInput = (field: SchemaField) => field.type === 'file';
 
 class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSignature> {
@@ -31,6 +33,7 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
   @service declare intl: IntlService;
   @tracked isOpen = false;
   @tracked firstFieldKey = this.args.fields[0]?.key || '';
+  @tracked isDragOver = false;
 
   @action
   toggleOpen() {
@@ -96,9 +99,43 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
     );
   }
 
+  @action handleDragStart(event: DragEvent) {
+    event.stopPropagation();
+    this.args.onDragStart?.(event);
+  }
+
+  @action handleDragOver(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragOver = true;
+  }
+
+  @action handleDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragOver = false;
+    this.args.onDrop?.(event);
+  }
+
+  @action handleDragEnd(event: DragEvent) {
+    this.isDragOver = false;
+    this.args.onDragEnd?.(event);
+  }
+
+  @action handleDragLeave() {
+    this.isDragOver = false;
+  }
+
   <template>
     <div
-      class="flex flex-col w-full border border-gray-300 rounded-lg bg-white shadow-sm overflow-hidden"
+      draggable="true"
+      class="flex flex-col w-full border rounded-lg bg-white shadow-sm overflow-hidden transition-colors duration-150
+        {{if this.isDragOver 'border-blue-400 bg-blue-50' 'border-gray-300'}}"
+      {{on "dragstart" this.handleDragStart}}
+      {{on "dragover" this.handleDragOver}}
+      {{on "drop" this.handleDrop}}
+      {{on "dragend" this.handleDragEnd}}
+      {{on "dragleave" this.handleDragLeave}}
     >
       <div
         class="flex flex-row items-center justify-between px-4 py-2 bg-white-50 border-b border-gray-200"

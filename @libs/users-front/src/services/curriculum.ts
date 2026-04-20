@@ -11,6 +11,7 @@ const API_BASE = '/api/v1';
 const Endpoints = {
   curriculums: `${API_BASE}/curriculums`,
   curriculum: (id: string) => `${API_BASE}/curriculums/${id}`,
+  curriculumExport: (id: string) => `${API_BASE}/curriculums/${id}/export`,
   curriculumDuplicate: (id: string) =>
     `${API_BASE}/curriculums/${id}/duplicate`,
   sectionTemplates: `${API_BASE}/section-templates`,
@@ -24,6 +25,8 @@ const Endpoints = {
     `${API_BASE}/curriculums/${curriculumId}/sections/${sectionId}/items`,
   item: (curriculumId: string, sectionId: string, itemId: string) =>
     `${API_BASE}/curriculums/${curriculumId}/sections/${sectionId}/items/${itemId}`,
+  itemsReorder: (curriculumId: string, sectionId: string) =>
+    `${API_BASE}/curriculums/${curriculumId}/sections/${sectionId}/items/reorder`,
 } as const;
 
 export class ServiceError extends Error {
@@ -159,6 +162,37 @@ export default class CurriculumService extends Service {
       }
 
       toServiceError(`delete(${curriculumId})`, err);
+    }
+  }
+
+  public async export(curriculumId: string): Promise<Blob> {
+    try {
+      const url = Endpoints.curriculumExport(curriculumId);
+
+      if (
+        !this.session.isAuthenticated ||
+        !this.session.data.authenticated.data
+      ) {
+        throw new Error('User is not authenticated');
+      }
+
+      const token = this.session.data.authenticated.data as unknown as {
+        accessToken: string;
+      };
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token.accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      return await response.blob();
+    } catch (err) {
+      toServiceError(`export(${curriculumId})`, err);
     }
   }
 
@@ -303,6 +337,25 @@ export default class CurriculumService extends Service {
         `deleteItem(${curriculumId}, ${sectionId}, ${itemId})`,
         err
       );
+    }
+  }
+
+  public async updateOrderItems(
+    curriculumId: string,
+    sectionId: string,
+    order: string[]
+  ): Promise<void> {
+    try {
+      await this.store.request({
+        method: 'PATCH',
+        url: Endpoints.itemsReorder(curriculumId, sectionId),
+        body: JSON.stringify({ data: { attributes: { order } } }),
+      });
+    } catch (err) {
+      if (isEmptyResponseError(err)) {
+        return;
+      }
+      toServiceError(`updateOrderItems(${curriculumId}, ${sectionId})`, err);
     }
   }
 

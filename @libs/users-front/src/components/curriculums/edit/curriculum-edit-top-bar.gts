@@ -28,8 +28,20 @@ class CurriculumTopBar extends Component<CurriculumTopBarArgs> {
   }
 
   @action
-  handleDownload() {
-    // TODO: implement curriculum download
+  async handleDownload() {
+    try {
+      const blob = await this.curriculum.export(this.args.curriculum?.id || '');
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${this.args.curriculum?.title || 'curriculum'}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Export failed', err);
+    }
   }
 
   @action
