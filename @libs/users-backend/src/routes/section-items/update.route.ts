@@ -62,6 +62,9 @@ export class UpdateSectionItemRoute implements Route {
         }
 
         if (attributes) {
+          if ("profilePicture" in attributes) {
+            delete attributes["profilePicture"];
+          }
           const templateSchema = parseTemplateSchema(item.section.template.jsonSchema);
           const allowedKeys = new Set(templateSchema.map((f) => f.key));
           const unknownKeys = Object.keys(attributes).filter((key) => !allowedKeys.has(key));

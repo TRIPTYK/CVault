@@ -1,0 +1,13 @@
+<section class="cv-section cv-section--langues">
+  <h2 class="cv-section__title">{{title}}</h2>
+  <ul class="cv-section__langues-list">
+    {{#each items}}
+      <li class="cv-section__langue">
+        <span class="cv-section__langue-name">{{this.language}}</span>
+        {{#if this.level}}
+          <span class="cv-section__langue-niveau">{{this.level}}</span>
+        {{/if}}
+      </li>
+    {{/each}}
+  </ul>
+</section>

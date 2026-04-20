@@ -38,6 +38,7 @@
       "lefthook",
       "msw",
       "protobufjs",
+      "puppeteer",
       "sqlite3",
       "ssh2"
     ]

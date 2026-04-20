@@ -192,6 +192,7 @@ export class TestModule {
       template: data.templateId,
       title: data.title,
       position: 0,
+      isActive: true,
     });
   }
 

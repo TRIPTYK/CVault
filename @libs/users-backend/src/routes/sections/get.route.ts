@@ -1,6 +1,6 @@
 import type { FastifyInstanceTypeForModule } from "#src/init.js";
 import type { EntityRepository } from "@mikro-orm/core";
-import { object, string, number, array, record, unknown } from "zod";
+import { object, string, number, array, record, unknown, boolean } from "zod";
 import type { SectionEntityType } from "#src/entities/sections.entity.js";
 import { jsonApiErrorDocumentSchema, makeJsonApiError, type Route } from "@libs/backend-shared";
 import type { CurriculumEntityType } from "#src/entities/curriculum.entity.ts";
@@ -32,6 +32,7 @@ export class GetSectionsRoute implements Route {
                     templateId: string(),
                     title: string(),
                     position: number(),
+                    isActive: boolean(),
                     items: array(
                       object({
                         id: string(),
@@ -85,6 +86,7 @@ export class GetSectionsRoute implements Route {
             templateId: section.template.id,
             title: section.title,
             position: section.position,
+            isActive: section.isActive,
             items: section.items.map((item) => ({
               id: item.id,
               position: item.position,

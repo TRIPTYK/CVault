@@ -38,6 +38,8 @@ import { CreateCurriculumRoute } from "./routes/curriculums/create.route.ts";
 import { UpdateCurriculumRoute } from "./routes/curriculums/update.route.ts";
 import { DeleteCurriculumRoute } from "./routes/curriculums/delete.route.ts";
 import { DuplicateCurriculumRoute } from "./routes/curriculums/duplicate.route.ts";
+import { ExportCurriculumRoute } from "./routes/curriculums/export.route.ts";
+import { ListModelsCurriculumRoute } from "./routes/curriculums/list.models.route.ts";
 
 import { GetSectionsRoute } from "./routes/sections/get.route.ts";
 import { CreateSectionsRoute } from "./routes/sections/create.route.ts";
@@ -156,7 +158,11 @@ export class CurriculumModule implements ModuleInterface<FastifyInstanceTypeForM
         const curriculumRoutes: Route<FastifyInstanceTypeForModule>[] = [
           new GetCurriculumRoute(repository),
           new ListCurriculumRoute(repository),
-          new CreateCurriculumRoute(repository),
+          new CreateCurriculumRoute(
+            repository,
+            this.context.em.getRepository(SectionsEntity),
+            this.context.em.getRepository(SectionTemplatesEntity),
+          ),
           new UpdateCurriculumRoute(repository),
           new DeleteCurriculumRoute(repository),
           new DuplicateCurriculumRoute(
@@ -164,6 +170,8 @@ export class CurriculumModule implements ModuleInterface<FastifyInstanceTypeForM
             this.context.em.getRepository(SectionsEntity),
             this.context.em.getRepository(SectionItemsEntity),
           ),
+          new ExportCurriculumRoute(repository),
+          new ListModelsCurriculumRoute(),
         ];
 
         f.setErrorHandler((error, request, reply) => {

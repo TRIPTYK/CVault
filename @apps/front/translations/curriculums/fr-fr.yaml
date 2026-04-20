@@ -24,3 +24,5 @@ edit:
   noFileChosen: 'Aucun fichier choisi'
   newItem: 'Nouvel élément'
   noTitle: 'Sans titre'
+  selectTemplate: 'Sélectionnez un modèle'
+  chooseFile: 'Choisir un fichier'

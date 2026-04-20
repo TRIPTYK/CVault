@@ -1,0 +1,19 @@
+<section class="cv-section cv-section--formations">
+  <h2 class="cv-section__title">{{title}}</h2>
+  <ul class="cv-section__list">
+    {{#each items}}
+    <li class="cv-section__entry">
+      <div class="cv-section__entry-header">
+        <span class="cv-section__entry-degree">{{this.degree}}</span>
+        <span class="cv-section__entry-dates">{{this.startDate}} – {{this.endDate}}</span>
+      </div>
+      <div class="cv-section__entry-school">
+        {{this.school}}{{#if this.field}} — {{this.field}}{{/if}}
+      </div>
+      {{#if this.description}}
+      <p class="cv-section__entry-desc">{{this.description}}</p>
+      {{/if}}
+    </li>
+    {{/each}}
+  </ul>
+</section>

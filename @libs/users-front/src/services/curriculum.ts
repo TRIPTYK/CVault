@@ -5,14 +5,18 @@ import type { Curriculum } from '#src/schemas/curriculums.ts';
 import type { SectionTemplates } from '#src/schemas/section-templates.ts';
 import type { Sections } from '#src/schemas/sections.ts';
 import SessionService from 'ember-simple-auth/services/session';
+import { tracked } from '@glimmer/tracking';
 
 const API_BASE = '/api/v1';
 
 const Endpoints = {
   curriculums: `${API_BASE}/curriculums`,
   curriculum: (id: string) => `${API_BASE}/curriculums/${id}`,
+  curriculumExport: (id: string, modelId: string) =>
+    `${API_BASE}/curriculums/${id}/export/${modelId}`,
   curriculumDuplicate: (id: string) =>
     `${API_BASE}/curriculums/${id}/duplicate`,
+  curriculumModels: () => `${API_BASE}/curriculums/models`,
   sectionTemplates: `${API_BASE}/section-templates`,
   sections: (curriculumId: string) =>
     `${API_BASE}/curriculums/${curriculumId}/sections`,
@@ -24,6 +28,8 @@ const Endpoints = {
     `${API_BASE}/curriculums/${curriculumId}/sections/${sectionId}/items`,
   item: (curriculumId: string, sectionId: string, itemId: string) =>
     `${API_BASE}/curriculums/${curriculumId}/sections/${sectionId}/items/${itemId}`,
+  itemsReorder: (curriculumId: string, sectionId: string) =>
+    `${API_BASE}/curriculums/${curriculumId}/sections/${sectionId}/items/reorder`,
 } as const;
 
 export class ServiceError extends Error {
@@ -73,8 +79,19 @@ function isEmptyResponseError(err: unknown): boolean {
 }
 
 export default class CurriculumService extends Service {
+  @tracked currentModelService: string | null = null;
   @service declare store: Store;
   @service declare session: SessionService;
+
+  // ── Models ────────────────────────────────────────────────────────────────
+
+  public setModel(modelName: string): void {
+    this.currentModelService = modelName;
+  }
+
+  public getModel(): string | null {
+    return this.currentModelService;
+  }
 
   // ── Curriculums ───────────────────────────────────────────────────────────
   public async findOne(curriculumId: string): Promise<Curriculum> {
@@ -162,6 +179,71 @@ export default class CurriculumService extends Service {
     }
   }
 
+  public async export(curriculumId: string, modelId: string): Promise<Blob> {
+    try {
+      if (!modelId || !curriculumId) {
+        throw new Error('Model ID and Curriculum ID are required for export');
+      }
+
+      const url = Endpoints.curriculumExport(curriculumId, modelId);
+
+      if (
+        !this.session.isAuthenticated ||
+        !this.session.data.authenticated.data
+      ) {
+        throw new Error('User is not authenticated');
+      }
+
+      const token = this.session.data.authenticated.data as unknown as {
+        accessToken: string;
+      };
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token.accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      return await response.blob();
+    } catch (err) {
+      toServiceError(`export(${curriculumId})`, err);
+    }
+  }
+
+  public async listModels(): Promise<string[]> {
+    try {
+      if (
+        !this.session.isAuthenticated ||
+        !this.session.data.authenticated.data
+      ) {
+        throw new Error('User is not authenticated');
+      }
+
+      const token = this.session.data.authenticated.data as unknown as {
+        accessToken: string;
+      };
+      const response = await fetch(Endpoints.curriculumModels(), {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token.accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const json = (await response.json()) as { data: string[] };
+      return json.data ?? [];
+    } catch (err) {
+      toServiceError('listModels()', err);
+    }
+  }
+
   // ── Section templates ─────────────────────────────────────────────────────
 
   public async findAllTemplates(): Promise<SectionTemplates[]> {
@@ -222,6 +304,9 @@ export default class CurriculumService extends Service {
         body: JSON.stringify({ order }),
       });
     } catch (err) {
+      if (isEmptyResponseError(err)) {
+        return;
+      }
       toServiceError(`updateOrderSections(${curriculumId})`, err);
     }
   }
@@ -241,6 +326,22 @@ export default class CurriculumService extends Service {
         return;
       }
       toServiceError(`deleteSection(${curriculumId}, ${sectionId})`, err);
+    }
+  }
+
+  public async updateSection(
+    curriculumId: string,
+    sectionId: string,
+    isActive: boolean
+  ): Promise<void> {
+    try {
+      await this.store.request({
+        method: 'PATCH',
+        url: Endpoints.section(curriculumId, sectionId),
+        body: JSON.stringify({ isActive: isActive }),
+      });
+    } catch (err) {
+      toServiceError(`updateSection(${curriculumId}, ${sectionId})`, err);
     }
   }
 
@@ -300,6 +401,25 @@ export default class CurriculumService extends Service {
         `deleteItem(${curriculumId}, ${sectionId}, ${itemId})`,
         err
       );
+    }
+  }
+
+  public async updateOrderItems(
+    curriculumId: string,
+    sectionId: string,
+    order: string[]
+  ): Promise<void> {
+    try {
+      await this.store.request({
+        method: 'PATCH',
+        url: Endpoints.itemsReorder(curriculumId, sectionId),
+        body: JSON.stringify({ data: { attributes: { order } } }),
+      });
+    } catch (err) {
+      if (isEmptyResponseError(err)) {
+        return;
+      }
+      toServiceError(`updateOrderItems(${curriculumId}, ${sectionId})`, err);
     }
   }
 
