@@ -11,6 +11,7 @@ const SectionsSchema = withDefaults({
     { name: 'templateId', kind: 'attribute' },
     { name: 'title', kind: 'attribute' },
     { name: 'position', kind: 'attribute' },
+    { name: 'isActive', kind: 'attribute' },
     { name: 'items', kind: 'attribute' },
   ],
 });
@@ -22,6 +23,7 @@ export type Sections = WithLegacy<{
   templateId: string;
   title: string;
   position: number;
+  isActive: boolean;
   items: Items[];
   [Type]: 'sections';
 }>;

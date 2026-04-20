@@ -281,6 +281,26 @@ export default class CurriculumService extends Service {
     }
   }
 
+  public async updateSection(
+    curriculumId: string,
+    sectionId: string,
+    isActive: boolean
+  ): Promise<void> {
+    console.log('Updating section', { curriculumId, sectionId, isActive });
+    try {
+      await this.store.request({
+        method: 'PATCH',
+        url: Endpoints.section(curriculumId, sectionId),
+        body: JSON.stringify({ isActive: isActive }),
+      });
+    } catch (err) {
+      toServiceError(
+        `updateSection(${curriculumId}, ${sectionId})`,
+        err
+      );
+    }
+  }
+
   // ── Items ─────────────────────────────────────────────────────────────────
 
   public async createItem(

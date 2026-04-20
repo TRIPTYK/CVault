@@ -20,8 +20,8 @@ interface CurriculumEditViewSignature {
   };
 }
 
-const isSectionInTemplate = (sections: Sections[], templateId: string | null) =>
-  sections.some((s) => s.templateId === templateId);
+const isSectionActive = (sections: Sections[], templateId: string | null) =>
+  sections.some((s) => s.templateId === templateId && s.isActive);
 
 class CurriculumEditView extends Component<CurriculumEditViewSignature> {
   @service declare curriculum: CurriculumService;
@@ -47,14 +47,16 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
     );
   }
 
-  onAddSection = async (templateId: string | null, title: string) => {
+  onAddSection = async (templateId: string | null) => {
     if (!templateId) return;
-    await this.curriculum.createSection(
+    const sectionId = this.getSectionIdByTemplate(templateId, this.sections);
+    if (!sectionId) return;
+    await this.curriculum.updateSection(
       this.args.curriculumId,
-      templateId,
-      title
+      sectionId,
+      true
     );
-    await this.loadSections();
+    this.args.onUpdate();
   };
 
   onAddItem = async (templateId: string | null) => {
@@ -87,8 +89,12 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
     if (!templateId) return;
     const sectionId = this.getSectionIdByTemplate(templateId, this.sections);
     if (!sectionId) return;
-    await this.curriculum.deleteSection(this.args.curriculumId, sectionId);
-    await this.loadSections();
+    await this.curriculum.updateSection(
+      this.args.curriculumId,
+      sectionId,
+      false
+    );
+    this.args.onUpdate();
   };
 
   @action
@@ -198,8 +204,8 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
       {{#each this.sortedSectionTemplates as |template index|}}
         <CurriculumDropdownSection
           @title={{template.label}}
-          @isActive={{isSectionInTemplate this.sections template.id}}
-          @onActivate={{fn this.onAddSection template.id template.label}}
+          @isActive={{isSectionActive this.sections template.id}}
+          @onActivate={{fn this.onAddSection template.id}}
           @onDesactivate={{fn this.onDeleteSection template.id}}
           @onDragStart={{fn this.onDragStart index}}
           @onDrop={{fn this.onDrop index}}

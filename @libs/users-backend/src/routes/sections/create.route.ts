@@ -77,6 +77,7 @@ export class CreateSectionsRoute implements Route {
           template: template,
           title,
           position: await this.sectionRepository.count({ curriculum: curriculumId }),
+          isActive: false,
         });
 
         await this.sectionRepository.getEntityManager().persist(section).flush();

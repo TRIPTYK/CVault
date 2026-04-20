@@ -49,6 +49,7 @@ export default async function renderCv(sections: Sections[]): Promise<string> {
   const rightSections: { html: string }[] = [];
 
   for (const section of sorted) {
+    if (!section.isActive) continue;
     const html = await renderSection(section);
     if (!html) continue;
 

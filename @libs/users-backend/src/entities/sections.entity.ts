@@ -12,6 +12,7 @@ export const SectionsEntity = defineEntity({
     title: p.string(),
     position: p.integer(),
     items: () => p.oneToMany(SectionItemsEntity).mappedBy("section").cascade(Cascade.ALL),
+    isActive: p.boolean(),
   },
 });
 

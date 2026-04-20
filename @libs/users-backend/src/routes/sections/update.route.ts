@@ -1,6 +1,6 @@
 import type { FastifyInstanceTypeForModule } from "#src/init.js";
 import type { EntityRepository } from "@mikro-orm/core";
-import { object, string } from "zod";
+import { boolean, object, string } from "zod";
 import type { SectionEntityType } from "#src/entities/sections.entity.ts";
 import { jsonApiErrorDocumentSchema, makeJsonApiError, type Route } from "@libs/backend-shared";
 import {
@@ -17,7 +17,7 @@ export class UpdateSectionsRoute implements Route {
       {
         schema: {
           params: object({ curriculumId: string(), sectionId: string() }),
-          body: object({ title: string() }),
+          body: object({ isActive: boolean() }),
           response: {
             200: object({ data: SerializedSectionsSchema }),
             404: jsonApiErrorDocumentSchema,
@@ -30,7 +30,7 @@ export class UpdateSectionsRoute implements Route {
           curriculumId: string;
           sectionId: string;
         };
-        const { title } = request.body as { title: string };
+        const { isActive } = request.body as { isActive: boolean };
 
         const section = await this.sectionRepository.findOne({
           id: sectionId,
@@ -46,7 +46,7 @@ export class UpdateSectionsRoute implements Route {
           );
         }
 
-        section.title = title;
+        section.isActive = isActive;
 
         await this.sectionRepository.getEntityManager().flush();
 

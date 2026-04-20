@@ -47,6 +47,7 @@ export class CreateCurriculumRoute implements Route {
             template,
             title: template.label,
             position: template.position,
+            isActive: false,
           });
 
           curriculum.sections.add(section);

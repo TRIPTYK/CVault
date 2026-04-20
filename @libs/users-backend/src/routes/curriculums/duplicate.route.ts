@@ -78,6 +78,7 @@ export class DuplicateCurriculumRoute implements Route {
             template: section.template,
             title: section.title,
             position: section.position,
+            isActive: section.isActive,
           });
 
           for (const item of section.items) {
