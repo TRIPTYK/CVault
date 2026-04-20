@@ -5,15 +5,18 @@ import type { Curriculum } from '#src/schemas/curriculums.ts';
 import type { SectionTemplates } from '#src/schemas/section-templates.ts';
 import type { Sections } from '#src/schemas/sections.ts';
 import SessionService from 'ember-simple-auth/services/session';
+import { tracked } from '@glimmer/tracking';
 
 const API_BASE = '/api/v1';
 
 const Endpoints = {
   curriculums: `${API_BASE}/curriculums`,
   curriculum: (id: string) => `${API_BASE}/curriculums/${id}`,
-  curriculumExport: (id: string) => `${API_BASE}/curriculums/${id}/export`,
+  curriculumExport: (id: string, modelId: string) =>
+    `${API_BASE}/curriculums/${id}/export/${modelId}`,
   curriculumDuplicate: (id: string) =>
     `${API_BASE}/curriculums/${id}/duplicate`,
+  curriculumModels: () => `${API_BASE}/curriculums/models`,
   sectionTemplates: `${API_BASE}/section-templates`,
   sections: (curriculumId: string) =>
     `${API_BASE}/curriculums/${curriculumId}/sections`,
@@ -76,8 +79,19 @@ function isEmptyResponseError(err: unknown): boolean {
 }
 
 export default class CurriculumService extends Service {
+  @tracked selectedModel: string | null = null;
   @service declare store: Store;
   @service declare session: SessionService;
+
+  // ── Models ────────────────────────────────────────────────────────────────
+
+  public saveModel(modelName: string): void {
+    this.selectedModel = modelName;
+  }
+
+  public getModel(): string | null {
+    return this.selectedModel;
+  }
 
   // ── Curriculums ───────────────────────────────────────────────────────────
   public async findOne(curriculumId: string): Promise<Curriculum> {
@@ -165,9 +179,9 @@ export default class CurriculumService extends Service {
     }
   }
 
-  public async export(curriculumId: string): Promise<Blob> {
+  public async export(curriculumId: string, modelId: string): Promise<Blob> {
     try {
-      const url = Endpoints.curriculumExport(curriculumId);
+      const url = Endpoints.curriculumExport(curriculumId, modelId);
 
       if (
         !this.session.isAuthenticated ||
@@ -193,6 +207,29 @@ export default class CurriculumService extends Service {
       return await response.blob();
     } catch (err) {
       toServiceError(`export(${curriculumId})`, err);
+    }
+  }
+
+  public async listModels(): Promise<string[]> {
+    try {
+      const token = this.session.data.authenticated.data as unknown as {
+        accessToken: string;
+      };
+      const response = await fetch(Endpoints.curriculumModels(), {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token.accessToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const json = (await response.json()) as { data: string[] };
+      return json.data ?? [];
+    } catch (err) {
+      toServiceError('listModels()', err);
     }
   }
 

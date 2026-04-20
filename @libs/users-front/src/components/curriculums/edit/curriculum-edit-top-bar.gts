@@ -30,7 +30,10 @@ class CurriculumTopBar extends Component<CurriculumTopBarArgs> {
   @action
   async handleDownload() {
     try {
-      const blob = await this.curriculum.export(this.args.curriculum?.id || '');
+      const blob = await this.curriculum.export(
+        this.args.curriculum?.id || '',
+        this.curriculum.getModel() || ''
+      );
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;

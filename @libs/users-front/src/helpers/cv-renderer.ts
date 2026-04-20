@@ -1,7 +1,7 @@
 import * as Handlebars from 'handlebars';
 import type { Sections } from '#src/schemas/sections.ts';
 
-const TEMPLATE_BASE_URL = '/templates/template1';
+const TEMPLATE_BASE_URL = `/templates/`;
 const SIDEBAR_TEMPLATE_IDS = new Set([
   'e2e-section-template-informations-personnelles',
   'e2e-section-template-compétences',
@@ -23,10 +23,13 @@ function templateIdToFilename(templateId: string): string {
   return templateId.replace(/^e2e-section-template-/, '');
 }
 
-async function renderSection(section: Sections): Promise<string> {
+async function renderSection(
+  section: Sections,
+  templateNumber: string
+): Promise<string> {
   const { templateId, title, items } = section;
   const filename = templateIdToFilename(templateId);
-  const templatePath = `${TEMPLATE_BASE_URL}/sections/${filename}.html`;
+  const templatePath = `${TEMPLATE_BASE_URL}${templateNumber}/sections/${filename}.html`;
   const templateSource = await fetchTemplate(templatePath);
 
   if (!templateSource) {
@@ -42,7 +45,10 @@ async function renderSection(section: Sections): Promise<string> {
   return compiledTemplate(context);
 }
 
-export default async function renderCv(sections: Sections[]): Promise<string> {
+export default async function renderCv(
+  sections: Sections[],
+  templateNumber: string
+): Promise<string> {
   const sorted = [...sections].sort((a, b) => a.position - b.position);
 
   const leftSections: { html: string }[] = [];
@@ -50,7 +56,7 @@ export default async function renderCv(sections: Sections[]): Promise<string> {
 
   for (const section of sorted) {
     if (!section.isActive) continue;
-    const html = await renderSection(section);
+    const html = await renderSection(section, templateNumber);
     if (!html) continue;
 
     if (SIDEBAR_TEMPLATE_IDS.has(section.templateId)) {
@@ -61,8 +67,8 @@ export default async function renderCv(sections: Sections[]): Promise<string> {
   }
 
   const [baseSource, styles] = await Promise.all([
-    fetchTemplate(`${TEMPLATE_BASE_URL}/base.html`),
-    fetchTemplate(`${TEMPLATE_BASE_URL}/style.css`),
+    fetchTemplate(`${TEMPLATE_BASE_URL}${templateNumber}/base.html`),
+    fetchTemplate(`${TEMPLATE_BASE_URL}${templateNumber}/style.css`),
   ]);
 
   if (!baseSource || !styles) {

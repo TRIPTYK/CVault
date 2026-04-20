@@ -24,3 +24,5 @@ edit:
   noFileChosen: 'No file chosen'
   newItem: 'New item'
   noTitle: 'Untitled'
+  selectTemplate: 'Select a template'
+  chooseFile: 'Choose a file'

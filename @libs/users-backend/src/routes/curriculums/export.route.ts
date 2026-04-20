@@ -12,11 +12,12 @@ export class ExportCurriculumRoute implements Route {
 
   public routeDefinition(f: FastifyInstanceTypeForModule) {
     return f.get(
-      "/:id/export",
+      "/:id/export/:modelId",
       {
         schema: {
           params: object({
             id: string(),
+            modelId: string(),
           }),
           response: {
             200: z.instanceof(Buffer),
@@ -25,7 +26,7 @@ export class ExportCurriculumRoute implements Route {
         },
       },
       async (request, reply) => {
-        const { id } = request.params as { id: string };
+        const { id, modelId } = request.params as { id: string; modelId: string };
 
         const curriculum = await this.curriculumRepository.findOne(
           { id },
@@ -41,7 +42,7 @@ export class ExportCurriculumRoute implements Route {
           );
         }
 
-        const html = await renderCv(curriculum.sections.getItems());
+        const html = await renderCv(curriculum.sections.getItems(), modelId);
         const pdf = await pdfService.renderHtmlToPdf(html);
 
         return reply

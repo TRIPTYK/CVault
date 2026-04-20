@@ -1,0 +1,16 @@
+<section class="cv-section cv-section--competences">
+  <h2 class="cv-section__title">{{title}}</h2>
+  <ul class="cv-section__competences-list">
+    {{#each items}}
+    <li class="cv-section__competence">
+      <span class="cv-section__competence-name">{{this.competence}}</span>
+      {{#if this.level}}
+      <div class="cv-section__competence-bar-wrap">
+        <div class="cv-section__competence-bar cv-section__competence-bar--{{this.level}}"></div>
+      </div>
+      <span class="cv-section__competence-level">{{this.level}}</span>
+      {{/if}}
+    </li>
+    {{/each}}
+  </ul>
+</section>

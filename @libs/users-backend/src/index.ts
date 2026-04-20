@@ -42,6 +42,7 @@ export * from "#src/routes/curriculums/update.route.js";
 export * from "#src/routes/curriculums/delete.route.js";
 export * from "#src/routes/curriculums/duplicate.route.js";
 export * from "#src/routes/curriculums/export.route.js";
+export * from "#src/routes/curriculums/list.models.route.js";
 
 export * from "#src/routes/section-templates/list.route.js";
 

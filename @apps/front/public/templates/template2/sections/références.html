@@ -1,0 +1,23 @@
+<section class="cv-section cv-section--references">
+  <h2 class="cv-section__title">{{title}}</h2>
+  <ul class="cv-section__list">
+    {{#each items}}
+      <li class="cv-section__entry cv-section__entry--reference">
+        <div class="cv-section__entry-header">
+          <span class="cv-section__entry-degree">{{this.name}}</span>
+        </div>
+        {{#if this.entreprise}}
+          <div class="cv-section__entry-school">{{this.entreprise}}{{#if this.city}} — {{this.city}}{{/if}}</div>
+        {{/if}}
+        <ul class="cv-section__ref-contacts">
+          {{#if this.phone}}
+            <li><span class="cv-section__personal-detail-label">Tél.</span> {{this.phone}}</li>
+          {{/if}}
+          {{#if this.email}}
+            <li><span class="cv-section__personal-detail-label">Email</span> {{this.email}}</li>
+          {{/if}}
+        </ul>
+      </li>
+    {{/each}}
+  </ul>
+</section>

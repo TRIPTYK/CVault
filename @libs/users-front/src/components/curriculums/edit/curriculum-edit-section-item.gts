@@ -7,7 +7,7 @@ import type { SchemaField } from '#src/schemas/section-templates.ts';
 import { fn } from '@ember/helper';
 import { service } from '@ember/service';
 import type CurriculumService from '#src/services/curriculum.ts';
-import { type IntlService } from 'ember-intl';
+import { t, type IntlService } from 'ember-intl';
 
 interface CurriculumEditSectionItemSignature {
   Element: HTMLDivElement;
@@ -199,7 +199,7 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
                     for={{field.key}}
                     class="border border-gray-300 rounded px-3 py-2 text-sm cursor-pointer hover:border-blue-400"
                   >
-                    Choisir un fichier
+                    {{t "curriculums.edit.chooseFile"}}
                   </label>
 
                   <span class="text-sm text-gray-500">

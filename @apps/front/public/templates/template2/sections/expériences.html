@@ -1,0 +1,17 @@
+<section class="cv-section cv-section--experiences">
+  <h2 class="cv-section__title">{{title}}</h2>
+  <ul class="cv-section__list">
+    {{#each items}}
+      <li class="cv-section__entry">
+        <div class="cv-section__entry-header">
+          <span class="cv-section__entry-degree">{{this.position}}</span>
+          <span class="cv-section__entry-dates">{{this.startDate}} – {{#if this.endDate}}{{this.endDate}}{{else}}Aujourd'hui{{/if}}</span>
+        </div>
+        <div class="cv-section__entry-school">{{this.employer}}{{#if this.city}} — {{this.city}}{{/if}}</div>
+        {{#if this.description}}
+          <p class="cv-section__entry-desc">{{this.description}}</p>
+        {{/if}}
+      </li>
+    {{/each}}
+  </ul>
+</section>
