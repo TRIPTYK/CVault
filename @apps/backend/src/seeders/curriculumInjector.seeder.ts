@@ -45,7 +45,14 @@ function createSection(
   position: number,
   isActive: boolean,
 ) {
-  return em.create<SectionEntityType>("Sections", { id, curriculum, template, title, position, isActive });
+  return em.create<SectionEntityType>("Sections", {
+    id,
+    curriculum,
+    template,
+    title,
+    position,
+    isActive,
+  });
 }
 
 function createItem(
@@ -78,14 +85,22 @@ export default function curriculumInjectorSeeder(em: EntityManager) {
     tPerso!,
     "Informations personnelles",
     0,
-    true
+    true,
   );
   const c1Profil = createSection(em, "e2e-c1-s2-profil", cv1, tProfil!, "Profil", 1, true);
   const c1Exp = createSection(em, "e2e-c1-s3-exp", cv1, tExperiences!, "Expériences", 2, true);
   const c1Form = createSection(em, "e2e-c1-s4-form", cv1, tFormation!, "Formations", 3, true);
   const c1Comp = createSection(em, "e2e-c1-s5-comp", cv1, tCompetences!, "Compétences", 4, true);
   const c1Langue = createSection(em, "e2e-c1-s6-langue", cv1, tLangue!, "Langues", 5, true);
-  const c1Centres = createSection(em, "e2e-c1-s7-centres", cv1, tCentres!, "Centres d'intérêt", 6, true);
+  const c1Centres = createSection(
+    em,
+    "e2e-c1-s7-centres",
+    cv1,
+    tCentres!,
+    "Centres d'intérêt",
+    6,
+    true,
+  );
   const c1Refs = createSection(em, "e2e-c1-s8-refs", cv1, tReferences!, "Références", 7, true);
 
   createItem(em, "e2e-c1-s1-perso-i1", c1Perso, 0, {

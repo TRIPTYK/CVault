@@ -44,7 +44,7 @@ test("UpdateRoute returns 200 and updates a section", async () => {
       authorization: module.generateBearerToken(TestModule.TEST_USER_ID),
     },
     payload: {
-      title: "Updated Test Section",
+      isActive: true,
     },
   });
 
@@ -57,7 +57,7 @@ test("UpdateRoute returns 200 and updates a section", async () => {
     attributes: {
       curriculumId: TestModule.TEST_CURRICULUM_ID,
       templateId: TestModule.TEST_SECTION_TEMPLATE_ID,
-      title: "Updated Test Section",
+      title: "Test Section",
       position: 0,
     },
   });
@@ -68,7 +68,7 @@ test("UpdateRoute returns 200 and updates a section", async () => {
     { refresh: true },
   );
   expect(section).not.toBeNull();
-  expect(section!.title).toBe("Updated Test Section");
+  expect(section!.title).toBe("Test Section");
 });
 
 test("UpdateRoute returns 404 if curriculum not found", async () => {
@@ -97,7 +97,7 @@ test("UpdateRoute returns 404 if curriculum not found", async () => {
       authorization: module.generateBearerToken(TestModule.TEST_USER_ID),
     },
     payload: {
-      title: "Updated Test Section",
+      isActive: true,
     },
   });
 
@@ -126,7 +126,7 @@ test("UpdateRoute returns 404 if curriculum does not belong to user", async () =
       authorization: module.generateBearerToken(TestModule.TEST_USER_ID),
     },
     payload: {
-      title: "Updated Test Section",
+      isActive: true,
     },
   });
 
@@ -160,7 +160,7 @@ test("UpdateRoute returns 404 if section not found", async () => {
       authorization: module.generateBearerToken(TestModule.TEST_USER_ID),
     },
     payload: {
-      title: "Updated Test Section",
+      isActive: true,
     },
   });
 
@@ -209,7 +209,7 @@ test("UpdateRoute returns 400 if title is missing", async () => {
   expect(body.errors[0]).toMatchObject({
     status: "400",
     title: "Validation Error",
-    detail: "Invalid input: expected string, received undefined",
+    detail: "Invalid input: expected boolean, received undefined",
   });
 });
 
@@ -218,7 +218,7 @@ test("UpdateRoute returns 401 when not authenticated", async () => {
     method: "PATCH",
     url: `/curriculums/${TestModule.TEST_CURRICULUM_ID}/sections/${TestModule.TEST_SECTION_ID}`,
     payload: {
-      title: "Updated Test Section",
+      isActive: true,
     },
   });
 

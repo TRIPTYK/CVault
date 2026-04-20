@@ -294,10 +294,7 @@ export default class CurriculumService extends Service {
         body: JSON.stringify({ isActive: isActive }),
       });
     } catch (err) {
-      toServiceError(
-        `updateSection(${curriculumId}, ${sectionId})`,
-        err
-      );
+      toServiceError(`updateSection(${curriculumId}, ${sectionId})`, err);
     }
   }
 
