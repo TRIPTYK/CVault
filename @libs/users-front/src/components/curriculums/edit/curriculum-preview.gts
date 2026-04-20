@@ -37,14 +37,14 @@ class CurriculumPreview extends Component<CurriculumPreviewSignature> {
   loadModels = async () => {
     this.models = await this.curriculum.listModels();
     this.selectedTemplate = this.models[0] ?? '';
-    this.curriculum.saveModel(this.selectedTemplate);
+    this.curriculum.setModel(this.selectedTemplate);
     await this.render();
   };
 
   @action
   onTemplateChange(event: Event) {
     this.selectedTemplate = (event.target as HTMLSelectElement).value;
-    this.curriculum.saveModel(this.selectedTemplate);
+    this.curriculum.setModel(this.selectedTemplate);
     void this.render();
   }
 

@@ -27,9 +27,10 @@ export class ExportCurriculumRoute implements Route {
       },
       async (request, reply) => {
         const { id, modelId } = request.params as { id: string; modelId: string };
+        const currentUser = request.user!;
 
         const curriculum = await this.curriculumRepository.findOne(
-          { id },
+          { id, userId: currentUser.id },
           { populate: ["sections", "sections.template", "sections.items"] },
         );
 

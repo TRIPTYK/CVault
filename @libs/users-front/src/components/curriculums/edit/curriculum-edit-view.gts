@@ -112,12 +112,10 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
     if (!moved) return;
     reordered.splice(targetIndex, 0, moved);
 
-    const newOrder = [];
-    for (let i = 0; i < reordered.length; i++) {
-      newOrder.push(
-        this.getSectionIdByTemplate(reordered[i]!.id, this.sections)
-      );
-    }
+    const newOrder = reordered.map((t) =>
+      this.getSectionIdByTemplate(t.id, this.sections)
+    );
+
     if (newOrder.some((id) => typeof id !== 'string')) return;
     await this.curriculum.updateOrderSections(
       this.args.curriculumId,

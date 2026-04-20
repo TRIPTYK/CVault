@@ -79,18 +79,18 @@ function isEmptyResponseError(err: unknown): boolean {
 }
 
 export default class CurriculumService extends Service {
-  @tracked selectedModel: string | null = null;
+  @tracked currentModelService: string | null = null;
   @service declare store: Store;
   @service declare session: SessionService;
 
   // ── Models ────────────────────────────────────────────────────────────────
 
-  public saveModel(modelName: string): void {
-    this.selectedModel = modelName;
+  public setModel(modelName: string): void {
+    this.currentModelService = modelName;
   }
 
   public getModel(): string | null {
-    return this.selectedModel;
+    return this.currentModelService;
   }
 
   // ── Curriculums ───────────────────────────────────────────────────────────
@@ -181,6 +181,10 @@ export default class CurriculumService extends Service {
 
   public async export(curriculumId: string, modelId: string): Promise<Blob> {
     try {
+      if (!modelId || !curriculumId) {
+        throw new Error('Model ID and Curriculum ID are required for export');
+      }
+
       const url = Endpoints.curriculumExport(curriculumId, modelId);
 
       if (
@@ -212,6 +216,13 @@ export default class CurriculumService extends Service {
 
   public async listModels(): Promise<string[]> {
     try {
+      if (
+        !this.session.isAuthenticated ||
+        !this.session.data.authenticated.data
+      ) {
+        throw new Error('User is not authenticated');
+      }
+
       const token = this.session.data.authenticated.data as unknown as {
         accessToken: string;
       };
@@ -323,7 +334,6 @@ export default class CurriculumService extends Service {
     sectionId: string,
     isActive: boolean
   ): Promise<void> {
-    console.log('Updating section', { curriculumId, sectionId, isActive });
     try {
       await this.store.request({
         method: 'PATCH',

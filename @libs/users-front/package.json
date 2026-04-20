@@ -65,7 +65,6 @@
     "ember-cli-page-object": "catalog:",
     "ember-click-outside": "^6.1.1",
     "ember-click-outside-modifier": "^4.1.2",
-    "ember-drag-drop": "^1.0.1",
     "ember-immer-changeset": "catalog:",
     "ember-intl": "catalog:",
     "ember-simple-auth": "catalog:",
