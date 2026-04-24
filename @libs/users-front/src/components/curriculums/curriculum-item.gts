@@ -6,9 +6,7 @@ import t from 'ember-intl/helpers/t';
 import { action } from '@ember/object';
 
 import EditIcon from '#src/assets/icons/edit.gts';
-import RenameIcon from '#src/assets/icons/rename.gts';
 import DuplicateIcon from '#src/assets/icons/duplicate.gts';
-import DownloadIcon from '#src/assets/icons/download.gts';
 import DeleteIcon from '#src/assets/icons/delete.gts';
 
 import CvIcon from '#src/assets/icons/cv.gts';
@@ -25,12 +23,11 @@ import relativeTime from '#src/helpers/relative-time.ts';
 import type ImmerChangeset from 'ember-immer-changeset';
 import TpkForm from '@triptyk/ember-input-validation/components/tpk-form';
 import { CurriculumChangeset } from '#src/changesets/curriculum.ts';
-import { createCurriculumValidationSchema } from '#src/components/curriculums/curriculum-validation.ts';
+import { editCurriculumValidationSchema } from '#src/components/curriculums/curriculum-validation.ts';
 import type { IntlService } from 'ember-intl';
 import type Owner from '@ember/owner';
 import type {
-  UpdatedCurriculum,
-  ValidatedCurriculum,
+  UpdatedCurriculum
 } from '#src/components/curriculums/curriculum-validation.ts';
 import HandleSaveService from '@libs/shared-front/services/handle-save';
 
@@ -54,21 +51,14 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
   @service declare intl: IntlService;
   @service declare handleSave: HandleSaveService;
 
-  validationSchema: ReturnType<typeof createCurriculumValidationSchema>;
+  validationSchema: ReturnType<typeof editCurriculumValidationSchema>;
   changeset = new CurriculumChangeset({
     title: this.args.curriculum.title,
   });
 
   constructor(owner: Owner, args: CurriculumItemSignature['Args']) {
     super(owner, args);
-    this.validationSchema = createCurriculumValidationSchema(this.intl);
-  }
-
-  @action
-  async renameOnEnter(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      await this.rename((event.target as HTMLInputElement).value);
-    }
+    this.validationSchema = editCurriculumValidationSchema(this.intl);
   }
 
   @action
@@ -95,11 +85,6 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
   }
 
   @action
-  async renameOnBlur(event: FocusEvent) {
-    await this.rename((event.target as HTMLInputElement).value);
-  }
-
-  @action
   async rename(title: string) {
     if (!this.args.curriculum.id || title === this.args.curriculum.title)
       return;
@@ -107,21 +92,9 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
     this.args.onRefresh?.();
   }
 
-  @action
-  focusTitle() {
-    const input = document.querySelector(
-      `input[name="curriculum-title-${this.args.curriculum.id}"]`
-    );
-
-    if (input) {
-      (input as HTMLInputElement).focus();
-      (input as HTMLInputElement).select();
-    }
-  }
-
   onSubmit = async (
     data: UpdatedCurriculum,
-    c: ImmerChangeset<ValidatedCurriculum | UpdatedCurriculum>
+    c: ImmerChangeset<UpdatedCurriculum>
   ) => {
     await this.handleSave.handleSave({
       saveAction: async () => await this.rename(data.title),
@@ -140,7 +113,7 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
     <div data-test-curriculum-item class="flex flex-col p-5">
       <div class="relative inline-block">
         <button
-          data-test-curriculum-enter
+          data-test-curriculum-item-more-action-button
           type="button"
           class="cursor-pointer hover:shadow-lg transition-shadow duration-200"
           {{on "click" this.gotToEdit}}
@@ -153,17 +126,9 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
               <EditIcon class="size-4 mr-2" />
               {{t "curriculums.moreActions.edit"}}
             </Action>
-            <Action @action={{this.focusTitle}}>
-              <RenameIcon class="size-4 mr-2" />
-              {{t "curriculums.moreActions.rename"}}
-            </Action>
             <Action @action={{this.duplicate}}>
               <DuplicateIcon class="size-4 mr-2" />
               {{t "curriculums.moreActions.duplicate"}}
-            </Action>
-            <Action @action={{this.refresh}}>
-              <DownloadIcon class="size-4 mr-2" />
-              {{t "curriculums.moreActions.download"}}
             </Action>
             <Action @action={{this.delete}}>
               <DeleteIcon class="size-4 mr-2" />
@@ -177,17 +142,17 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
         @changeset={{this.changeset}}
         @onSubmit={{this.onSubmit}}
         @validationSchema={{this.validationSchema}}
-        data-test-todos-form
         as |F|
       >
         <F.TpkInputPrefab
+          data-test-curriculum-item-title
           @label={{t "curriculums.edit.title"}}
           @validationField="title"
           class="col-span-12 md:col-span-4"
         />
       </TpkForm>
 
-      <span data-test-curriculum-last-modified class="text-sm text-gray-500">
+      <span data-test-curriculum-item-last-modified class="text-sm text-gray-500">
         {{t "curriculums.view.lastModified"}}
         {{relativeTime @curriculum.updatedAt}}
       </span>
@@ -199,9 +164,8 @@ export default CurriculumItem;
 
 export const CurriculumItemPageObject = create({
   scope: '[data-test-curriculum-item]',
-  enterButton: clickable('[data-test-curriculum-enter]'),
-  titleInput: fillable('[data-test-curriculum-title] input'),
-  titleValue: value('[data-test-curriculum-title]'),
-  lastModified: text('[data-test-curriculum-last-modified]'),
-  moreActionsButton: clickable('[data-test-curriculum-more-action-button]'),
+  moreActionsButton: clickable('[data-test-curriculum-item-more-action-button]'),
+  titleInput: fillable('[data-test-curriculum-item-title] input'),
+  titleValue: value('[data-test-curriculum-item-title]'),
+  lastModified: text('[data-test-curriculum-item-last-modified]'),
 });

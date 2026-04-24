@@ -9,6 +9,10 @@ moreActions:
   download: 'Télécharger'
   rename: 'Renommer'
 validation:
+  selectModel:
+    required: 'Un modèle doit être sélectionné'
+    minimumLength: 'Un modèle doit être sélectionné'
+    maximumLength: 'Un modèle doit être sélectionné'
   titleRequired: 'Le titre est requis'
   minimumTitleLength: 'Le titre doit comporter au moins 1 caractère'
   maximumTitleLength: 'Le titre doit comporter au maximum 255 caractères'

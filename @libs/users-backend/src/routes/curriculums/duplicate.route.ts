@@ -94,9 +94,9 @@ export class DuplicateCurriculumRoute implements Route {
             if (fields[fieldType] !== "" && fields[fieldType] !== undefined) {
               const oldFilePath = fields[fieldType] as string;
               const fileExtension = oldFilePath.split(".").pop();
-              const newFileName = `${newItem.id}.${fileExtension}`;
-              const newFilePath = `uploads/${newFileName}/${fieldType}`;
-
+              const newFileName = `${newItem.id}-${fieldType}.${fileExtension}`;
+              const newFilePath = `uploads/${newFileName}`;
+              
               await fs.promises.copyFile(oldFilePath, newFilePath);
 
               fields[fieldType] = newFilePath;

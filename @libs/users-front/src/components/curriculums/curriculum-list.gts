@@ -33,9 +33,8 @@ class CurriculumList extends Component<CurriculumListSignature> {
 
   createCurriculum = async () => {
     const curriculum = await this.curriculum.create();
-    if (curriculum?.id) {
-      this.router.transitionTo('dashboard.curriculums.edit', curriculum.id);
-    }
+    if (!curriculum?.id) return;
+    this.router.transitionTo('dashboard.curriculums.edit', curriculum.id);
   };
 
   onRefresh = async () => {
@@ -61,6 +60,7 @@ class CurriculumList extends Component<CurriculumListSignature> {
         </button>
         {{#each this.curriculums as |curriculum|}}
           <CurriculumItem
+            data-test-curriculum-item
             @curriculum={{curriculum}}
             @onRefresh={{this.onRefresh}}
           />
