@@ -41,7 +41,7 @@ describe('curriculum-item', function () {
       </template>
     );
 
-    await CurriculumItemPageObject.enterButton();
+    await CurriculumItemPageObject.moreActionsButton();
 
     assert(true, 'Buttons are clickable');
   });
