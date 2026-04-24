@@ -26,9 +26,7 @@ import { CurriculumChangeset } from '#src/changesets/curriculum.ts';
 import { editCurriculumValidationSchema } from '#src/components/curriculums/curriculum-validation.ts';
 import type { IntlService } from 'ember-intl';
 import type Owner from '@ember/owner';
-import type {
-  UpdatedCurriculum
-} from '#src/components/curriculums/curriculum-validation.ts';
+import type { UpdatedCurriculum } from '#src/components/curriculums/curriculum-validation.ts';
 import HandleSaveService from '@libs/shared-front/services/handle-save';
 
 interface CurriculumItemSignature {
@@ -152,7 +150,10 @@ class CurriculumItem extends Component<CurriculumItemSignature> {
         />
       </TpkForm>
 
-      <span data-test-curriculum-item-last-modified class="text-sm text-gray-500">
+      <span
+        data-test-curriculum-item-last-modified
+        class="text-sm text-gray-500"
+      >
         {{t "curriculums.view.lastModified"}}
         {{relativeTime @curriculum.updatedAt}}
       </span>
@@ -164,7 +165,9 @@ export default CurriculumItem;
 
 export const CurriculumItemPageObject = create({
   scope: '[data-test-curriculum-item]',
-  moreActionsButton: clickable('[data-test-curriculum-item-more-action-button]'),
+  moreActionsButton: clickable(
+    '[data-test-curriculum-item-more-action-button]'
+  ),
   titleInput: fillable('[data-test-curriculum-item-title] input'),
   titleValue: value('[data-test-curriculum-item-title]'),
   lastModified: text('[data-test-curriculum-item-last-modified]'),
