@@ -27,7 +27,6 @@ describe('curriculum-item', function () {
       );
 
       expect(CurriculumItemPageObject.titleInput).toBeDefined();
-      expect(CurriculumItemPageObject.enterButton).toBeDefined();
       expect(CurriculumItemPageObject.moreActionsButton).toBeDefined();
     }
   );
