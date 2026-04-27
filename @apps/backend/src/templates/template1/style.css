@@ -11,11 +11,10 @@
 
 @page {
   size: A4 portrait;
-  margin: 0; /* On gère les marges en CSS pour le fond perdu */
+  margin: 0;
 }
 
 html {
-  /* L'astuce cruciale : Le fond est dessiné sur toute la hauteur du doc */
   background: linear-gradient(to right, #1a2e4a 0%, #1a2e4a 72mm, #ffffff 72mm, #ffffff 100%);
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
@@ -26,8 +25,8 @@ body {
   font-size: 10pt;
   line-height: 1.5;
   color: #2d2d2d;
-  background: transparent; /* Laisse voir le fond du html */
-  padding: 15mm 0; /* Simule les marges haut/bas sur chaque page */
+  background: transparent;
+  padding: 15mm 0;
 }
 
 /* ── Structure ────────────────────────────────────────── */
@@ -41,7 +40,7 @@ body {
 /* ── Sidebar ──────────────────────────────────────────── */
 .cv__sidebar {
   color: #ecf0f1;
-  padding: 0 7mm 10mm 7mm; /* Marge haut gérée par le body */
+  padding: 0 7mm 10mm 7mm;
   display: flex;
   flex-direction: column;
   gap: 8mm;
@@ -49,7 +48,7 @@ body {
 
 /* ── Main ─────────────────────────────────────────────── */
 .cv__main {
-  padding: 0 10mm 10mm 8mm; /* Marge haut gérée par le body */
+  padding: 0 10mm 10mm 8mm;
   display: flex;
   flex-direction: column;
   gap: 7mm;
@@ -218,17 +217,4 @@ body {
   background: rgba(255, 255, 255, 0.12);
   padding: 1mm 2.5mm;
   border-radius: 1mm;
-}
-
-/* ── Ajustements spécifiques pour l'écran (Preview) ─── */
-@media screen {
-  body {
-    background: #e0e0e0;
-    padding: 20px;
-  }
-  .cv {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    min-height: 297mm;
-    background: white; /* Pour la préview écran */
-  }
 }

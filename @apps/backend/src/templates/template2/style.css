@@ -218,16 +218,3 @@ body {
   padding: 1mm 2.5mm;
   border-radius: 1mm;
 }
-
-/* ── Ajustements spécifiques pour l'écran (Preview) ─── */
-@media screen {
-  body {
-    background: #e8e0f0;
-    padding: 20px;
-  }
-  .cv {
-    box-shadow: 0 10px 30px rgba(45, 27, 78, 0.25);
-    min-height: 297mm;
-    background: white;
-  }
-}
