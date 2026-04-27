@@ -11,10 +11,8 @@ import TpkDatepickerPrefab from '@triptyk/ember-input-validation/components/tpk-
 
 import { type SchemaField } from '#src/schemas/section-templates.ts';
 import getPrefabForField from '#src/services/schema-field-map.ts';
-import {
-  buildChangeset,
-  buildValidationSchema,
-} from '#src/services/schema-to-changeset.ts';
+import { buildChangeset } from '#src/services/schema-to-changeset.ts';
+import buildValidationSchema from '#src/services/schema-to-changeset.ts';
 
 const PREFAB_COMPONENTS = {
   TpkInputPrefab,

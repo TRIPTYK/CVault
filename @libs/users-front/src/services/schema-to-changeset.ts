@@ -7,7 +7,7 @@ export type DynamicFormData = Record<string, string | FileList>;
 // const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 // const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
-export function buildValidationSchema(
+export default function buildValidationSchema(
   fields: SchemaField[]
 ): z.ZodObject<Record<string, z.ZodTypeAny>> {
   const shape: Record<string, z.ZodTypeAny> = {};
