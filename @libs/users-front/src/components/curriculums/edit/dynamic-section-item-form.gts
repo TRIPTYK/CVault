@@ -9,12 +9,12 @@ import TpkTextareaPrefab from '@triptyk/ember-input-validation/components/tpk-va
 import TpkFilePrefab from '@triptyk/ember-input-validation/components/tpk-validation-file';
 import TpkDatepickerPrefab from '@triptyk/ember-input-validation/components/tpk-validation-datepicker';
 
-import type { SchemaField } from '#src/schemas/section-templates.ts';
-import { getPrefabForField } from '#src/helpers/schema-field-map.ts';
+import { type SchemaField } from '#src/schemas/section-templates.ts';
+import { getPrefabForField } from '#src/services/schema-field-map.ts';
 import {
   buildChangeset,
   buildValidationSchema,
-} from '#src/helpers/schema-to-changeset.ts';
+} from '#src/services/schema-to-changeset.ts';
 
 const PREFAB_COMPONENTS = {
   TpkInputPrefab,
