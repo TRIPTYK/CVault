@@ -30,3 +30,4 @@ edit:
   noTitle: 'Untitled'
   selectTemplate: 'Select a template'
   chooseFile: 'Choose a file'
+  saveItem: 'Save'
