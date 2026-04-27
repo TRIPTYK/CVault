@@ -1,6 +1,7 @@
 import ImmerChangeset from 'ember-immer-changeset';
 import { z } from 'zod';
 import type { SchemaField } from '#src/schemas/section-templates.ts';
+import type { IntlService } from 'ember-intl';
 
 export type DynamicFormData = Record<string, string | FileList>;
 
@@ -8,7 +9,8 @@ export type DynamicFormData = Record<string, string | FileList>;
 // const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 export default function buildValidationSchema(
-  fields: SchemaField[]
+  fields: SchemaField[],
+  intl?: IntlService
 ): z.ZodObject<Record<string, z.ZodTypeAny>> {
   const shape: Record<string, z.ZodTypeAny> = {};
 
@@ -17,20 +19,29 @@ export default function buildValidationSchema(
 
     switch (field.type) {
       case 'text':
-        rule = z.string().max(255, 'Maximum length is 255 characters');
+        rule = z
+          .string()
+          .max(255, intl?.t('curriculums.validation.maximumLength'));
         break;
       case 'tel':
-        rule = z.string().regex(/^\+?[1-9]\d{1,14}$/, 'Invalid phone number');
+        rule = z
+          .string()
+          .regex(
+            /^\+?[1-9]\d{1,14}$/,
+            intl?.t('curriculums.validation.invalidPhoneNumber')
+          );
         break;
       case 'email':
-        rule = z.string().email('Invalid email address');
+        rule = z.string().email(intl?.t('curriculums.validation.invalidEmail'));
         break;
       case 'date':
         // TODO : gérer la validation de date (format, pas dans le futur...)
         rule = z.any();
         break;
       case 'textarea':
-        rule = z.string().max(4000, 'Maximum length is 4000 characters');
+        rule = z
+          .string()
+          .max(4000, intl?.t('curriculums.validation.maximumLength'));
         break;
       case 'file':
         // TODO : gérer la validation de fichier (taille, type)

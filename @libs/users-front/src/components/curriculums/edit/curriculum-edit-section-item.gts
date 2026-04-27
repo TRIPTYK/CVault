@@ -166,13 +166,11 @@ class CurriculumEditSectionItem extends Component<CurriculumEditSectionItemSigna
 
       {{#if this.isOpen}}
         <div class="flex flex-col gap-3 px-4 py-3">
-          {{#if this.isOpen}}
-            <DynamicSectionForm
-              @fields={{@fields}}
-              @fillInfos={{@fillInfos}}
-              @onSubmit={{this.handleSubmit}}
-            />
-          {{/if}}
+          <DynamicSectionForm
+            @fields={{@fields}}
+            @fillInfos={{@fillInfos}}
+            @onSubmit={{this.handleSubmit}}
+          />
         </div>
       {{/if}}
     </div>

@@ -4,22 +4,11 @@ import { service } from '@ember/service';
 import { t, type IntlService } from 'ember-intl';
 
 import TpkForm from '@triptyk/ember-input-validation/components/tpk-form';
-import TpkInputPrefab from '@triptyk/ember-input-validation/components/tpk-validation-input';
-import TpkTextareaPrefab from '@triptyk/ember-input-validation/components/tpk-validation-textarea';
-import TpkFilePrefab from '@triptyk/ember-input-validation/components/tpk-validation-file';
-import TpkDatepickerPrefab from '@triptyk/ember-input-validation/components/tpk-validation-datepicker';
 
 import { type SchemaField } from '#src/schemas/section-templates.ts';
 import getPrefabForField from '#src/services/schema-field-map.ts';
 import { buildChangeset } from '#src/services/schema-to-changeset.ts';
 import buildValidationSchema from '#src/services/schema-to-changeset.ts';
-
-const PREFAB_COMPONENTS = {
-  TpkInputPrefab,
-  TpkTextareaPrefab,
-  TpkDatepickerPrefab,
-  TpkFilePrefab,
-} as const;
 
 interface DynamicSectionFormSignature {
   Element: HTMLDivElement;
@@ -42,12 +31,7 @@ class DynamicSectionForm extends Component<DynamicSectionFormSignature> {
 
   @cached
   get validationSchema() {
-    return buildValidationSchema(this.args.fields);
-  }
-
-  getPrefabComponent(field: SchemaField) {
-    const prefabType = getPrefabForField(field);
-    return PREFAB_COMPONENTS[prefabType];
+    return buildValidationSchema(this.args.fields, this.intl);
   }
 
   getPrefabType(field: SchemaField) {

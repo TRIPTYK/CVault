@@ -16,6 +16,9 @@ validation:
   titleRequired: 'Le titre est requis'
   minimumTitleLength: 'Le titre doit comporter au moins 1 caractère'
   maximumTitleLength: 'Le titre doit comporter au maximum 255 caractères'
+  maximumLength: 'La longueur maximale est de 255 caractères'
+  invalidPhoneNumber: 'Numéro de téléphone invalide'
+  invalidEmail: 'Adresse e-mail invalide'
 create:
   createSuccess: 'Le curriculum vitae a été créé avec succès'
 edit:

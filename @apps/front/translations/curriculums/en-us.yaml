@@ -16,6 +16,9 @@ validation:
   titleRequired: 'Title is required'
   minimumTitleLength: 'Title must be at least 1 character long'
   maximumTitleLength: 'Title must be at most 255 characters long'
+  maximumLength: 'Maximum length is 255 characters'
+  invalidPhoneNumber: 'Invalid phone number'
+  invalidEmail: 'Invalid email address'
 create:
   createSuccess: 'Curriculum vitae created successfully'
 edit:
