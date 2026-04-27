@@ -10,7 +10,7 @@ import TpkFilePrefab from '@triptyk/ember-input-validation/components/tpk-valida
 import TpkDatepickerPrefab from '@triptyk/ember-input-validation/components/tpk-validation-datepicker';
 
 import { type SchemaField } from '#src/schemas/section-templates.ts';
-import { getPrefabForField } from '#src/services/schema-field-map.ts';
+import getPrefabForField from '#src/services/schema-field-map.ts';
 import {
   buildChangeset,
   buildValidationSchema,

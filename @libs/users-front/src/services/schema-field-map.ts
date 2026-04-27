@@ -15,6 +15,6 @@ export const FIELD_TYPE_TO_PREFAB: Record<string, PrefabType> = {
   file: 'TpkFilePrefab',
 };
 
-export function getPrefabForField(field: SchemaField): PrefabType {
+export default function getPrefabForField(field: SchemaField): PrefabType {
   return FIELD_TYPE_TO_PREFAB[field.type] ?? 'TpkInputPrefab';
 }
