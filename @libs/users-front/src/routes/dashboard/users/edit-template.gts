@@ -22,6 +22,7 @@ export default class UsersEditRouteTemplate extends Component<UsersEditRouteSign
     lastName: this.args.model.user.lastName,
     password: undefined,
     email: this.args.model.user.email,
+    role: this.args.model.user.role,
   });
 
   <template>

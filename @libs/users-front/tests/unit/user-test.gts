@@ -51,6 +51,7 @@ describe('Service | User | Unit', () => {
       firstName: 'John',
       lastName: 'Doe',
       email: 'email@example.com',
+      role: 'admin',
     } as ValidatedUser;
 
     await expect(userService.save(data)).resolves.not.toThrow();
@@ -74,12 +75,14 @@ describe('Service | User | Unit', () => {
       firstName: 'Jane',
       lastName: 'Doe',
       email: 'jane@example.com',
+      role: 'admin',
     });
     const data = {
       id: '123',
       firstName: 'Jane',
       lastName: 'Doe',
       email: 'jane@example.com',
+      role: 'admin',
     };
 
     await expect(userService.save(data)).resolves.not.toThrow();

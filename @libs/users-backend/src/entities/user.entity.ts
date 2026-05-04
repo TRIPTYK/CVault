@@ -8,6 +8,7 @@ export const UserEntity = defineEntity({
     firstName: p.string(),
     lastName: p.string(),
     password: p.string(),
+    role: p.string(),
   },
 });
 

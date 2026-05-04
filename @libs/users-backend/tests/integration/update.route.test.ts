@@ -35,6 +35,7 @@ test("UpdateRoute updates user and returns JSON:API format", async () => {
           email: "updated@test.com",
           firstName: "Updated",
           lastName: "Name",
+          role: "user",
         },
       },
     },

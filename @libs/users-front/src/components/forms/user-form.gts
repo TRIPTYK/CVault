@@ -42,6 +42,10 @@ export default class UsersForm extends Component<UserFormSignature> {
     return !this.args.changeset.get('id');
   }
 
+  get options() {
+    return ['admin', 'user'];
+  }
+
   onSubmit = async (
     data: ValidatedUser | UpdatedUser,
     c: ImmerChangeset<ValidatedUser | UpdatedUser>
@@ -84,6 +88,12 @@ export default class UsersForm extends Component<UserFormSignature> {
           @label={{t "users.forms.user.labels.email"}}
           @validationField="email"
           class="col-span-12 md:col-span-3"
+        />
+        <F.TpkSelectPrefab
+          @label={{t "users.forms.user.labels.role"}}
+          @validationField="role"
+          class="col-span-12 md:col-span-3"
+          @options={{this.options}}
         />
         <div class="col-span-12 flex items-center justify-between gap-2">
           <button type="submit" class="btn btn-primary">

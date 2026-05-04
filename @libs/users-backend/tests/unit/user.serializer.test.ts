@@ -14,6 +14,7 @@ describe("user.serializer", () => {
     firstName: "John",
     lastName: "Doe",
     password: "hashedpassword",
+    role: "user",
   };
 
   const mockUsers: UserEntityType[] = [
@@ -24,6 +25,7 @@ describe("user.serializer", () => {
       firstName: "Jane",
       lastName: "Smith",
       password: "hashedpassword2",
+      role: "user",
     },
   ];
 
@@ -38,6 +40,7 @@ describe("user.serializer", () => {
           email: "test@example.com",
           firstName: "John",
           lastName: "Doe",
+          role: "user",
         },
       });
     });
@@ -84,6 +87,7 @@ describe("user.serializer", () => {
           email: "test@example.com",
           firstName: "John",
           lastName: "Doe",
+          role: "user",
         },
       });
     });

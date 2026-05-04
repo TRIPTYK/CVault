@@ -16,6 +16,7 @@ export class E2ESeeder extends Seeder {
       firstName: "Amaury",
       lastName: "Deflorenne",
       password: hashedPassword,
+      role: "admin",
     });
 
     // Mock users that match the MSW mock data
@@ -25,6 +26,7 @@ export class E2ESeeder extends Seeder {
       firstName: "John",
       lastName: "Doe",
       password: hashedPassword,
+      role: "user",
     });
 
     em.create(UserEntity, {
@@ -33,6 +35,7 @@ export class E2ESeeder extends Seeder {
       firstName: "Jane",
       lastName: "Smith",
       password: hashedPassword,
+      role: "user",
     });
 
     em.create(UserEntity, {
@@ -41,6 +44,7 @@ export class E2ESeeder extends Seeder {
       firstName: "Bob Johnson",
       lastName: "Johnson",
       password: hashedPassword,
+      role: "user",
     });
   }
 }
