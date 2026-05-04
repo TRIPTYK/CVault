@@ -74,8 +74,8 @@ export default function curriculumInjectorSeeder(em: EntityManager) {
     id: "e2e-c1",
     userId: "e2e-login-user",
     title: "CV Complet - Amaury Deflorenne",
-    createdAt: new Date("2025-06-01"),
-    updatedAt: new Date("2025-06-01"),
+    createdAt: new Date("01/06/2025"),
+    updatedAt: new Date("01/06/2025"),
   }) as CurriculumEntityType;
 
   const c1Perso = createSection(
@@ -107,7 +107,7 @@ export default function curriculumInjectorSeeder(em: EntityManager) {
     firstName: "Amaury",
     lastName: "Deflorenne",
     email: "amaury@gmail.com",
-    phone: "0601020304",
+    phone: "+32601020304",
     address: "123 rue de la paix, 75000 Paris",
   });
   createItem(em, "e2e-c1-s2-profil-i1", c1Profil, 0, {
@@ -118,7 +118,7 @@ export default function curriculumInjectorSeeder(em: EntityManager) {
     employer: "Triptyk",
     position: "Développeur Fullstack",
     city: "Lyon",
-    startDate: "2022-03-01",
+    startDate: "01/03/2022",
     endDate: "",
     description:
       "Développement d'applications web avec Ember.js et Node.js. Mise en place d'architectures microservices.",
@@ -127,8 +127,8 @@ export default function curriculumInjectorSeeder(em: EntityManager) {
     employer: "WebAgency",
     position: "Développeur Frontend",
     city: "Paris",
-    startDate: "2020-06-01",
-    endDate: "2022-02-28",
+    startDate: "01/06/2020",
+    endDate: "28/02/2022",
     description:
       "Intégration et développement d'interfaces React. Optimisation des performances frontend.",
   });
@@ -136,8 +136,8 @@ export default function curriculumInjectorSeeder(em: EntityManager) {
     employer: "StartupX",
     position: "Stagiaire Développeur",
     city: "Lyon",
-    startDate: "2019-01-01",
-    endDate: "2019-12-31",
+    startDate: "01/01/2019",
+    endDate: "31/12/2019",
     description:
       "Stage de fin d'études axé sur le développement d'une application mobile en React Native.",
   });
@@ -145,8 +145,8 @@ export default function curriculumInjectorSeeder(em: EntityManager) {
     employer: "Freelance",
     position: "Développeur Web",
     city: "Lyon",
-    startDate: "2018-01-01",
-    endDate: "2018-12-31",
+    startDate: "01/01/2018",
+    endDate: "31/12/2018",
     description:
       "Réalisation de plusieurs projets web pour des clients locaux, principalement en JavaScript.",
   });
@@ -154,8 +154,8 @@ export default function curriculumInjectorSeeder(em: EntityManager) {
     employer: "Université de Lyon",
     position: "Assistant de Recherche",
     city: "Lyon",
-    startDate: "2017-01-01",
-    endDate: "2017-12-31",
+    startDate: "01/01/2017",
+    endDate: "31/12/2017",
     description:
       "Participation à un projet de recherche sur les systèmes distribués. Publication d'un article dans une conférence internationale.",
   });
@@ -163,24 +163,24 @@ export default function curriculumInjectorSeeder(em: EntityManager) {
     school: "Université de Lyon",
     degree: "Master Informatique",
     field: "Génie Logiciel",
-    startDate: "2018-09-01",
-    endDate: "2020-06-30",
+    startDate: "01/09/2018",
+    endDate: "30/06/2020",
     description: "Spécialisation en architecture logicielle et développement web.",
   });
   createItem(em, "e2e-c1-s4-form-i2", c1Form, 1, {
     school: "Université de Paris",
     degree: "Licence Informatique",
     field: "Informatique",
-    startDate: "2015-09-01",
-    endDate: "2018-06-30",
+    startDate: "01/09/2015",
+    endDate: "30/06/2018",
     description: "Formation généraliste en informatique.",
   });
   createItem(em, "e2e-c1-s4-form-i3", c1Form, 2, {
     school: "Lycée Jean Moulin",
     degree: "Baccalauréat Scientifique",
     field: "Sciences de l'ingénieur",
-    startDate: "2012-09-01",
-    endDate: "2015-06-30",
+    startDate: "01/09/2012",
+    endDate: "30/06/2015",
     description: "Mention Bien.",
   });
   createItem(em, "e2e-c1-s5-comp-i1", c1Comp, 0, { competence: "TypeScript", level: "Expert" });
@@ -194,7 +194,7 @@ export default function curriculumInjectorSeeder(em: EntityManager) {
     name: "Jean Dupont",
     entreprise: "Triptyk",
     email: "jean.dupont@triptyk.eu",
-    phone: "0612345678",
+    phone: "+32612345678",
     city: "Lyon",
   });
 }

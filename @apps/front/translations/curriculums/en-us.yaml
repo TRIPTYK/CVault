@@ -9,9 +9,16 @@ moreActions:
   download: 'Download'
   rename: 'Rename'
 validation:
+  selectModel:
+    required: 'A model must be selected'
+    minimumLength: 'A model must be selected'
+    maximumLength: 'A model must be selected'
   titleRequired: 'Title is required'
   minimumTitleLength: 'Title must be at least 1 character long'
   maximumTitleLength: 'Title must be at most 255 characters long'
+  maximumLength: 'Maximum length is 255 characters'
+  invalidPhoneNumber: 'Invalid phone number'
+  invalidEmail: 'Invalid email address'
 create:
   createSuccess: 'Curriculum vitae created successfully'
 edit:
@@ -26,3 +33,4 @@ edit:
   noTitle: 'Untitled'
   selectTemplate: 'Select a template'
   chooseFile: 'Choose a file'
+  saveItem: 'Save'

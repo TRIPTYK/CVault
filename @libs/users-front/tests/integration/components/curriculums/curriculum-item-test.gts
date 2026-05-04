@@ -27,7 +27,6 @@ describe('curriculum-item', function () {
       );
 
       expect(CurriculumItemPageObject.titleInput).toBeDefined();
-      expect(CurriculumItemPageObject.enterButton).toBeDefined();
       expect(CurriculumItemPageObject.moreActionsButton).toBeDefined();
     }
   );
@@ -41,7 +40,7 @@ describe('curriculum-item', function () {
       </template>
     );
 
-    await CurriculumItemPageObject.enterButton();
+    await CurriculumItemPageObject.moreActionsButton();
 
     assert(true, 'Buttons are clickable');
   });

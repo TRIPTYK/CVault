@@ -148,6 +148,7 @@
     "type": "addon",
     "main": "addon-main.cjs",
     "app-js": {
+      "./components/curriculums/edit/dynamic-section-item-form.js": "./dist/_app_/components/curriculums/edit/dynamic-section-item-form.js",
       "./components/forms/login-form.js": "./dist/_app_/components/forms/login-form.js",
       "./components/forms/user-form.js": "./dist/_app_/components/forms/user-form.js",
       "./handlers/auth.js": "./dist/_app_/handlers/auth.js",
@@ -169,6 +170,8 @@
       "./schemas/users.js": "./dist/_app_/schemas/users.js",
       "./services/current-user.js": "./dist/_app_/services/current-user.js",
       "./services/curriculum.js": "./dist/_app_/services/curriculum.js",
+      "./services/schema-field-map.js": "./dist/_app_/services/schema-field-map.js",
+      "./services/schema-to-changeset.js": "./dist/_app_/services/schema-to-changeset.js",
       "./services/user.js": "./dist/_app_/services/user.js",
       "./templates/dashboard/curriculums/edit.js": "./dist/_app_/templates/dashboard/curriculums/edit.js",
       "./templates/dashboard/curriculums/index.js": "./dist/_app_/templates/dashboard/curriculums/index.js",

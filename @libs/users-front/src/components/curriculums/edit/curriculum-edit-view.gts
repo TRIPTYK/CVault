@@ -64,7 +64,7 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
     const sectionId = this.getSectionIdByTemplate(templateId, this.sections);
     if (!sectionId) return;
     await this.curriculum.createItem(this.args.curriculumId, sectionId);
-    await this.loadSections();
+    this.args.onUpdate();
   };
 
   getItemsByTemplate(templateId: string | null, sections: Sections[]) {
@@ -82,7 +82,7 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
     const sectionId = this.getSectionIdByTemplate(templateId, this.sections);
     if (!sectionId) return;
     await this.curriculum.deleteItem(this.args.curriculumId, sectionId, itemId);
-    await this.loadSections();
+    this.args.onUpdate();
   };
 
   onDeleteSection = async (templateId: string | null) => {
@@ -159,7 +159,6 @@ class CurriculumEditView extends Component<CurriculumEditViewSignature> {
     this.dragSourceItemIndex = null;
     this.dragSourceTemplateId = null;
 
-    await this.loadSections();
     this.args.onUpdate();
   }
 
