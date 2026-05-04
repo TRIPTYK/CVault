@@ -5,6 +5,7 @@ table:
     firstName: 'First Name'
     lastName: 'Last Name'
     email: 'Email'
+    role: 'Role'
   actions:
     addUser: 'Add User'
     edit: 'Edit'
@@ -26,6 +27,7 @@ forms:
       lastName: 'Last Name'
       password: 'Password'
       email: 'Email'
+      role: 'Role'
     validation:
       firstNameRequired: 'First name is required'
       lastNameRequired: 'Last name is required'
@@ -33,6 +35,7 @@ forms:
       passwordRequired: 'Password is required'
       passwordTooShort: 'Min 8 characters'
       minLength: 'At least 2 characters'
+      invalidRole: 'Invalid role'
     actions:
       submit: 'Submit'
       back: 'Back to users'

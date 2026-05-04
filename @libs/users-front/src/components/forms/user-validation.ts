@@ -13,6 +13,9 @@ export const createUserValidationSchema = (intl: IntlService) =>
       intl.t('users.forms.user.validation.passwordRequired')
     ).min(8, intl.t('users.forms.user.validation.passwordTooShort')),
     id: string().optional().nullable(),
+    role: string({
+      message: intl.t('users.forms.user.validation.invalidRole'),
+    }),
   });
 
 export const editUserValidationSchema = (intl: IntlService) =>
@@ -24,6 +27,9 @@ export const editUserValidationSchema = (intl: IntlService) =>
     password: string().optional().nullable(),
     email: email(intl.t('users.forms.user.validation.invalidEmail')),
     id: string(),
+    role: string({
+      message: intl.t('users.forms.user.validation.invalidRole'),
+    }),
   });
 
 export type ValidatedUser = z.infer<

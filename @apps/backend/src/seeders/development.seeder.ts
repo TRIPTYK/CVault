@@ -14,6 +14,16 @@ export class DatabaseSeeder extends Seeder {
       firstName: "Amaury",
       lastName: "Deflorenne",
       password: hashedPassword,
+      role: "admin",
+    });
+
+    em.create(UserEntity, {
+      id: "e2e-login-user-2",
+      email: "jean@triptyk.eu",
+      firstName: "Jean",
+      lastName: "Bourgies",
+      password: hashedPassword,
+      role: "user",
     });
 
     curriculumInjectorSeeder(em);

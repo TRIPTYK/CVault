@@ -13,6 +13,7 @@ const mockUsers = [
       firstName: 'John',
       lastName: 'Doe',
       email: 'john.doe@example.com',
+      role: 'user',
     },
   },
   {
@@ -22,6 +23,7 @@ const mockUsers = [
       firstName: 'Jane',
       lastName: 'Smith',
       email: 'jane.smith@example.com',
+      role: 'user',
     },
   },
   {
@@ -31,6 +33,7 @@ const mockUsers = [
       firstName: 'Bob Johnson',
       lastName: 'Johnson',
       email: 'bob.johnson@example.com',
+      role: 'user',
     },
   },
 ];

@@ -1,9 +1,14 @@
 import type {
   FastifyBaseLogger,
   FastifyInstance,
+  FastifyReply,
+  FastifyRequest,
+  FastifySchema,
+  FastifyTypeProviderDefault,
   RawReplyDefaultExpression,
   RawRequestDefaultExpression,
   RawServerDefault,
+  RouteGenericInterface,
 } from "fastify";
 import type {
   AuthLibraryContext,
@@ -22,7 +27,7 @@ import { GetRoute } from "#src/routes/get.route.js";
 import { UpdateRoute } from "#src/routes/update.route.js";
 import { DeleteRoute } from "#src/routes/delete.route.js";
 import { UserEntity } from "./entities/user.entity.js";
-import { type ModuleInterface, type Route } from "@libs/backend-shared";
+import { makeJsonApiError, type ModuleInterface, type Route } from "@libs/backend-shared";
 import { handleJsonApiErrors } from "@libs/backend-shared";
 import {
   createJwtAuthMiddleware,
@@ -55,6 +60,8 @@ import { UploadPdpRoute } from "./routes/section-items/upload.pdp.route.ts";
 import { GetPdpRoute } from "./routes/section-items/get.pdp.route.ts";
 
 import { ListSectionTemplatesRoute } from "./routes/section-templates/list.route.ts";
+import type { ResolveFastifyRequestType } from "fastify/types/type-provider.js";
+import type { IncomingMessage, ServerResponse } from "node:http";
 
 export type FastifyInstanceTypeForModule = FastifyInstance<
   RawServerDefault,
@@ -133,6 +140,65 @@ export class UserModule implements ModuleInterface<FastifyInstanceTypeForModule>
         );
 
         f.addHook("preValidation", jwtAuthMiddleware);
+
+        const adminUserMiddleware = async (
+          request: FastifyRequest<
+            RouteGenericInterface,
+            RawServerDefault,
+            IncomingMessage,
+            FastifySchema,
+            FastifyTypeProviderDefault,
+            unknown,
+            FastifyBaseLogger,
+            ResolveFastifyRequestType<
+              FastifyTypeProviderDefault,
+              FastifySchema,
+              RouteGenericInterface
+            >
+          >,
+          reply: FastifyReply<
+            RouteGenericInterface,
+            RawServerDefault,
+            IncomingMessage,
+            ServerResponse<IncomingMessage>,
+            unknown,
+            FastifySchema,
+            FastifyTypeProviderDefault,
+            unknown
+          >,
+        ) => {
+          if (request.url === "/api/v1/users/profile") {
+            return;
+          }
+          const user = request.user;
+
+          if (!user) {
+            return reply.code(401).send(
+              handleJsonApiErrors(
+                makeJsonApiError(401, "Unauthorized", {
+                  code: "UNAUTHORIZED",
+                  detail: "You must be authenticated to access this resource",
+                }),
+                request,
+                reply,
+              ),
+            );
+          }
+          if (user.role !== "admin") {
+            return reply.code(403).send(
+              handleJsonApiErrors(
+                makeJsonApiError(403, "Forbidden", {
+                  code: "FORBIDDEN",
+                  detail: "You do not have permission to access this resource",
+                }),
+                request,
+                reply,
+              ),
+            );
+          }
+        };
+
+        f.addHook("preValidation", adminUserMiddleware);
 
         for (const route of userRoutes) {
           route.routeDefinition(f);

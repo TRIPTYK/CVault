@@ -55,6 +55,7 @@ test("ListRoute filters users by search query", async () => {
     firstName: "Alice",
     lastName: "Smith",
     password: "testpassword",
+    role: "admin",
   });
 
   await module.createUser({
@@ -63,6 +64,7 @@ test("ListRoute filters users by search query", async () => {
     firstName: "Bob",
     lastName: "Jones",
     password: "testpassword",
+    role: "admin",
   });
 
   const response = await module.fastifyInstance.inject({
@@ -86,6 +88,7 @@ test("ListRoute sorts users ascending", async () => {
     firstName: "Alice",
     lastName: "Smith",
     password: "testpassword",
+    role: "admin",
   });
 
   await module.createUser({
@@ -94,6 +97,7 @@ test("ListRoute sorts users ascending", async () => {
     firstName: "Zoe",
     lastName: "Adams",
     password: "testpassword",
+    role: "admin",
   });
 
   const response = await module.fastifyInstance.inject({
@@ -117,6 +121,7 @@ test("ListRoute sorts users descending", async () => {
     firstName: "Alice",
     lastName: "Smith",
     password: "testpassword",
+    role: "admin",
   });
 
   await module.createUser({
@@ -125,6 +130,7 @@ test("ListRoute sorts users descending", async () => {
     firstName: "Zoe",
     lastName: "Adams",
     password: "testpassword",
+    role: "admin",
   });
 
   const response = await module.fastifyInstance.inject({
@@ -164,6 +170,7 @@ test("ListRoute ignores invalid sort field", async () => {
     firstName: "Alice",
     lastName: "Smith",
     password: "testpassword",
+    role: "admin",
   });
 
   const response = await module.fastifyInstance.inject({

@@ -13,6 +13,7 @@ export class DatabaseSeeder extends Seeder {
       firstName: "Amaury",
       lastName: "Deflorenne",
       password: hashedPassword,
+      role: "admin",
     });
   }
 }

@@ -26,6 +26,7 @@ export class CreateRoute implements Route {
                 firstName: string(),
                 lastName: string(),
                 password: string(),
+                role: string().optional().nullable(),
               }),
             }),
           ),
@@ -45,6 +46,7 @@ export class CreateRoute implements Route {
           firstName: body.firstName,
           lastName: body.lastName,
           password,
+          role: body.role || "user",
         });
 
         await this.userRepository.getEntityManager().flush();

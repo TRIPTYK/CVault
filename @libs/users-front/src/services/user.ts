@@ -57,6 +57,7 @@ export default class UserService extends Service {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
+      role: data.role,
     });
 
     const request = updateRecord(existingUser, { patch: true });

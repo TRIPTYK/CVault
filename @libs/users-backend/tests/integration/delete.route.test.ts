@@ -27,6 +27,7 @@ test("DeleteRoute deletes another user and returns 204", async () => {
     firstName: "Other",
     lastName: "User",
     password: "testpassword",
+    role: "admin",
   });
 
   const response = await module.fastifyInstance.inject({

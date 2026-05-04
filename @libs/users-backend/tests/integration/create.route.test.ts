@@ -67,6 +67,7 @@ test("CreateRoute works correctly", async () => {
           firstName: "New",
           lastName: "User",
           password: "testpassword",
+          role: "user",
         },
       },
     },
@@ -81,6 +82,7 @@ test("CreateRoute works correctly", async () => {
         email: "new@test.com",
         firstName: "New",
         lastName: "User",
+        role: "user",
       },
     },
   });

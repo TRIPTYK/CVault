@@ -30,6 +30,7 @@ export async function setup() {
     firstName: "Test",
     lastName: "User",
     password: hashedPassword,
+    role: "admin",
   });
 
   await orm.close();

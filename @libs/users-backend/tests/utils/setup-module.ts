@@ -215,11 +215,13 @@ export class TestModule {
     firstName: string;
     lastName: string;
     password: string;
+    role: string;
   }) {
     const hashedPassword = await hash(data.password);
     await this.em.getRepository(UserEntity).insert({
       ...data,
       password: hashedPassword,
+      role: data.role || "user",
     });
   }
 
