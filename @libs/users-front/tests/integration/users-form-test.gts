@@ -51,6 +51,7 @@ describe('tpk-form', function () {
       await pageObject.lastName('Doe');
       await pageObject.email('john.doe@example.com');
       await pageObject.password('password123');
+      await pageObject.role('user');
       await pageObject.submit();
 
       // eslint-disable-next-line @typescript-eslint/unbound-method
