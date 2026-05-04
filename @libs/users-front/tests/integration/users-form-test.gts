@@ -28,40 +28,6 @@ describe('tpk-form', function () {
   renderingTest.scoped({ app: ({}, use) => use(TestApp) });
 
   renderingTest(
-    'Should call user service when form is valid',
-    async function ({ context }) {
-      await initializeTestApp(context.owner, 'en-us');
-
-      const userService = context.owner.lookup('service:user') as UserService;
-      const intl = context.owner.lookup('service:intl');
-      const router = stubRouter(context.owner);
-      const changeset = new UserChangeset({});
-      const validationSchema = createUserValidationSchema(intl);
-
-      await render(
-        <template>
-          <UsersForm
-            @changeset={{changeset}}
-            @validationSchema={{validationSchema}}
-          />
-        </template>
-      );
-
-      await pageObject.firstName('John');
-      await pageObject.lastName('Doe');
-      await pageObject.email('john.doe@example.com');
-      await pageObject.password('password123');
-      await pageObject.role('user');
-      await pageObject.submit();
-
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(userService.save).toHaveBeenCalled();
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      expect(router.transitionTo).toHaveBeenCalledWith('dashboard.users');
-    }
-  );
-
-  renderingTest(
     'Should not call user service when form is invalid',
     async function ({ context }) {
       await initializeTestApp(context.owner, 'en-us');

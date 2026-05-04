@@ -125,5 +125,4 @@ export const pageObject = create({
     '[data-test-tpk-prefab-password-container="password"] input'
   ),
   submit: clickable('button[type="submit"]'),
-  role: fillable('[data-test-tpk-prefab-select-container="role"] select'),
 });
